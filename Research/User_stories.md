@@ -1,4 +1,4 @@
-##Relevant user stories for the Data Explorer app##
+## Relevant user stories for the Data Explorer app ##
 
 #58 As an involved analyst I want to be able to navigate to data via geographies so that I can see performance in areas  
 #32 As a connected influencer/ involved analyst (#73) I want to see the relationships between indicators so that I can understand how they affect each other  
