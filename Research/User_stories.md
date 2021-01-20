@@ -14,7 +14,9 @@
 #8 As a user with disabilities I want the website to provide me with the same experience as a user without disabilities so that I can use it unimpeded  
   
 #10 As a concerned citizen I want the targets to be clearly visible on the website so that I can understand the context of the goals without having to navigate data  
-
+  
+#6 As a user I want to search for content using terms familiar to me so that I don't have to guess what it is called  
+  
 ### purpose: look at multiple indicators alongside each other ###
 #32 As a connected influencer/ involved analyst (#73) I want to see the relationships between indicators so that I can understand how they affect each other  
 #65 As an involved analyst I want to be able to compare data from multiple indicators so that I can see trends and comparisons  
@@ -40,10 +42,10 @@ Create groupings of indicators by themes and allow users to navigate to the indi
 ### functionality: links to written analysis/ quality/ original data ###
 #72 As an involved analyst/ fact gatherer (#51)/ connected influencer (#34) I want to see the written analysis linked to the related indicators so that I can easily find it  
   
+As an involved analyst I want to understand the quality of the data used so I can decided whether it meets my needs  
+  
 ### functionality: trendlines from basic linear model ###  
 #57 As an involved analyst I want to see trend lines on charts so that I can quickly see the direction of travel  
-  
-As an involved analyst I want to understand the quality of the data used so I can decided whether it meets my needs  
   
 ### functionality: data/ chart download ###
 #97 As an involved analyst I want to be able to download all the data for specific disaggregation across all indicators so that I can perform complex analysis with my own tools  
