@@ -1,3 +1,5 @@
+# Author: David
+
 install.packages("shiny")
 install.packages('dplyr', dependencies = TRUE)
 install.packages('ggplot2', dependencies = TRUE)
