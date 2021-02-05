@@ -1,0 +1,17 @@
+variable_1,variable_2,indicator
+Age,Sex,1.2.1
+Sex,Age,1.2.1
+Age,NA,1.2.1
+Sex,NA,1.2.1
+Age,Sex,10.2.1
+Sex,Age,10.2.1
+Age,NA,10.2.1
+Sex,NA,10.2.1
+Sex,NA,16.1.4
+Age,NA,16.1.4
+Ethnicity,Ethnic group,16.1.4
+Ethnic group,Ethnicity,16.1.4
+Disability status,NA,16.1.4
+Country of birth,NA,16.1.4
+Region,NA,16.1.4
+Household income,NA,16.1.4
