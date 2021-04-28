@@ -2,12 +2,17 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 
-#change name later
+setwd("ggplot_testing") 
+source("config.R")
 
-threeaone_function_test <- read.csv("H:\\3-a-1 (1).csv", na.strings=c("","NA")) %>% 
+
+#next things- make this function work regardless of how many characteristics the user has chosen.
+
+dat <- read.csv(paste0(csv_filepath, indicator), na.strings=c("","NA")) %>% 
   mutate_if(is.factor, as.character)
 
 
+source("Filtering.R")
 test_facet_args <- function(df, facet1, facet2, linecolour) {
   
 
@@ -26,9 +31,9 @@ test_facet_args <- function(df, facet1, facet2, linecolour) {
   
 }
 
- test_facet_args(threeaone_function_test,
-                 linecolour = Sex, 
-                 facet1 = Age, 
-                 facet2 = Country)
+ test_facet_args(filtered_data_frame,
+                 linecolour = (line_colour), 
+                 facet1 = facet_row, 
+                 facet2 = )
 
 
