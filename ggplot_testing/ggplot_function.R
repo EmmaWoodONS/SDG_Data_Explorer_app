@@ -3,7 +3,7 @@ library(ggplot2)
 library(dplyr)
 
 setwd("ggplot_testing") 
-source("config.R")
+source("config.R")   
 
 
 #next things- make this function work regardless of how many characteristics the user has chosen.
