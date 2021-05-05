@@ -23,7 +23,7 @@ test_facet_args <- function(df, facet1, facet2, linecolour) {
   df <- df %>% 
     mutate(facet1 = !!(enquo(facet1)),
            facet2 = !!(enquo(facet2)),
-           linecolour = !!(enquo(linecolour)))
+           linecolour_enquo = !!(enquo(linecolour)))
   
   ggplot(data = df, 
          aes(Year, Value))+
@@ -35,9 +35,9 @@ test_facet_args <- function(df, facet1, facet2, linecolour) {
   
 }
 
- test_facet_args(filtered_data_frame,
-                 linecolour = (line_colour), 
-                 facet1 = facet_row, 
-                 facet2 = )
+ test_facet_args(filtered_data,
+                 linecolour = line_colour, 
+                 facet2 = facet_row, 
+                 facet1 = facet_column)
 
 
