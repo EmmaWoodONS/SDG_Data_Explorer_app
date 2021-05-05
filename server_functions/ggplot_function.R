@@ -1,18 +1,22 @@
-library(tidyverse)
+library(tidyr)
 library(ggplot2)
 library(dplyr)
 
-setwd("ggplot_testing") 
-source("config.R")   
-
-
 #next things- make this function work regardless of how many characteristics the user has chosen.
+
+
+setwd("server_functions") 
+
+source("config.R")   
 
 dat <- read.csv(paste0(csv_filepath, indicator), na.strings=c("","NA")) %>% 
   mutate_if(is.factor, as.character)
 
 
 source("Filtering.R")
+
+filtered_data <- filter_for_selections(dat)
+
 test_facet_args <- function(df, facet1, facet2, linecolour) {
   
 

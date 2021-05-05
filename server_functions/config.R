@@ -5,10 +5,10 @@ char1 <- "Sex"
 char2 <- "Country"
 char3 <- NA
 char4 <- NA
-disagg1 <- c(NA, "Male")
-disagg2 <- c("England")
-disagg3 <- NA
-disagg4 <- NA
+levels1 <- c(NA, "Male")
+levels2 <- c("England")
+levels3 <- NA
+levels4 <- NA
 line_colour <- "Sex"
 facet_row <- "Country"
 facet_column <- NA
