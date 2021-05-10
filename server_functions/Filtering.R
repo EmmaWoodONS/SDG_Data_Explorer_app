@@ -36,26 +36,7 @@ filter_for_selections <- function(dat){
       filter(!!rlang::sym(char4) %in% c(levels4))
   }
   
-  # if(any(is.na(levels1))) {
-  #   headlines_as_headline <- filtered_data %>% 
-  #     mutate(sym(char1) = ifelse(is.na(!!(enquo(char1))), "1. headline", !!(enquo(char1))))
-  # }
-  # 
-  # if(!is.na(char2) & any(is.na(levels2))) {
-  #   levels2 <- replace_na(levels2, "1. headline")
-  # }
-  # 
-  # if(!is.na(char3) & any(is.na(levels3))) {
-  #   levels3 <- replace_na(levels2, "1. headline")
-  # }
-  # 
-  # if(!is.na(char4) & any(is.na(levels4))) {
-  #   levels4 <- replace_na(levels4, "1. headline")
-  # }
-  # 
-  # headlines_specified <- filtered_data %>% 
-  #   mutate()
-  
+ 
   return(filtered_data)
   
 }
