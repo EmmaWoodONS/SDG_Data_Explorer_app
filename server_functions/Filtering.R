@@ -7,7 +7,6 @@ filter_for_selections <- function(dat){
   irrelevant_variables <- c("Observation.status", "Unit.multiplier", "Unit.measure", "GeoCode", "Value", "Year")
   
   selected_characteristics <- c(char1, char2, char3, char4)
-  # selected_levels <- c(levels1, levels2, levels3, levels4)
   
   unselected_characteristics <- setdiff(names(dat), selected_characteristics)
   relevant_unselected_characteristics <- setdiff(unselected_characteristics, irrelevant_variables)
@@ -37,6 +36,7 @@ filter_for_selections <- function(dat){
       filter(!!rlang::sym(char4) %in% c(levels4))
   }
   
+ 
   return(filtered_data)
   
 }

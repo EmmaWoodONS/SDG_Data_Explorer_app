@@ -5,7 +5,7 @@ char1 <- "Sex"
 char2 <- "Country"
 char3 <- NA
 char4 <- NA
-levels1 <- c(NA, "Male")
+levels1 <- c("Female", "Male")
 levels2 <- c("England")
 levels3 <- NA
 levels4 <- NA
