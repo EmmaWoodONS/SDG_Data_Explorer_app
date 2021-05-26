@@ -10,12 +10,12 @@ library(dplyr)
 `%not_in%` <- Negate(`%in%`)
 
 remove_unused_columns <- function(dat, cols_to_remove = unused_columns) {
-  dat[ , colnames(csv) %notin% cols_to_remove]
+  dat[ , colnames(csv) %not_in% cols_to_remove]
 }
 
 #----------
 
-csv <- read.csv('Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_3-1-2.csv', na.strings = "") %>% 
+csv <- read.csv("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_3-1-2.csv", na.strings = "") %>% 
   mutate_if(is.factor, as.character)
 
 unused_columns <- c("Year", "Observation.status", "Unit.multiplier", "Unit.measure", "GeoCode", "Value")
@@ -24,6 +24,7 @@ all_variables <- remove_unused_columns(csv)
 
 # is_disagg_nested? i.e. does a column require a single value in any other column (not including NAs). 
 # Need to know this to know whether an NA should actually be 'All'
+# For example, if 
 incompletely_nested_variables <- NULL
 completely_nested_variables <- NULL
 
@@ -43,7 +44,6 @@ for(i in 1:ncol(all_variables)) {
     if(target_column_name != check_column_name) {
       
       unique_check_column_options <- target_column_options %>% 
-        # select(!!as.name(target_column_name), !!as.name(check_column_name)) %>% 
         filter(!is.na(!!as.name(check_column_name))) %>% 
         distinct(!!as.name(target_column_name)) %>% 
         rename(unique_target_column_options = all_of(target_column_name)) %>% 
@@ -60,60 +60,75 @@ for(i in 1:ncol(all_variables)) {
         incompletely_nested_variables <- bind_rows(incompletely_nested_variables, incompletely_nested)
         
       }
-      # else if(length(unique_check_column_options) == nrow(unique_target_column_options) &
-      #           length(unique_check_column_options) != 0) {
-      #   
-      #   completely_nested <- data.frame(nested_variable = check_column_name,
-      #                                   nested_within = target_column_name)
-      #   completely_nested_variables <- bind_rows(completely_nested_variables, completely_nested)
-      # }
+
     }
   }
   
 }
 
-# incompletes_flipped <- paste(incompletely_nested_variables$nested_within, incompletely_nested_variables$nested_variable)
-# 
-# correct_completely_nested_variables <- completely_nested_variables %>% 
-#   mutate(variables_combined = paste(nested_variable, nested_within)) %>% 
-#   filter(variables_combined %not_in% incompletes_flipped) %>% 
-#   select(-variables_combined)
-#   
+nested_variables <- as.character(incompletely_nested_variables$nested_variable)
+nested_within <- as.character(incompletely_nested_variables$nested_within)
+values_given_for <- as.character(incompletely_nested_variables$values_given_for)
 
-na_to_all_for_non_nested <- all_variables %>% 
-  select(-nested_variables$nested_variable) %>% 
+# where All does not make sense (e.g. All for Welsh-only Health Boards when England is selected), keep NAs
+incompletely_nested_NAs_to_all <- all_variables 
+
+for(i in 1:nrow(incompletely_nested_variables)) {
+  
+  nested_variable_colname <- sym(nested_variables[i])
+  nested_within_colname <- sym(nested_within[i])
+  
+  incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>% 
+    # mutate(Region = ifelse(Country == "England" & is.na(Region), "England", Region)) : this is what the line below is doing as an example from 3.1.2
+    mutate(!!nested_variable_colname := ifelse(!!nested_within_colname == values_given_for[i] &
+                                                is.na(!!nested_variable_colname),
+                                    "All", !!nested_variable_colname))
+
+  }
+
+final_incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>% 
+  select(incompletely_nested_variables$nested_variable)
+
+all_other_NAs_to_all <- all_variables %>% 
+  select(-incompletely_nested_variables$nested_variable) %>% 
   replace(is.na(.), "All")
 
-number_of_nested_variables <- nrow(distinct(nested_variables, nested_variable))
-all_variables_with_nesting <- select(all_variables, 
-                                     nested_variables$nested_within, 
-                                     nested_variables$nested_variable)
-na_to_all_for_nested <- NULL
+final_NAs_to_all <- bind_cols(final_incompletely_nested_NAs_to_all, all_other_NAs_to_all)
+  
 
-for(variable in 1:number_of_nested_variables) {
+# Alternative way to do the NA replacement  
+# number_of_nested_variables <- nrow(distinct(nested_variables, nested_variable))
+# all_variables_with_nesting <- select(all_variables, 
+#                                      nested_variables$nested_within, 
+#                                      nested_variables$nested_variable)
+# na_to_all_for_nested <- NULL
+# 
+# for(variable in 1:number_of_nested_variables) {
+#   
+#   active_rows <- nested_variables %>% 
+#     mutate_if(is.factor, as.character) %>% 
+#     filter(nested_variable == nested_variable[variable])
+#   
+#   columns_to_select <- c(active_rows$nested_variable, 
+#                          active_rows$nested_within)
+#   
+#   na_to_all <- all_variables_with_nesting %>% 
+#     select(columns_to_select) %>% 
+#     mutate(!!as.character(active_rows$nested_variable) := 
+#              ifelse(is.na(!!sym(active_rows$nested_variable)) & 
+#                       !!sym(active_rows$nested_within) %in% active_rows$values_given_for, 
+#                     "All", !!sym(active_rows$nested_variable))) %>% 
+#     select(!!sym(active_rows$nested_variable))
+#     
+#   na_to_all_for_nested <- bind_cols(na_to_all_for_nested, na_to_all)
+# }
+# 
+# nas_and_alls_fixed <- bind_cols(na_to_all_for_nested, na_to_all_for_non_nested)
   
-  active_rows <- nested_variables %>% 
-    mutate_if(is.factor, as.character) %>% 
-    filter(nested_variable == nested_variable[variable])
-  
-  columns_to_select <- c(active_rows$nested_variable, 
-                         active_rows$nested_within)
-  
-  na_to_all <- all_variables_with_nesting %>% 
-    select(columns_to_select) %>% 
-    mutate(!!as.character(active_rows$nested_variable) := 
-             ifelse(is.na(!!sym(active_rows$nested_variable)) & 
-                      !!sym(active_rows$nested_within) %in% active_rows$values_given_for, 
-                    "All", !!sym(active_rows$nested_variable))) %>% 
-    select(!!sym(active_rows$nested_variable))
-    
-  na_to_all_for_nested <- bind_cols(na_to_all_for_nested, na_to_all)
-}
-
-nas_and_alls_fixed <- bind_cols(na_to_all_for_nested, na_to_all_for_non_nested)
-  
-# TO DO: create the 'Characteristics' columns and work out how to put them in every possible aorder
+# TO DO: create the 'Characteristics' columns and work out how to put them in every possible order
 # The above code just gives the 'Levels' columns shown in indicator_selection_flowchart.pptx
+
+
 
 
 # # get all combinations of column names------------
