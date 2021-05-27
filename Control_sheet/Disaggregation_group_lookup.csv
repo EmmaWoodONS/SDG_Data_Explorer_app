@@ -1,0 +1,44 @@
+Disaggregation,Group
+Age,Age
+Age at which FGM took place,Age
+Age of oldest person,Age
+Age of youngest person,Age
+Children under 16 in the household,Age
+Children under 6 in the household,Age
+Retirement status,Age
+Disability status,Disability status etc
+Sex by disability,Disability status etc
+Special educational needs,Disability status etc
+Highest qualification,Education level
+Ethnic group,Ethnic group
+Ethnicity,Ethnicity
+Ethnicity of household reference person (HRP),Ethnicity
+Urbanisation sub-category,Geography - high level
+Urban or rural,Geography - high level
+Country,Geography - high level
+Welsh Unitary Authority,Geography - low level
+County,Geography - low level
+Waste collection authority,Geography - low level
+Health Board,Geography - low level
+Local Authority,Geography - low level
+Police Force Area,Geography - low level
+Scottish Council Area,Geography - low level
+Geography (HydroBASINs ID),Geography - mid-level
+Region,Geography - mid-level
+Sub-national area,Geography - mid-level
+Citizenship,Migration status etc
+Country of birth,Migration status etc
+Migratory status,Migration status etc
+Nationality,Migration status etc
+Gender,Sex/Gender
+Sex,Sex/Gender
+Sex by disability,Sex/Gender
+Deprivation decile,Wealth
+Deprivation quantile,Wealth
+Deprivation quintile,Wealth
+Free school meals,Wealth
+Household income,Wealth
+Income,Wealth
+Income group,Wealth
+Income quartile,Wealth
+Socio-economic classification,Wealth

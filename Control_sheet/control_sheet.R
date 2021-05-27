@@ -18,6 +18,8 @@ remove_unused_columns <- function(dat, cols_to_remove = unused_columns) {
 csv <- read.csv("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_3-1-2.csv", na.strings = "") %>% 
   mutate_if(is.factor, as.character)
 
+disagg_lookup <- read.csv('Disaggregation_group_lookup.csv')
+
 unused_columns <- c("Year", "Observation.status", "Unit.multiplier", "Unit.measure", "GeoCode", "Value")
 all_variables <- remove_unused_columns(csv)
 
@@ -95,57 +97,49 @@ all_other_NAs_to_all <- all_variables %>%
 
 final_NAs_to_all <- bind_cols(final_incompletely_nested_NAs_to_all, all_other_NAs_to_all)
   
+#-------------
+# get all combinations of column names------------
 
-# Alternative way to do the NA replacement  
-# number_of_nested_variables <- nrow(distinct(nested_variables, nested_variable))
-# all_variables_with_nesting <- select(all_variables, 
-#                                      nested_variables$nested_within, 
-#                                      nested_variables$nested_variable)
-# na_to_all_for_nested <- NULL
-# 
-# for(variable in 1:number_of_nested_variables) {
-#   
-#   active_rows <- nested_variables %>% 
-#     mutate_if(is.factor, as.character) %>% 
-#     filter(nested_variable == nested_variable[variable])
-#   
-#   columns_to_select <- c(active_rows$nested_variable, 
-#                          active_rows$nested_within)
-#   
-#   na_to_all <- all_variables_with_nesting %>% 
-#     select(columns_to_select) %>% 
-#     mutate(!!as.character(active_rows$nested_variable) := 
-#              ifelse(is.na(!!sym(active_rows$nested_variable)) & 
-#                       !!sym(active_rows$nested_within) %in% active_rows$values_given_for, 
-#                     "All", !!sym(active_rows$nested_variable))) %>% 
-#     select(!!sym(active_rows$nested_variable))
-#     
-#   na_to_all_for_nested <- bind_cols(na_to_all_for_nested, na_to_all)
-# }
-# 
-# nas_and_alls_fixed <- bind_cols(na_to_all_for_nested, na_to_all_for_non_nested)
+
+#-------------
+# build control sheet (written before 'get all combinations of column names')
+number_of_columns <- ncol(final_NAs_to_all)
+available_variables <- distinct(final_NAs_to_all)
+
+location_of_values <- which(!is.na(available_variables), arr.ind = TRUE)
+available_variables[location_of_values] <- names(available_variables)[location_of_values[, "col"]]
+unique_available_variables <- distinct(available_variables)
+
+# add the corresponding variable columns and variable (disaggregation) group name
+disagg_lookup_cleaned <- mutate_all(disagg_lookup, .funs = tolower)
+available_levels <- final_NAs_to_all %>% 
+  distinct() %>% 
+  rename_with( ~ tolower(gsub(".", " ", .x, fixed = TRUE)))
+
+groups_mapped <- disagg_lookup_cleaned %>% 
+  filter(Disaggregation %in% colnames(available_levels))
+
+variables_and_levels <- available_levels %>% 
+  select(groups_mapped$Disaggregation)
+
+for (i in 1:ncol(variables_and_levels)) {
   
-# TO DO: create the 'Characteristics' columns and work out how to put them in every possible order
-# The above code just gives the 'Levels' columns shown in indicator_selection_flowchart.pptx
+  variable <- colnames(variables_and_levels)[i]
+  variable_colname <- sym(paste0("variable_", i))
+  variable_group <- as.character(groups_mapped$Group[which(groups_mapped$Disaggregation == variable)])
+  variable_group_colname <- sym(paste0("variable_group_", i))
+  
+  colnames(control_sheet)[i] <- paste0("level_", i)
+  
+  control_sheet <- control_sheet %>% 
+    mutate(!!variable_colname := variable,
+           !!variable_group_colname := variable_group)
+}
 
 
+# # create blank dataframe to store the named disaggregations
+# top_disaggs <- data.frame(matrix(ncol = max_disaggs, nrow = 0))
 
-
-# # get all combinations of column names------------
-# 
-# number_of_columns <- ncol(all_variables)
-# 
-# unique_rows <- distinct(all_variables)
-# 
-# available_variables <- unique_rows
-# 
-# location_of_values <- which(!is.na(unique_rows), arr.ind = TRUE)
-# available_variables[location_of_values] <- names(unique_rows)[location_of_values[, "col"]]
-# unique_available_variables <- distinct(available_variables)
-# 
-# # # create blank dataframe to store the named disaggregations
-# # top_disaggs <- data.frame(matrix(ncol = max_disaggs, nrow = 0))
-# 
 # # at the moment the table is 1 if present, 0 if not, this loop replaces the 1s with the name of the disaggregation
 # for (i in 1:nrow(available_variables)) {
 # 
@@ -227,3 +221,46 @@ final_NAs_to_all <- bind_cols(final_incompletely_nested_NAs_to_all, all_other_NA
 # 
 # }
 # 
+
+
+
+
+
+
+
+
+
+
+
+# Alternative way to do the NA replacement  
+# number_of_nested_variables <- nrow(distinct(nested_variables, nested_variable))
+# all_variables_with_nesting <- select(all_variables, 
+#                                      nested_variables$nested_within, 
+#                                      nested_variables$nested_variable)
+# na_to_all_for_nested <- NULL
+# 
+# for(variable in 1:number_of_nested_variables) {
+#   
+#   active_rows <- nested_variables %>% 
+#     mutate_if(is.factor, as.character) %>% 
+#     filter(nested_variable == nested_variable[variable])
+#   
+#   columns_to_select <- c(active_rows$nested_variable, 
+#                          active_rows$nested_within)
+#   
+#   na_to_all <- all_variables_with_nesting %>% 
+#     select(columns_to_select) %>% 
+#     mutate(!!as.character(active_rows$nested_variable) := 
+#              ifelse(is.na(!!sym(active_rows$nested_variable)) & 
+#                       !!sym(active_rows$nested_within) %in% active_rows$values_given_for, 
+#                     "All", !!sym(active_rows$nested_variable))) %>% 
+#     select(!!sym(active_rows$nested_variable))
+#     
+#   na_to_all_for_nested <- bind_cols(na_to_all_for_nested, na_to_all)
+# }
+# 
+# nas_and_alls_fixed <- bind_cols(na_to_all_for_nested, na_to_all_for_non_nested)
+
+# TO DO: create the 'Characteristics' columns and work out how to put them in every possible order
+# The above code just gives the 'Levels' columns shown in indicator_selection_flowchart.pptx
+
