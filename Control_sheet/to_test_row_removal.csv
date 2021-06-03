@@ -1,0 +1,9 @@
+variable1,variable2,variable3,variable4
+country,region,age,NA
+country,region,NA,age
+country,NA,region,age
+NA,country,region,age
+sex,age,NA,NA
+NA,NA,sex,age
+sex,NA,age,NA
+NA,sex,age,NA
