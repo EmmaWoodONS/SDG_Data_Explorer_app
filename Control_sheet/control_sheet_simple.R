@@ -2,6 +2,7 @@
 # Date started: 23/04/2021
 # Purpose: Create control sheet for Shiny app that doesn't allow users to select levels as they go along
 
+
 rm(list = ls())
 
 library(tidyr)
@@ -16,8 +17,11 @@ remove_unused_columns <- function(dat, cols_to_remove = unused_columns) {
 
 
 #----------
-indicator_numbers <- read.csv("indicators.csv")
+indicator_numbers <- read.csv("indicators.csv") %>% 
+  mutate(indicator = gsub("\\.", "-", indicator)) # it is a dot in the csv to stop excel converting the indicator numbers to dates 
+
 disagg_lookup <- read.csv('Disaggregation_group_lookup.csv')
+disagg_lookup_cleaned <- mutate_all(disagg_lookup, .funs = tolower)
 
 unused_columns <- c("Year", "Observation.status", "Unit.multiplier", "Unit.measure", "GeoCode", "Value")
 
@@ -55,9 +59,6 @@ for(i in 1:nrow(indicator_numbers)){
           transmute_all(function(x) (ifelse(!is.na(x), deparse(substitute(x)), NA))) %>% 
           distinct() 
         
-        # add the corresponding variable columns and variable (disaggregation) group name - still to be done
-        disagg_lookup_cleaned <- mutate_all(disagg_lookup, .funs = tolower)
-        
         disaggs_cleaned <- disaggs_simplified %>% 
           rename_with( ~ tolower(gsub(".", " ", .x, fixed = TRUE))) %>% 
           transmute_all( ~ tolower(gsub(".", " ", .x, fixed = TRUE)))
@@ -75,8 +76,9 @@ for(i in 1:nrow(indicator_numbers)){
           # build control sheet -------------
           # get all possible variable orders ----
           
-          # TO DO: get maximum number of interactions to make permutations() faster 
-          # when there are a lot of disaggs (e.g. 16.1.3)
+          # when there are a lot of disaggs (e.g. 16.1.3) permutations() is very slow,
+          # so we should keep the size of the permutations target vector only as large as it needs to be
+          # which is the maximum number of interactions.
           maximum_interactions <- disagg_combos_to_keep %>% 
             mutate(count_non_na = rowSums(!is.na(.))) %>% 
             pull(count_non_na) %>% 
@@ -104,7 +106,7 @@ for(i in 1:nrow(indicator_numbers)){
           # test:
           # control_sheet_all_orders <- read.csv('to_test_row_removal.csv')
           
-          # remove any instances where the preceding column is NA
+          # remove unwanted rows (e.g. we want to keep 'Sex, Age, NA' but not 'Sex, NA, Age')
           number_of_variables <- ncol(control_sheet_all_orders)
           control_sheet_cleaned <- control_sheet_all_orders
           
@@ -163,9 +165,16 @@ for(i in 1:nrow(indicator_numbers)){
   }
 }
 
-# TO DO: 
-# - does it matter that 'country, NA' is a row, as well as 'country, region'?
-# remove all rows with an NA in var2 as these will all be rows with no interactions
 
+# remove all rows with an NA in var2 as these will all be rows with no interactions
+# select() is commented out because this is just cosmetic (to reorder the columns) 
+#  and there may be more variables when this is run in the future
 control_sheet_interactions_only <- control_sheet %>% 
-  filter(!is.na(variable2))
+  filter(!is.na(variable2)) %>% 
+  left_join(indicator_numbers, by = c("Indicator" = "indicator")) %>% 
+  # select(Indicator, indicator_title, variable1, variable2, variable3, variable4,
+  #        variable_group_1, variable_group_2, variable_group_3, variable_group_4) %>%
+  mutate(Indicator = gsub("-", ".", Indicator))
+  
+
+write.csv(control_sheet_interactions_only, "control_sheet.csv", row.names = FALSE)
