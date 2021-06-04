@@ -1,0 +1,459 @@
+"","variable1","variable2","Indicator","variable_group_1","variable_group_2","variable3","variable_group_3","variable4","variable_group_4"
+"1","age","sex","1-2-1","age","sex/gender",NA,NA,NA,NA
+"2","sex","age","1-2-1","sex/gender","age",NA,NA,NA,NA
+"3","age","sex","1-2-2","age","sex/gender",NA,NA,NA,NA
+"4","sex","age","1-2-2","sex/gender","age",NA,NA,NA,NA
+"5","country","sex","1-5-1","geography - high level","sex/gender",NA,NA,NA,NA
+"6","sex","country","1-5-1","sex/gender","geography - high level",NA,NA,NA,NA
+"7","age","sex","10-2-1","age","sex/gender",NA,NA,NA,NA
+"8","sex","age","10-2-1","sex/gender","age",NA,NA,NA,NA
+"9","country","local authority","11-3-1","geography - high level","geography - low level","region","geography - mid-level",NA,NA
+"10","country","local authority","11-3-1","geography - high level","geography - low level",NA,NA,NA,NA
+"11","country","region","11-3-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"12","country","region","11-3-1","geography - high level","geography - mid-level","local authority","geography - low level",NA,NA
+"13","country","scottish council area","11-3-1","geography - high level","geography - low level",NA,NA,NA,NA
+"14","country","welsh unitary authority","11-3-1","geography - high level","geography - low level",NA,NA,NA,NA
+"15","local authority","country","11-3-1","geography - low level","geography - high level","region","geography - mid-level",NA,NA
+"16","local authority","country","11-3-1","geography - low level","geography - high level",NA,NA,NA,NA
+"17","local authority","region","11-3-1","geography - low level","geography - mid-level","country","geography - high level",NA,NA
+"18","local authority","region","11-3-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"19","region","country","11-3-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"20","region","country","11-3-1","geography - mid-level","geography - high level","local authority","geography - low level",NA,NA
+"21","region","local authority","11-3-1","geography - mid-level","geography - low level","country","geography - high level",NA,NA
+"22","region","local authority","11-3-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"23","scottish council area","country","11-3-1","geography - low level","geography - high level",NA,NA,NA,NA
+"24","welsh unitary authority","country","11-3-1","geography - low level","geography - high level",NA,NA,NA,NA
+"25","country","sex","11-5-1","geography - high level","sex/gender",NA,NA,NA,NA
+"26","sex","country","11-5-1","sex/gender","geography - high level",NA,NA,NA,NA
+"27","region","waste collection authority","11-6-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"28","waste collection authority","region","11-6-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"29","age","sex","11-7-2","age","sex/gender",NA,NA,NA,NA
+"30","country of birth","sex","11-7-2","migration status etc","sex/gender",NA,NA,NA,NA
+"31","disability status","sex","11-7-2","disability status etc","sex/gender",NA,NA,NA,NA
+"32","ethnicity","sex","11-7-2","ethnicity","sex/gender",NA,NA,NA,NA
+"33","income","sex","11-7-2","wealth","sex/gender",NA,NA,NA,NA
+"34","region","sex","11-7-2","geography - mid-level","sex/gender",NA,NA,NA,NA
+"35","sex","age","11-7-2","sex/gender","age",NA,NA,NA,NA
+"36","sex","country of birth","11-7-2","sex/gender","migration status etc",NA,NA,NA,NA
+"37","sex","disability status","11-7-2","sex/gender","disability status etc",NA,NA,NA,NA
+"38","sex","ethnicity","11-7-2","sex/gender","ethnicity",NA,NA,NA,NA
+"39","sex","income","11-7-2","sex/gender","wealth",NA,NA,NA,NA
+"40","sex","region","11-7-2","sex/gender","geography - mid-level",NA,NA,NA,NA
+"41","country","sex","13-1-1","geography - high level","sex/gender",NA,NA,NA,NA
+"42","sex","country","13-1-1","sex/gender","geography - high level",NA,NA,NA,NA
+"43","age","sex","16-1-1","age","sex/gender",NA,NA,NA,NA
+"44","country","police force area","16-1-1","geography - high level","geography - low level",NA,NA,NA,NA
+"45","country","police force area","16-1-1","geography - high level","geography - low level","region","geography - mid-level",NA,NA
+"46","country","region","16-1-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"47","country","region","16-1-1","geography - high level","geography - mid-level","police force area","geography - low level",NA,NA
+"48","police force area","country","16-1-1","geography - low level","geography - high level",NA,NA,NA,NA
+"49","police force area","country","16-1-1","geography - low level","geography - high level","region","geography - mid-level",NA,NA
+"50","police force area","region","16-1-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"51","police force area","region","16-1-1","geography - low level","geography - mid-level","country","geography - high level",NA,NA
+"52","region","country","16-1-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"53","region","country","16-1-1","geography - mid-level","geography - high level","police force area","geography - low level",NA,NA
+"54","region","police force area","16-1-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"55","region","police force area","16-1-1","geography - mid-level","geography - low level","country","geography - high level",NA,NA
+"56","sex","age","16-1-1","sex/gender","age",NA,NA,NA,NA
+"57","age","sex","16-1-3","age","sex/gender",NA,NA,NA,NA
+"58","country of birth","sex","16-1-3","migration status etc","sex/gender",NA,NA,NA,NA
+"59","disability status","sex","16-1-3","disability status etc","sex/gender",NA,NA,NA,NA
+"60","ethnic group","ethnicity","16-1-3","ethnic group","ethnicity",NA,NA,NA,NA
+"61","ethnicity","ethnic group","16-1-3","ethnicity","ethnic group",NA,NA,NA,NA
+"62","ethnicity","sex","16-1-3","ethnicity","sex/gender",NA,NA,NA,NA
+"63","highest qualification","sex","16-1-3","education level","sex/gender",NA,NA,NA,NA
+"64","household income","sex","16-1-3","wealth","sex/gender",NA,NA,NA,NA
+"65","region","sex","16-1-3","geography - mid-level","sex/gender",NA,NA,NA,NA
+"66","sex","age","16-1-3","sex/gender","age",NA,NA,NA,NA
+"67","sex","country of birth","16-1-3","sex/gender","migration status etc",NA,NA,NA,NA
+"68","sex","disability status","16-1-3","sex/gender","disability status etc",NA,NA,NA,NA
+"69","sex","ethnicity","16-1-3","sex/gender","ethnicity",NA,NA,NA,NA
+"70","sex","highest qualification","16-1-3","sex/gender","education level",NA,NA,NA,NA
+"71","sex","household income","16-1-3","sex/gender","wealth",NA,NA,NA,NA
+"72","sex","region","16-1-3","sex/gender","geography - mid-level",NA,NA,NA,NA
+"73","age","sex","16-1-4","age","sex/gender",NA,NA,NA,NA
+"74","ethnic group","ethnicity","16-1-4","ethnic group","ethnicity",NA,NA,NA,NA
+"75","ethnicity","ethnic group","16-1-4","ethnicity","ethnic group",NA,NA,NA,NA
+"76","sex","age","16-1-4","sex/gender","age",NA,NA,NA,NA
+"77","age","sex","16-3-2","age","sex/gender",NA,NA,NA,NA
+"78","sex","age","16-3-2","sex/gender","age",NA,NA,NA,NA
+"79","age","sex","16-7-1","age","sex/gender",NA,NA,NA,NA
+"80","country","region","16-7-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"81","region","country","16-7-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"82","sex","age","16-7-1","sex/gender","age",NA,NA,NA,NA
+"83","age","disability status","17-8-1","age","disability status etc",NA,NA,NA,NA
+"84","disability status","age","17-8-1","disability status etc","age",NA,NA,NA,NA
+"85","ethnic group","ethnicity","17-8-1","ethnic group","ethnicity",NA,NA,NA,NA
+"86","ethnicity","ethnic group","17-8-1","ethnicity","ethnic group",NA,NA,NA,NA
+"87","local authority","region","17-8-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"88","region","local authority","17-8-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"89","age","sex","2-1-1","age","sex/gender",NA,NA,NA,NA
+"90","sex","age","2-1-1","sex/gender","age",NA,NA,NA,NA
+"91","age","sex","2-1-2","age","sex/gender",NA,NA,NA,NA
+"92","children under 16 in the household","sex","2-1-2","age","sex/gender",NA,NA,NA,NA
+"93","children under 6 in the household","sex","2-1-2","age","sex/gender",NA,NA,NA,NA
+"94","country","sex","2-1-2","geography - high level","sex/gender",NA,NA,NA,NA
+"95","household income","sex","2-1-2","wealth","sex/gender",NA,NA,NA,NA
+"96","sex","age","2-1-2","sex/gender","age",NA,NA,NA,NA
+"97","sex","children under 16 in the household","2-1-2","sex/gender","age",NA,NA,NA,NA
+"98","sex","children under 6 in the household","2-1-2","sex/gender","age",NA,NA,NA,NA
+"99","sex","country","2-1-2","sex/gender","geography - high level",NA,NA,NA,NA
+"100","sex","household income","2-1-2","sex/gender","wealth",NA,NA,NA,NA
+"101","country","ethnicity","2-2-2","geography - high level","ethnicity",NA,NA,NA,NA
+"102","country","sex","2-2-2","geography - high level","sex/gender",NA,NA,NA,NA
+"103","ethnicity","country","2-2-2","ethnicity","geography - high level",NA,NA,NA,NA
+"104","sex","country","2-2-2","sex/gender","geography - high level",NA,NA,NA,NA
+"105","country","region","2-4-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"106","region","country","2-4-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"107","country","health board","3-1-2","geography - high level","geography - low level",NA,NA,NA,NA
+"108","country","region","3-1-2","geography - high level","geography - mid-level",NA,NA,NA,NA
+"109","health board","country","3-1-2","geography - low level","geography - high level",NA,NA,NA,NA
+"110","region","country","3-1-2","geography - mid-level","geography - high level",NA,NA,NA,NA
+"111","country","sex","3-2-1","geography - high level","sex/gender",NA,NA,NA,NA
+"112","sex","country","3-2-1","sex/gender","geography - high level",NA,NA,NA,NA
+"113","age","country","3-2-2","age","geography - high level",NA,NA,NA,NA
+"114","country","age","3-2-2","geography - high level","age",NA,NA,NA,NA
+"115","country","health board","3-2-2","geography - high level","geography - low level",NA,NA,NA,NA
+"116","country","region","3-2-2","geography - high level","geography - mid-level",NA,NA,NA,NA
+"117","country","sex","3-2-2","geography - high level","sex/gender",NA,NA,NA,NA
+"118","health board","country","3-2-2","geography - low level","geography - high level",NA,NA,NA,NA
+"119","region","country","3-2-2","geography - mid-level","geography - high level",NA,NA,NA,NA
+"120","sex","country","3-2-2","sex/gender","geography - high level",NA,NA,NA,NA
+"121","age","country","3-3-1","age","geography - high level",NA,NA,NA,NA
+"122","age","country","3-3-1","age","geography - high level","sex","sex/gender",NA,NA
+"123","age","sex","3-3-1","age","sex/gender",NA,NA,NA,NA
+"124","age","sex","3-3-1","age","sex/gender","country","geography - high level",NA,NA
+"125","country","age","3-3-1","geography - high level","age",NA,NA,NA,NA
+"126","country","age","3-3-1","geography - high level","age","sex","sex/gender",NA,NA
+"127","country","ethnicity","3-3-1","geography - high level","ethnicity",NA,NA,NA,NA
+"128","country","ethnicity","3-3-1","geography - high level","ethnicity","sex","sex/gender",NA,NA
+"129","country","sex","3-3-1","geography - high level","sex/gender",NA,NA,NA,NA
+"130","country","sex","3-3-1","geography - high level","sex/gender","age","age",NA,NA
+"131","country","sex","3-3-1","geography - high level","sex/gender","ethnicity","ethnicity",NA,NA
+"132","ethnicity","country","3-3-1","ethnicity","geography - high level",NA,NA,NA,NA
+"133","ethnicity","country","3-3-1","ethnicity","geography - high level","sex","sex/gender",NA,NA
+"134","ethnicity","sex","3-3-1","ethnicity","sex/gender",NA,NA,NA,NA
+"135","ethnicity","sex","3-3-1","ethnicity","sex/gender","country","geography - high level",NA,NA
+"136","sex","age","3-3-1","sex/gender","age",NA,NA,NA,NA
+"137","sex","age","3-3-1","sex/gender","age","country","geography - high level",NA,NA
+"138","sex","country","3-3-1","sex/gender","geography - high level",NA,NA,NA,NA
+"139","sex","country","3-3-1","sex/gender","geography - high level","age","age",NA,NA
+"140","sex","country","3-3-1","sex/gender","geography - high level","ethnicity","ethnicity",NA,NA
+"141","sex","ethnicity","3-3-1","sex/gender","ethnicity",NA,NA,NA,NA
+"142","sex","ethnicity","3-3-1","sex/gender","ethnicity","country","geography - high level",NA,NA
+"143","country","country of birth","3-3-2","geography - high level","migration status etc",NA,NA,NA,NA
+"144","country","country of birth","3-3-2","geography - high level","migration status etc","ethnic group","ethnic group",NA,NA
+"145","country","ethnic group","3-3-2","geography - high level","ethnic group","country of birth","migration status etc",NA,NA
+"146","country","ethnic group","3-3-2","geography - high level","ethnic group",NA,NA,NA,NA
+"147","country of birth","country","3-3-2","migration status etc","geography - high level",NA,NA,NA,NA
+"148","country of birth","country","3-3-2","migration status etc","geography - high level","ethnic group","ethnic group",NA,NA
+"149","country of birth","ethnic group","3-3-2","migration status etc","ethnic group","country","geography - high level",NA,NA
+"150","country of birth","ethnic group","3-3-2","migration status etc","ethnic group",NA,NA,NA,NA
+"151","ethnic group","country","3-3-2","ethnic group","geography - high level","country of birth","migration status etc",NA,NA
+"152","ethnic group","country","3-3-2","ethnic group","geography - high level",NA,NA,NA,NA
+"153","ethnic group","country of birth","3-3-2","ethnic group","migration status etc","country","geography - high level",NA,NA
+"154","ethnic group","country of birth","3-3-2","ethnic group","migration status etc",NA,NA,NA,NA
+"155","age","sex","3-3-3","age","sex/gender",NA,NA,NA,NA
+"156","country","region","3-3-3","geography - high level","geography - mid-level",NA,NA,NA,NA
+"157","region","country","3-3-3","geography - mid-level","geography - high level",NA,NA,NA,NA
+"158","sex","age","3-3-3","sex/gender","age",NA,NA,NA,NA
+"159","age","region","3-3-4","age","geography - mid-level",NA,NA,NA,NA
+"160","age","region","3-3-4","age","geography - mid-level","sex","sex/gender",NA,NA
+"161","age","sex","3-3-4","age","sex/gender",NA,NA,NA,NA
+"162","age","sex","3-3-4","age","sex/gender","region","geography - mid-level",NA,NA
+"163","region","age","3-3-4","geography - mid-level","age",NA,NA,NA,NA
+"164","region","age","3-3-4","geography - mid-level","age","sex","sex/gender",NA,NA
+"165","region","sex","3-3-4","geography - mid-level","sex/gender",NA,NA,NA,NA
+"166","region","sex","3-3-4","geography - mid-level","sex/gender","age","age",NA,NA
+"167","sex","age","3-3-4","sex/gender","age",NA,NA,NA,NA
+"168","sex","age","3-3-4","sex/gender","age","region","geography - mid-level",NA,NA
+"169","sex","region","3-3-4","sex/gender","geography - mid-level",NA,NA,NA,NA
+"170","sex","region","3-3-4","sex/gender","geography - mid-level","age","age",NA,NA
+"171","age","country","3-4-1","age","geography - high level",NA,NA,NA,NA
+"172","age","country","3-4-1","age","geography - high level","region","geography - mid-level",NA,NA
+"173","age","country","3-4-1","age","geography - high level","region","geography - mid-level","sex","sex/gender"
+"174","age","country","3-4-1","age","geography - high level","sex","sex/gender",NA,NA
+"175","age","country","3-4-1","age","geography - high level","sex","sex/gender","region","geography - mid-level"
+"176","age","region","3-4-1","age","geography - mid-level","country","geography - high level",NA,NA
+"177","age","region","3-4-1","age","geography - mid-level","country","geography - high level","sex","sex/gender"
+"178","age","region","3-4-1","age","geography - mid-level","sex","sex/gender","country","geography - high level"
+"179","age","sex","3-4-1","age","sex/gender","country","geography - high level",NA,NA
+"180","age","sex","3-4-1","age","sex/gender","country","geography - high level","region","geography - mid-level"
+"181","age","sex","3-4-1","age","sex/gender","region","geography - mid-level","country","geography - high level"
+"182","country","age","3-4-1","geography - high level","age",NA,NA,NA,NA
+"183","country","age","3-4-1","geography - high level","age","region","geography - mid-level",NA,NA
+"184","country","age","3-4-1","geography - high level","age","region","geography - mid-level","sex","sex/gender"
+"185","country","age","3-4-1","geography - high level","age","sex","sex/gender",NA,NA
+"186","country","age","3-4-1","geography - high level","age","sex","sex/gender","region","geography - mid-level"
+"187","country","region","3-4-1","geography - high level","geography - mid-level","age","age",NA,NA
+"188","country","region","3-4-1","geography - high level","geography - mid-level","age","age","sex","sex/gender"
+"189","country","region","3-4-1","geography - high level","geography - mid-level","sex","sex/gender","age","age"
+"190","country","sex","3-4-1","geography - high level","sex/gender","age","age",NA,NA
+"191","country","sex","3-4-1","geography - high level","sex/gender","age","age","region","geography - mid-level"
+"192","country","sex","3-4-1","geography - high level","sex/gender","region","geography - mid-level","age","age"
+"193","region","age","3-4-1","geography - mid-level","age","country","geography - high level",NA,NA
+"194","region","age","3-4-1","geography - mid-level","age","country","geography - high level","sex","sex/gender"
+"195","region","age","3-4-1","geography - mid-level","age","sex","sex/gender","country","geography - high level"
+"196","region","country","3-4-1","geography - mid-level","geography - high level","age","age",NA,NA
+"197","region","country","3-4-1","geography - mid-level","geography - high level","age","age","sex","sex/gender"
+"198","region","country","3-4-1","geography - mid-level","geography - high level","sex","sex/gender","age","age"
+"199","region","sex","3-4-1","geography - mid-level","sex/gender","age","age","country","geography - high level"
+"200","region","sex","3-4-1","geography - mid-level","sex/gender","country","geography - high level","age","age"
+"201","sex","age","3-4-1","sex/gender","age","country","geography - high level",NA,NA
+"202","sex","age","3-4-1","sex/gender","age","country","geography - high level","region","geography - mid-level"
+"203","sex","age","3-4-1","sex/gender","age","region","geography - mid-level","country","geography - high level"
+"204","sex","country","3-4-1","sex/gender","geography - high level","age","age",NA,NA
+"205","sex","country","3-4-1","sex/gender","geography - high level","age","age","region","geography - mid-level"
+"206","sex","country","3-4-1","sex/gender","geography - high level","region","geography - mid-level","age","age"
+"207","sex","region","3-4-1","sex/gender","geography - mid-level","age","age","country","geography - high level"
+"208","sex","region","3-4-1","sex/gender","geography - mid-level","country","geography - high level","age","age"
+"209","age","country","3-4-2","age","geography - high level",NA,NA,NA,NA
+"210","age","country","3-4-2","age","geography - high level","sex","sex/gender",NA,NA
+"211","age","sex","3-4-2","age","sex/gender",NA,NA,NA,NA
+"212","age","sex","3-4-2","age","sex/gender","country","geography - high level",NA,NA
+"213","country","age","3-4-2","geography - high level","age",NA,NA,NA,NA
+"214","country","age","3-4-2","geography - high level","age","sex","sex/gender",NA,NA
+"215","country","region","3-4-2","geography - high level","geography - mid-level",NA,NA,NA,NA
+"216","country","region","3-4-2","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
+"217","country","sex","3-4-2","geography - high level","sex/gender",NA,NA,NA,NA
+"218","country","sex","3-4-2","geography - high level","sex/gender","age","age",NA,NA
+"219","country","sex","3-4-2","geography - high level","sex/gender","region","geography - mid-level",NA,NA
+"220","region","country","3-4-2","geography - mid-level","geography - high level",NA,NA,NA,NA
+"221","region","country","3-4-2","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
+"222","region","sex","3-4-2","geography - mid-level","sex/gender",NA,NA,NA,NA
+"223","region","sex","3-4-2","geography - mid-level","sex/gender","country","geography - high level",NA,NA
+"224","sex","age","3-4-2","sex/gender","age",NA,NA,NA,NA
+"225","sex","age","3-4-2","sex/gender","age","country","geography - high level",NA,NA
+"226","sex","country","3-4-2","sex/gender","geography - high level",NA,NA,NA,NA
+"227","sex","country","3-4-2","sex/gender","geography - high level","age","age",NA,NA
+"228","sex","country","3-4-2","sex/gender","geography - high level","region","geography - mid-level",NA,NA
+"229","sex","region","3-4-2","sex/gender","geography - mid-level",NA,NA,NA,NA
+"230","sex","region","3-4-2","sex/gender","geography - mid-level","country","geography - high level",NA,NA
+"231","age","country","3-6-1","age","geography - high level",NA,NA,NA,NA
+"232","age","country","3-6-1","age","geography - high level","sex","sex/gender",NA,NA
+"233","age","sex","3-6-1","age","sex/gender","country","geography - high level",NA,NA
+"234","age","sex","3-6-1","age","sex/gender",NA,NA,NA,NA
+"235","country","age","3-6-1","geography - high level","age",NA,NA,NA,NA
+"236","country","age","3-6-1","geography - high level","age","sex","sex/gender",NA,NA
+"237","country","region","3-6-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"238","country","sex","3-6-1","geography - high level","sex/gender",NA,NA,NA,NA
+"239","country","sex","3-6-1","geography - high level","sex/gender","age","age",NA,NA
+"240","region","country","3-6-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"241","sex","age","3-6-1","sex/gender","age","country","geography - high level",NA,NA
+"242","sex","age","3-6-1","sex/gender","age",NA,NA,NA,NA
+"243","sex","country","3-6-1","sex/gender","geography - high level",NA,NA,NA,NA
+"244","sex","country","3-6-1","sex/gender","geography - high level","age","age",NA,NA
+"245","local authority","region","3-7-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"246","region","local authority","3-7-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"247","age","country","3-7-2","age","geography - high level",NA,NA,NA,NA
+"248","country","age","3-7-2","geography - high level","age",NA,NA,NA,NA
+"249","county","region","3-9-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"250","local authority","region","3-9-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"251","region","county","3-9-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"252","region","local authority","3-9-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"253","country","sex","3-9-2","geography - high level","sex/gender",NA,NA,NA,NA
+"254","sex","country","3-9-2","sex/gender","geography - high level",NA,NA,NA,NA
+"255","age","country","3-9-3","age","geography - high level",NA,NA,NA,NA
+"256","age","country","3-9-3","age","geography - high level","sex","sex/gender",NA,NA
+"257","age","sex","3-9-3","age","sex/gender","country","geography - high level",NA,NA
+"258","age","sex","3-9-3","age","sex/gender",NA,NA,NA,NA
+"259","country","age","3-9-3","geography - high level","age",NA,NA,NA,NA
+"260","country","age","3-9-3","geography - high level","age","sex","sex/gender",NA,NA
+"261","country","region","3-9-3","geography - high level","geography - mid-level",NA,NA,NA,NA
+"262","country","region","3-9-3","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
+"263","country","sex","3-9-3","geography - high level","sex/gender",NA,NA,NA,NA
+"264","country","sex","3-9-3","geography - high level","sex/gender","age","age",NA,NA
+"265","country","sex","3-9-3","geography - high level","sex/gender","region","geography - mid-level",NA,NA
+"266","region","country","3-9-3","geography - mid-level","geography - high level",NA,NA,NA,NA
+"267","region","country","3-9-3","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
+"268","region","sex","3-9-3","geography - mid-level","sex/gender",NA,NA,NA,NA
+"269","region","sex","3-9-3","geography - mid-level","sex/gender","country","geography - high level",NA,NA
+"270","sex","age","3-9-3","sex/gender","age","country","geography - high level",NA,NA
+"271","sex","age","3-9-3","sex/gender","age",NA,NA,NA,NA
+"272","sex","country","3-9-3","sex/gender","geography - high level",NA,NA,NA,NA
+"273","sex","country","3-9-3","sex/gender","geography - high level","age","age",NA,NA
+"274","sex","country","3-9-3","sex/gender","geography - high level","region","geography - mid-level",NA,NA
+"275","sex","region","3-9-3","sex/gender","geography - mid-level",NA,NA,NA,NA
+"276","sex","region","3-9-3","sex/gender","geography - mid-level","country","geography - high level",NA,NA
+"277","age","country","3-a-1","age","geography - high level",NA,NA,NA,NA
+"278","age","country","3-a-1","age","geography - high level","region","geography - mid-level",NA,NA
+"279","age","country","3-a-1","age","geography - high level","region","geography - mid-level","sex","sex/gender"
+"280","age","country","3-a-1","age","geography - high level","sex","sex/gender",NA,NA
+"281","age","country","3-a-1","age","geography - high level","sex","sex/gender","region","geography - mid-level"
+"282","age","region","3-a-1","age","geography - mid-level","country","geography - high level",NA,NA
+"283","age","region","3-a-1","age","geography - mid-level","country","geography - high level","sex","sex/gender"
+"284","age","region","3-a-1","age","geography - mid-level",NA,NA,NA,NA
+"285","age","region","3-a-1","age","geography - mid-level","sex","sex/gender","country","geography - high level"
+"286","age","region","3-a-1","age","geography - mid-level","sex","sex/gender",NA,NA
+"287","age","sex","3-a-1","age","sex/gender","country","geography - high level",NA,NA
+"288","age","sex","3-a-1","age","sex/gender",NA,NA,NA,NA
+"289","age","sex","3-a-1","age","sex/gender","country","geography - high level","region","geography - mid-level"
+"290","age","sex","3-a-1","age","sex/gender","region","geography - mid-level","country","geography - high level"
+"291","age","sex","3-a-1","age","sex/gender","region","geography - mid-level",NA,NA
+"292","country","age","3-a-1","geography - high level","age",NA,NA,NA,NA
+"293","country","age","3-a-1","geography - high level","age","region","geography - mid-level",NA,NA
+"294","country","age","3-a-1","geography - high level","age","region","geography - mid-level","sex","sex/gender"
+"295","country","age","3-a-1","geography - high level","age","sex","sex/gender",NA,NA
+"296","country","age","3-a-1","geography - high level","age","sex","sex/gender","region","geography - mid-level"
+"297","country","country of birth","3-a-1","geography - high level","migration status etc",NA,NA,NA,NA
+"298","country","ethnicity","3-a-1","geography - high level","ethnicity",NA,NA,NA,NA
+"299","country","ethnicity","3-a-1","geography - high level","ethnicity","sex","sex/gender",NA,NA
+"300","country","region","3-a-1","geography - high level","geography - mid-level","age","age",NA,NA
+"301","country","region","3-a-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"302","country","region","3-a-1","geography - high level","geography - mid-level","age","age","sex","sex/gender"
+"303","country","region","3-a-1","geography - high level","geography - mid-level","sex","sex/gender","age","age"
+"304","country","region","3-a-1","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
+"305","country","sex","3-a-1","geography - high level","sex/gender","age","age",NA,NA
+"306","country","sex","3-a-1","geography - high level","sex/gender",NA,NA,NA,NA
+"307","country","sex","3-a-1","geography - high level","sex/gender","age","age","region","geography - mid-level"
+"308","country","sex","3-a-1","geography - high level","sex/gender","ethnicity","ethnicity",NA,NA
+"309","country","sex","3-a-1","geography - high level","sex/gender","region","geography - mid-level","age","age"
+"310","country","sex","3-a-1","geography - high level","sex/gender","region","geography - mid-level",NA,NA
+"311","country of birth","country","3-a-1","migration status etc","geography - high level",NA,NA,NA,NA
+"312","ethnicity","country","3-a-1","ethnicity","geography - high level",NA,NA,NA,NA
+"313","ethnicity","country","3-a-1","ethnicity","geography - high level","sex","sex/gender",NA,NA
+"314","ethnicity","sex","3-a-1","ethnicity","sex/gender",NA,NA,NA,NA
+"315","ethnicity","sex","3-a-1","ethnicity","sex/gender","country","geography - high level",NA,NA
+"316","region","age","3-a-1","geography - mid-level","age","country","geography - high level",NA,NA
+"317","region","age","3-a-1","geography - mid-level","age","country","geography - high level","sex","sex/gender"
+"318","region","age","3-a-1","geography - mid-level","age",NA,NA,NA,NA
+"319","region","age","3-a-1","geography - mid-level","age","sex","sex/gender","country","geography - high level"
+"320","region","age","3-a-1","geography - mid-level","age","sex","sex/gender",NA,NA
+"321","region","country","3-a-1","geography - mid-level","geography - high level","age","age",NA,NA
+"322","region","country","3-a-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"323","region","country","3-a-1","geography - mid-level","geography - high level","age","age","sex","sex/gender"
+"324","region","country","3-a-1","geography - mid-level","geography - high level","sex","sex/gender","age","age"
+"325","region","country","3-a-1","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
+"326","region","sex","3-a-1","geography - mid-level","sex/gender","age","age","country","geography - high level"
+"327","region","sex","3-a-1","geography - mid-level","sex/gender","age","age",NA,NA
+"328","region","sex","3-a-1","geography - mid-level","sex/gender",NA,NA,NA,NA
+"329","region","sex","3-a-1","geography - mid-level","sex/gender","country","geography - high level","age","age"
+"330","region","sex","3-a-1","geography - mid-level","sex/gender","country","geography - high level",NA,NA
+"331","sex","age","3-a-1","sex/gender","age","country","geography - high level",NA,NA
+"332","sex","age","3-a-1","sex/gender","age",NA,NA,NA,NA
+"333","sex","age","3-a-1","sex/gender","age","country","geography - high level","region","geography - mid-level"
+"334","sex","age","3-a-1","sex/gender","age","region","geography - mid-level","country","geography - high level"
+"335","sex","age","3-a-1","sex/gender","age","region","geography - mid-level",NA,NA
+"336","sex","country","3-a-1","sex/gender","geography - high level","age","age",NA,NA
+"337","sex","country","3-a-1","sex/gender","geography - high level",NA,NA,NA,NA
+"338","sex","country","3-a-1","sex/gender","geography - high level","age","age","region","geography - mid-level"
+"339","sex","country","3-a-1","sex/gender","geography - high level","ethnicity","ethnicity",NA,NA
+"340","sex","country","3-a-1","sex/gender","geography - high level","region","geography - mid-level","age","age"
+"341","sex","country","3-a-1","sex/gender","geography - high level","region","geography - mid-level",NA,NA
+"342","sex","ethnicity","3-a-1","sex/gender","ethnicity",NA,NA,NA,NA
+"343","sex","ethnicity","3-a-1","sex/gender","ethnicity","country","geography - high level",NA,NA
+"344","sex","region","3-a-1","sex/gender","geography - mid-level","age","age","country","geography - high level"
+"345","sex","region","3-a-1","sex/gender","geography - mid-level","age","age",NA,NA
+"346","sex","region","3-a-1","sex/gender","geography - mid-level",NA,NA,NA,NA
+"347","sex","region","3-a-1","sex/gender","geography - mid-level","country","geography - high level","age","age"
+"348","sex","region","3-a-1","sex/gender","geography - mid-level","country","geography - high level",NA,NA
+"349","age","country","3-b-1","age","geography - high level",NA,NA,NA,NA
+"350","age","country","3-b-1","age","geography - high level","region","geography - mid-level",NA,NA
+"351","age","region","3-b-1","age","geography - mid-level","country","geography - high level",NA,NA
+"352","country","age","3-b-1","geography - high level","age",NA,NA,NA,NA
+"353","country","age","3-b-1","geography - high level","age","region","geography - mid-level",NA,NA
+"354","country","region","3-b-1","geography - high level","geography - mid-level","age","age",NA,NA
+"355","region","age","3-b-1","geography - mid-level","age","country","geography - high level",NA,NA
+"356","region","country","3-b-1","geography - mid-level","geography - high level","age","age",NA,NA
+"357","ethnic group","ethnicity","4-1-1","ethnic group","ethnicity",NA,NA,NA,NA
+"358","ethnicity","ethnic group","4-1-1","ethnicity","ethnic group",NA,NA,NA,NA
+"359","free school meals","sex","4-1-1","wealth","sex/gender",NA,NA,NA,NA
+"360","local authority","region","4-1-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"361","region","local authority","4-1-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"362","sex","free school meals","4-1-1","sex/gender","wealth",NA,NA,NA,NA
+"363","sex","special educational needs","4-1-1","sex/gender","disability status etc",NA,NA,NA,NA
+"364","special educational needs","sex","4-1-1","disability status etc","sex/gender",NA,NA,NA,NA
+"365","ethnic group","ethnicity","4-2-1","ethnic group","ethnicity",NA,NA,NA,NA
+"366","ethnic group","ethnicity","4-2-1","ethnic group","ethnicity","gender","sex/gender",NA,NA
+"367","ethnic group","gender","4-2-1","ethnic group","sex/gender","ethnicity","ethnicity",NA,NA
+"368","ethnic group","gender","4-2-1","ethnic group","sex/gender",NA,NA,NA,NA
+"369","ethnicity","ethnic group","4-2-1","ethnicity","ethnic group",NA,NA,NA,NA
+"370","ethnicity","ethnic group","4-2-1","ethnicity","ethnic group","gender","sex/gender",NA,NA
+"371","ethnicity","gender","4-2-1","ethnicity","sex/gender",NA,NA,NA,NA
+"372","ethnicity","gender","4-2-1","ethnicity","sex/gender","ethnic group","ethnic group",NA,NA
+"373","free school meals","gender","4-2-1","wealth","sex/gender",NA,NA,NA,NA
+"374","gender","ethnic group","4-2-1","sex/gender","ethnic group","ethnicity","ethnicity",NA,NA
+"375","gender","ethnic group","4-2-1","sex/gender","ethnic group",NA,NA,NA,NA
+"376","gender","ethnicity","4-2-1","sex/gender","ethnicity",NA,NA,NA,NA
+"377","gender","ethnicity","4-2-1","sex/gender","ethnicity","ethnic group","ethnic group",NA,NA
+"378","gender","free school meals","4-2-1","sex/gender","wealth",NA,NA,NA,NA
+"379","gender","local authority","4-2-1","sex/gender","geography - low level",NA,NA,NA,NA
+"380","gender","local authority","4-2-1","sex/gender","geography - low level","region","geography - mid-level",NA,NA
+"381","gender","region","4-2-1","sex/gender","geography - mid-level",NA,NA,NA,NA
+"382","gender","region","4-2-1","sex/gender","geography - mid-level","local authority","geography - low level",NA,NA
+"383","local authority","gender","4-2-1","geography - low level","sex/gender",NA,NA,NA,NA
+"384","local authority","gender","4-2-1","geography - low level","sex/gender","region","geography - mid-level",NA,NA
+"385","local authority","region","4-2-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"386","local authority","region","4-2-1","geography - low level","geography - mid-level","gender","sex/gender",NA,NA
+"387","region","gender","4-2-1","geography - mid-level","sex/gender",NA,NA,NA,NA
+"388","region","gender","4-2-1","geography - mid-level","sex/gender","local authority","geography - low level",NA,NA
+"389","region","local authority","4-2-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"390","region","local authority","4-2-1","geography - mid-level","geography - low level","gender","sex/gender",NA,NA
+"391","region","special educational needs","4-2-1","geography - mid-level","disability status etc",NA,NA,NA,NA
+"392","special educational needs","region","4-2-1","disability status etc","geography - mid-level",NA,NA,NA,NA
+"393","age","region","4-2-2","age","geography - mid-level",NA,NA,NA,NA
+"394","region","age","4-2-2","geography - mid-level","age",NA,NA,NA,NA
+"395","local authority","region","4-c-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"396","region","local authority","4-c-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"397","ethnic group","ethnicity","5-2-1","ethnic group","ethnicity",NA,NA,NA,NA
+"398","ethnicity","ethnic group","5-2-1","ethnicity","ethnic group",NA,NA,NA,NA
+"399","ethnic group","ethnicity","5-2-2","ethnic group","ethnicity",NA,NA,NA,NA
+"400","ethnicity","ethnic group","5-2-2","ethnicity","ethnic group",NA,NA,NA,NA
+"401","country","local authority","8-10-1","geography - high level","geography - low level",NA,NA,NA,NA
+"402","country","local authority","8-10-1","geography - high level","geography - low level","region","geography - mid-level",NA,NA
+"403","country","region","8-10-1","geography - high level","geography - mid-level","local authority","geography - low level",NA,NA
+"404","country","region","8-10-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"405","country","urban or rural","8-10-1","geography - high level","geography - high level",NA,NA,NA,NA
+"406","local authority","country","8-10-1","geography - low level","geography - high level",NA,NA,NA,NA
+"407","local authority","country","8-10-1","geography - low level","geography - high level","region","geography - mid-level",NA,NA
+"408","local authority","region","8-10-1","geography - low level","geography - mid-level","country","geography - high level",NA,NA
+"409","local authority","region","8-10-1","geography - low level","geography - mid-level",NA,NA,NA,NA
+"410","region","country","8-10-1","geography - mid-level","geography - high level","local authority","geography - low level",NA,NA
+"411","region","country","8-10-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"412","region","local authority","8-10-1","geography - mid-level","geography - low level","country","geography - high level",NA,NA
+"413","region","local authority","8-10-1","geography - mid-level","geography - low level",NA,NA,NA,NA
+"414","urban or rural","country","8-10-1","geography - high level","geography - high level",NA,NA,NA,NA
+"415","age","sex","8-10-2","age","sex/gender",NA,NA,NA,NA
+"416","sex","age","8-10-2","sex/gender","age",NA,NA,NA,NA
+"417","region","sex","8-3-1","geography - mid-level","sex/gender",NA,NA,NA,NA
+"418","sex","region","8-3-1","sex/gender","geography - mid-level",NA,NA,NA,NA
+"419","age","sex","8-5-1","age","sex/gender",NA,NA,NA,NA
+"420","country","region","8-5-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"421","country","region","8-5-1","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
+"422","country","sex","8-5-1","geography - high level","sex/gender",NA,NA,NA,NA
+"423","country","sex","8-5-1","geography - high level","sex/gender","region","geography - mid-level",NA,NA
+"424","region","country","8-5-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"425","region","country","8-5-1","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
+"426","region","sex","8-5-1","geography - mid-level","sex/gender",NA,NA,NA,NA
+"427","region","sex","8-5-1","geography - mid-level","sex/gender","country","geography - high level",NA,NA
+"428","sex","age","8-5-1","sex/gender","age",NA,NA,NA,NA
+"429","sex","country","8-5-1","sex/gender","geography - high level",NA,NA,NA,NA
+"430","sex","country","8-5-1","sex/gender","geography - high level","region","geography - mid-level",NA,NA
+"431","sex","region","8-5-1","sex/gender","geography - mid-level",NA,NA,NA,NA
+"432","sex","region","8-5-1","sex/gender","geography - mid-level","country","geography - high level",NA,NA
+"433","age","sex","8-5-2","age","sex/gender",NA,NA,NA,NA
+"434","country","region","8-5-2","geography - high level","geography - mid-level",NA,NA,NA,NA
+"435","country","region","8-5-2","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
+"436","country","sex","8-5-2","geography - high level","sex/gender",NA,NA,NA,NA
+"437","country","sex","8-5-2","geography - high level","sex/gender","region","geography - mid-level",NA,NA
+"438","disability status","sex","8-5-2","disability status etc","sex/gender",NA,NA,NA,NA
+"439","region","country","8-5-2","geography - mid-level","geography - high level",NA,NA,NA,NA
+"440","region","country","8-5-2","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
+"441","region","sex","8-5-2","geography - mid-level","sex/gender",NA,NA,NA,NA
+"442","region","sex","8-5-2","geography - mid-level","sex/gender","country","geography - high level",NA,NA
+"443","sex","age","8-5-2","sex/gender","age",NA,NA,NA,NA
+"444","sex","country","8-5-2","sex/gender","geography - high level",NA,NA,NA,NA
+"445","sex","country","8-5-2","sex/gender","geography - high level","region","geography - mid-level",NA,NA
+"446","sex","disability status","8-5-2","sex/gender","disability status etc",NA,NA,NA,NA
+"447","sex","region","8-5-2","sex/gender","geography - mid-level",NA,NA,NA,NA
+"448","sex","region","8-5-2","sex/gender","geography - mid-level","country","geography - high level",NA,NA
+"449","age","sex","8-6-1","age","sex/gender",NA,NA,NA,NA
+"450","sex","age","8-6-1","sex/gender","age",NA,NA,NA,NA
+"451","age","sex","8-8-1","age","sex/gender",NA,NA,NA,NA
+"452","country","region","8-8-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"453","region","country","8-8-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"454","sex","age","8-8-1","sex/gender","age",NA,NA,NA,NA
+"455","country","local authority","9-1-1","geography - high level","geography - low level",NA,NA,NA,NA
+"456","local authority","country","9-1-1","geography - low level","geography - high level",NA,NA,NA,NA
+"457","country","region","9-5-1","geography - high level","geography - mid-level",NA,NA,NA,NA
+"458","region","country","9-5-1","geography - mid-level","geography - high level",NA,NA,NA,NA

@@ -33,7 +33,7 @@ for(i in 1:nrow(indicator_numbers)){
   if(csv_filename %in% available_files){
     
     # because a fatal error is thrown if we try to read in a blank csv, we need to catch the error using try
-    csv <- try( read.csv(paste0(csv_folder_filepath, "\\", csv_filename), na.strings = "") %>% 
+    csv <- try(read.csv(paste0(csv_folder_filepath, "\\", csv_filename), na.strings = "") %>% 
                   mutate_if(is.factor, as.character),
                 silent = TRUE)
     
@@ -42,6 +42,8 @@ for(i in 1:nrow(indicator_numbers)){
       relevant_unused_columns <- unused_columns[unused_columns %in% names(csv)]
       disaggs <- select(csv, -all_of(relevant_unused_columns))
       
+      # Some non-stats indicators have placeholder csvs (not sure why they are this way)
+      # as far as I can tell this is what they look like
       non_stats_indicator <- data.frame(Group = c("A", "B", NA, "A", "B", NA)) %>% 
         mutate(Group = as.character(Group))
       
@@ -73,8 +75,14 @@ for(i in 1:nrow(indicator_numbers)){
           # build control sheet -------------
           # get all possible variable orders ----
           
-          # TO DO: get maximum number of interactions to make permutations() faster when there are a lot of disaggs (e.g. 16.1.3)
-          all_combinations <- gtools::permutations(length(disaggs_to_keep), length(disaggs_to_keep), disaggs_to_keep)
+          # TO DO: get maximum number of interactions to make permutations() faster 
+          # when there are a lot of disaggs (e.g. 16.1.3)
+          maximum_interactions <- disagg_combos_to_keep %>% 
+            mutate(count_non_na = rowSums(!is.na(.))) %>% 
+            pull(count_non_na) %>% 
+            max(.)
+
+          all_combinations <- gtools::permutations(length(disaggs_to_keep), maximum_interactions, disaggs_to_keep)
           all_combinations_df <- as.data.frame(all_combinations)
           
           control_sheet_all_orders <- NULL
@@ -157,5 +165,7 @@ for(i in 1:nrow(indicator_numbers)){
 
 # TO DO: 
 # - does it matter that 'country, NA' is a row, as well as 'country, region'?
-# - add variable group
+# remove all rows with an NA in var2 as these will all be rows with no interactions
 
+control_sheet_interactions_only <- control_sheet %>% 
+  filter(!is.na(variable2))
