@@ -1,459 +1,459 @@
-"","variable1","variable2","Indicator","variable_group_1","variable_group_2","variable3","variable_group_3","variable4","variable_group_4"
-"1","age","sex","1-2-1","age","sex/gender",NA,NA,NA,NA
-"2","sex","age","1-2-1","sex/gender","age",NA,NA,NA,NA
-"3","age","sex","1-2-2","age","sex/gender",NA,NA,NA,NA
-"4","sex","age","1-2-2","sex/gender","age",NA,NA,NA,NA
-"5","country","sex","1-5-1","geography - high level","sex/gender",NA,NA,NA,NA
-"6","sex","country","1-5-1","sex/gender","geography - high level",NA,NA,NA,NA
-"7","age","sex","10-2-1","age","sex/gender",NA,NA,NA,NA
-"8","sex","age","10-2-1","sex/gender","age",NA,NA,NA,NA
-"9","country","local authority","11-3-1","geography - high level","geography - low level","region","geography - mid-level",NA,NA
-"10","country","local authority","11-3-1","geography - high level","geography - low level",NA,NA,NA,NA
-"11","country","region","11-3-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"12","country","region","11-3-1","geography - high level","geography - mid-level","local authority","geography - low level",NA,NA
-"13","country","scottish council area","11-3-1","geography - high level","geography - low level",NA,NA,NA,NA
-"14","country","welsh unitary authority","11-3-1","geography - high level","geography - low level",NA,NA,NA,NA
-"15","local authority","country","11-3-1","geography - low level","geography - high level","region","geography - mid-level",NA,NA
-"16","local authority","country","11-3-1","geography - low level","geography - high level",NA,NA,NA,NA
-"17","local authority","region","11-3-1","geography - low level","geography - mid-level","country","geography - high level",NA,NA
-"18","local authority","region","11-3-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"19","region","country","11-3-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"20","region","country","11-3-1","geography - mid-level","geography - high level","local authority","geography - low level",NA,NA
-"21","region","local authority","11-3-1","geography - mid-level","geography - low level","country","geography - high level",NA,NA
-"22","region","local authority","11-3-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"23","scottish council area","country","11-3-1","geography - low level","geography - high level",NA,NA,NA,NA
-"24","welsh unitary authority","country","11-3-1","geography - low level","geography - high level",NA,NA,NA,NA
-"25","country","sex","11-5-1","geography - high level","sex/gender",NA,NA,NA,NA
-"26","sex","country","11-5-1","sex/gender","geography - high level",NA,NA,NA,NA
-"27","region","waste collection authority","11-6-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"28","waste collection authority","region","11-6-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"29","age","sex","11-7-2","age","sex/gender",NA,NA,NA,NA
-"30","country of birth","sex","11-7-2","migration status etc","sex/gender",NA,NA,NA,NA
-"31","disability status","sex","11-7-2","disability status etc","sex/gender",NA,NA,NA,NA
-"32","ethnicity","sex","11-7-2","ethnicity","sex/gender",NA,NA,NA,NA
-"33","income","sex","11-7-2","wealth","sex/gender",NA,NA,NA,NA
-"34","region","sex","11-7-2","geography - mid-level","sex/gender",NA,NA,NA,NA
-"35","sex","age","11-7-2","sex/gender","age",NA,NA,NA,NA
-"36","sex","country of birth","11-7-2","sex/gender","migration status etc",NA,NA,NA,NA
-"37","sex","disability status","11-7-2","sex/gender","disability status etc",NA,NA,NA,NA
-"38","sex","ethnicity","11-7-2","sex/gender","ethnicity",NA,NA,NA,NA
-"39","sex","income","11-7-2","sex/gender","wealth",NA,NA,NA,NA
-"40","sex","region","11-7-2","sex/gender","geography - mid-level",NA,NA,NA,NA
-"41","country","sex","13-1-1","geography - high level","sex/gender",NA,NA,NA,NA
-"42","sex","country","13-1-1","sex/gender","geography - high level",NA,NA,NA,NA
-"43","age","sex","16-1-1","age","sex/gender",NA,NA,NA,NA
-"44","country","police force area","16-1-1","geography - high level","geography - low level",NA,NA,NA,NA
-"45","country","police force area","16-1-1","geography - high level","geography - low level","region","geography - mid-level",NA,NA
-"46","country","region","16-1-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"47","country","region","16-1-1","geography - high level","geography - mid-level","police force area","geography - low level",NA,NA
-"48","police force area","country","16-1-1","geography - low level","geography - high level",NA,NA,NA,NA
-"49","police force area","country","16-1-1","geography - low level","geography - high level","region","geography - mid-level",NA,NA
-"50","police force area","region","16-1-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"51","police force area","region","16-1-1","geography - low level","geography - mid-level","country","geography - high level",NA,NA
-"52","region","country","16-1-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"53","region","country","16-1-1","geography - mid-level","geography - high level","police force area","geography - low level",NA,NA
-"54","region","police force area","16-1-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"55","region","police force area","16-1-1","geography - mid-level","geography - low level","country","geography - high level",NA,NA
-"56","sex","age","16-1-1","sex/gender","age",NA,NA,NA,NA
-"57","age","sex","16-1-3","age","sex/gender",NA,NA,NA,NA
-"58","country of birth","sex","16-1-3","migration status etc","sex/gender",NA,NA,NA,NA
-"59","disability status","sex","16-1-3","disability status etc","sex/gender",NA,NA,NA,NA
-"60","ethnic group","ethnicity","16-1-3","ethnic group","ethnicity",NA,NA,NA,NA
-"61","ethnicity","ethnic group","16-1-3","ethnicity","ethnic group",NA,NA,NA,NA
-"62","ethnicity","sex","16-1-3","ethnicity","sex/gender",NA,NA,NA,NA
-"63","highest qualification","sex","16-1-3","education level","sex/gender",NA,NA,NA,NA
-"64","household income","sex","16-1-3","wealth","sex/gender",NA,NA,NA,NA
-"65","region","sex","16-1-3","geography - mid-level","sex/gender",NA,NA,NA,NA
-"66","sex","age","16-1-3","sex/gender","age",NA,NA,NA,NA
-"67","sex","country of birth","16-1-3","sex/gender","migration status etc",NA,NA,NA,NA
-"68","sex","disability status","16-1-3","sex/gender","disability status etc",NA,NA,NA,NA
-"69","sex","ethnicity","16-1-3","sex/gender","ethnicity",NA,NA,NA,NA
-"70","sex","highest qualification","16-1-3","sex/gender","education level",NA,NA,NA,NA
-"71","sex","household income","16-1-3","sex/gender","wealth",NA,NA,NA,NA
-"72","sex","region","16-1-3","sex/gender","geography - mid-level",NA,NA,NA,NA
-"73","age","sex","16-1-4","age","sex/gender",NA,NA,NA,NA
-"74","ethnic group","ethnicity","16-1-4","ethnic group","ethnicity",NA,NA,NA,NA
-"75","ethnicity","ethnic group","16-1-4","ethnicity","ethnic group",NA,NA,NA,NA
-"76","sex","age","16-1-4","sex/gender","age",NA,NA,NA,NA
-"77","age","sex","16-3-2","age","sex/gender",NA,NA,NA,NA
-"78","sex","age","16-3-2","sex/gender","age",NA,NA,NA,NA
-"79","age","sex","16-7-1","age","sex/gender",NA,NA,NA,NA
-"80","country","region","16-7-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"81","region","country","16-7-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"82","sex","age","16-7-1","sex/gender","age",NA,NA,NA,NA
-"83","age","disability status","17-8-1","age","disability status etc",NA,NA,NA,NA
-"84","disability status","age","17-8-1","disability status etc","age",NA,NA,NA,NA
-"85","ethnic group","ethnicity","17-8-1","ethnic group","ethnicity",NA,NA,NA,NA
-"86","ethnicity","ethnic group","17-8-1","ethnicity","ethnic group",NA,NA,NA,NA
-"87","local authority","region","17-8-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"88","region","local authority","17-8-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"89","age","sex","2-1-1","age","sex/gender",NA,NA,NA,NA
-"90","sex","age","2-1-1","sex/gender","age",NA,NA,NA,NA
-"91","age","sex","2-1-2","age","sex/gender",NA,NA,NA,NA
-"92","children under 16 in the household","sex","2-1-2","age","sex/gender",NA,NA,NA,NA
-"93","children under 6 in the household","sex","2-1-2","age","sex/gender",NA,NA,NA,NA
-"94","country","sex","2-1-2","geography - high level","sex/gender",NA,NA,NA,NA
-"95","household income","sex","2-1-2","wealth","sex/gender",NA,NA,NA,NA
-"96","sex","age","2-1-2","sex/gender","age",NA,NA,NA,NA
-"97","sex","children under 16 in the household","2-1-2","sex/gender","age",NA,NA,NA,NA
-"98","sex","children under 6 in the household","2-1-2","sex/gender","age",NA,NA,NA,NA
-"99","sex","country","2-1-2","sex/gender","geography - high level",NA,NA,NA,NA
-"100","sex","household income","2-1-2","sex/gender","wealth",NA,NA,NA,NA
-"101","country","ethnicity","2-2-2","geography - high level","ethnicity",NA,NA,NA,NA
-"102","country","sex","2-2-2","geography - high level","sex/gender",NA,NA,NA,NA
-"103","ethnicity","country","2-2-2","ethnicity","geography - high level",NA,NA,NA,NA
-"104","sex","country","2-2-2","sex/gender","geography - high level",NA,NA,NA,NA
-"105","country","region","2-4-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"106","region","country","2-4-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"107","country","health board","3-1-2","geography - high level","geography - low level",NA,NA,NA,NA
-"108","country","region","3-1-2","geography - high level","geography - mid-level",NA,NA,NA,NA
-"109","health board","country","3-1-2","geography - low level","geography - high level",NA,NA,NA,NA
-"110","region","country","3-1-2","geography - mid-level","geography - high level",NA,NA,NA,NA
-"111","country","sex","3-2-1","geography - high level","sex/gender",NA,NA,NA,NA
-"112","sex","country","3-2-1","sex/gender","geography - high level",NA,NA,NA,NA
-"113","age","country","3-2-2","age","geography - high level",NA,NA,NA,NA
-"114","country","age","3-2-2","geography - high level","age",NA,NA,NA,NA
-"115","country","health board","3-2-2","geography - high level","geography - low level",NA,NA,NA,NA
-"116","country","region","3-2-2","geography - high level","geography - mid-level",NA,NA,NA,NA
-"117","country","sex","3-2-2","geography - high level","sex/gender",NA,NA,NA,NA
-"118","health board","country","3-2-2","geography - low level","geography - high level",NA,NA,NA,NA
-"119","region","country","3-2-2","geography - mid-level","geography - high level",NA,NA,NA,NA
-"120","sex","country","3-2-2","sex/gender","geography - high level",NA,NA,NA,NA
-"121","age","country","3-3-1","age","geography - high level",NA,NA,NA,NA
-"122","age","country","3-3-1","age","geography - high level","sex","sex/gender",NA,NA
-"123","age","sex","3-3-1","age","sex/gender",NA,NA,NA,NA
-"124","age","sex","3-3-1","age","sex/gender","country","geography - high level",NA,NA
-"125","country","age","3-3-1","geography - high level","age",NA,NA,NA,NA
-"126","country","age","3-3-1","geography - high level","age","sex","sex/gender",NA,NA
-"127","country","ethnicity","3-3-1","geography - high level","ethnicity",NA,NA,NA,NA
-"128","country","ethnicity","3-3-1","geography - high level","ethnicity","sex","sex/gender",NA,NA
-"129","country","sex","3-3-1","geography - high level","sex/gender",NA,NA,NA,NA
-"130","country","sex","3-3-1","geography - high level","sex/gender","age","age",NA,NA
-"131","country","sex","3-3-1","geography - high level","sex/gender","ethnicity","ethnicity",NA,NA
-"132","ethnicity","country","3-3-1","ethnicity","geography - high level",NA,NA,NA,NA
-"133","ethnicity","country","3-3-1","ethnicity","geography - high level","sex","sex/gender",NA,NA
-"134","ethnicity","sex","3-3-1","ethnicity","sex/gender",NA,NA,NA,NA
-"135","ethnicity","sex","3-3-1","ethnicity","sex/gender","country","geography - high level",NA,NA
-"136","sex","age","3-3-1","sex/gender","age",NA,NA,NA,NA
-"137","sex","age","3-3-1","sex/gender","age","country","geography - high level",NA,NA
-"138","sex","country","3-3-1","sex/gender","geography - high level",NA,NA,NA,NA
-"139","sex","country","3-3-1","sex/gender","geography - high level","age","age",NA,NA
-"140","sex","country","3-3-1","sex/gender","geography - high level","ethnicity","ethnicity",NA,NA
-"141","sex","ethnicity","3-3-1","sex/gender","ethnicity",NA,NA,NA,NA
-"142","sex","ethnicity","3-3-1","sex/gender","ethnicity","country","geography - high level",NA,NA
-"143","country","country of birth","3-3-2","geography - high level","migration status etc",NA,NA,NA,NA
-"144","country","country of birth","3-3-2","geography - high level","migration status etc","ethnic group","ethnic group",NA,NA
-"145","country","ethnic group","3-3-2","geography - high level","ethnic group","country of birth","migration status etc",NA,NA
-"146","country","ethnic group","3-3-2","geography - high level","ethnic group",NA,NA,NA,NA
-"147","country of birth","country","3-3-2","migration status etc","geography - high level",NA,NA,NA,NA
-"148","country of birth","country","3-3-2","migration status etc","geography - high level","ethnic group","ethnic group",NA,NA
-"149","country of birth","ethnic group","3-3-2","migration status etc","ethnic group","country","geography - high level",NA,NA
-"150","country of birth","ethnic group","3-3-2","migration status etc","ethnic group",NA,NA,NA,NA
-"151","ethnic group","country","3-3-2","ethnic group","geography - high level","country of birth","migration status etc",NA,NA
-"152","ethnic group","country","3-3-2","ethnic group","geography - high level",NA,NA,NA,NA
-"153","ethnic group","country of birth","3-3-2","ethnic group","migration status etc","country","geography - high level",NA,NA
-"154","ethnic group","country of birth","3-3-2","ethnic group","migration status etc",NA,NA,NA,NA
-"155","age","sex","3-3-3","age","sex/gender",NA,NA,NA,NA
-"156","country","region","3-3-3","geography - high level","geography - mid-level",NA,NA,NA,NA
-"157","region","country","3-3-3","geography - mid-level","geography - high level",NA,NA,NA,NA
-"158","sex","age","3-3-3","sex/gender","age",NA,NA,NA,NA
-"159","age","region","3-3-4","age","geography - mid-level",NA,NA,NA,NA
-"160","age","region","3-3-4","age","geography - mid-level","sex","sex/gender",NA,NA
-"161","age","sex","3-3-4","age","sex/gender",NA,NA,NA,NA
-"162","age","sex","3-3-4","age","sex/gender","region","geography - mid-level",NA,NA
-"163","region","age","3-3-4","geography - mid-level","age",NA,NA,NA,NA
-"164","region","age","3-3-4","geography - mid-level","age","sex","sex/gender",NA,NA
-"165","region","sex","3-3-4","geography - mid-level","sex/gender",NA,NA,NA,NA
-"166","region","sex","3-3-4","geography - mid-level","sex/gender","age","age",NA,NA
-"167","sex","age","3-3-4","sex/gender","age",NA,NA,NA,NA
-"168","sex","age","3-3-4","sex/gender","age","region","geography - mid-level",NA,NA
-"169","sex","region","3-3-4","sex/gender","geography - mid-level",NA,NA,NA,NA
-"170","sex","region","3-3-4","sex/gender","geography - mid-level","age","age",NA,NA
-"171","age","country","3-4-1","age","geography - high level",NA,NA,NA,NA
-"172","age","country","3-4-1","age","geography - high level","region","geography - mid-level",NA,NA
-"173","age","country","3-4-1","age","geography - high level","region","geography - mid-level","sex","sex/gender"
-"174","age","country","3-4-1","age","geography - high level","sex","sex/gender",NA,NA
-"175","age","country","3-4-1","age","geography - high level","sex","sex/gender","region","geography - mid-level"
-"176","age","region","3-4-1","age","geography - mid-level","country","geography - high level",NA,NA
-"177","age","region","3-4-1","age","geography - mid-level","country","geography - high level","sex","sex/gender"
-"178","age","region","3-4-1","age","geography - mid-level","sex","sex/gender","country","geography - high level"
-"179","age","sex","3-4-1","age","sex/gender","country","geography - high level",NA,NA
-"180","age","sex","3-4-1","age","sex/gender","country","geography - high level","region","geography - mid-level"
-"181","age","sex","3-4-1","age","sex/gender","region","geography - mid-level","country","geography - high level"
-"182","country","age","3-4-1","geography - high level","age",NA,NA,NA,NA
-"183","country","age","3-4-1","geography - high level","age","region","geography - mid-level",NA,NA
-"184","country","age","3-4-1","geography - high level","age","region","geography - mid-level","sex","sex/gender"
-"185","country","age","3-4-1","geography - high level","age","sex","sex/gender",NA,NA
-"186","country","age","3-4-1","geography - high level","age","sex","sex/gender","region","geography - mid-level"
-"187","country","region","3-4-1","geography - high level","geography - mid-level","age","age",NA,NA
-"188","country","region","3-4-1","geography - high level","geography - mid-level","age","age","sex","sex/gender"
-"189","country","region","3-4-1","geography - high level","geography - mid-level","sex","sex/gender","age","age"
-"190","country","sex","3-4-1","geography - high level","sex/gender","age","age",NA,NA
-"191","country","sex","3-4-1","geography - high level","sex/gender","age","age","region","geography - mid-level"
-"192","country","sex","3-4-1","geography - high level","sex/gender","region","geography - mid-level","age","age"
-"193","region","age","3-4-1","geography - mid-level","age","country","geography - high level",NA,NA
-"194","region","age","3-4-1","geography - mid-level","age","country","geography - high level","sex","sex/gender"
-"195","region","age","3-4-1","geography - mid-level","age","sex","sex/gender","country","geography - high level"
-"196","region","country","3-4-1","geography - mid-level","geography - high level","age","age",NA,NA
-"197","region","country","3-4-1","geography - mid-level","geography - high level","age","age","sex","sex/gender"
-"198","region","country","3-4-1","geography - mid-level","geography - high level","sex","sex/gender","age","age"
-"199","region","sex","3-4-1","geography - mid-level","sex/gender","age","age","country","geography - high level"
-"200","region","sex","3-4-1","geography - mid-level","sex/gender","country","geography - high level","age","age"
-"201","sex","age","3-4-1","sex/gender","age","country","geography - high level",NA,NA
-"202","sex","age","3-4-1","sex/gender","age","country","geography - high level","region","geography - mid-level"
-"203","sex","age","3-4-1","sex/gender","age","region","geography - mid-level","country","geography - high level"
-"204","sex","country","3-4-1","sex/gender","geography - high level","age","age",NA,NA
-"205","sex","country","3-4-1","sex/gender","geography - high level","age","age","region","geography - mid-level"
-"206","sex","country","3-4-1","sex/gender","geography - high level","region","geography - mid-level","age","age"
-"207","sex","region","3-4-1","sex/gender","geography - mid-level","age","age","country","geography - high level"
-"208","sex","region","3-4-1","sex/gender","geography - mid-level","country","geography - high level","age","age"
-"209","age","country","3-4-2","age","geography - high level",NA,NA,NA,NA
-"210","age","country","3-4-2","age","geography - high level","sex","sex/gender",NA,NA
-"211","age","sex","3-4-2","age","sex/gender",NA,NA,NA,NA
-"212","age","sex","3-4-2","age","sex/gender","country","geography - high level",NA,NA
-"213","country","age","3-4-2","geography - high level","age",NA,NA,NA,NA
-"214","country","age","3-4-2","geography - high level","age","sex","sex/gender",NA,NA
-"215","country","region","3-4-2","geography - high level","geography - mid-level",NA,NA,NA,NA
-"216","country","region","3-4-2","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
-"217","country","sex","3-4-2","geography - high level","sex/gender",NA,NA,NA,NA
-"218","country","sex","3-4-2","geography - high level","sex/gender","age","age",NA,NA
-"219","country","sex","3-4-2","geography - high level","sex/gender","region","geography - mid-level",NA,NA
-"220","region","country","3-4-2","geography - mid-level","geography - high level",NA,NA,NA,NA
-"221","region","country","3-4-2","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
-"222","region","sex","3-4-2","geography - mid-level","sex/gender",NA,NA,NA,NA
-"223","region","sex","3-4-2","geography - mid-level","sex/gender","country","geography - high level",NA,NA
-"224","sex","age","3-4-2","sex/gender","age",NA,NA,NA,NA
-"225","sex","age","3-4-2","sex/gender","age","country","geography - high level",NA,NA
-"226","sex","country","3-4-2","sex/gender","geography - high level",NA,NA,NA,NA
-"227","sex","country","3-4-2","sex/gender","geography - high level","age","age",NA,NA
-"228","sex","country","3-4-2","sex/gender","geography - high level","region","geography - mid-level",NA,NA
-"229","sex","region","3-4-2","sex/gender","geography - mid-level",NA,NA,NA,NA
-"230","sex","region","3-4-2","sex/gender","geography - mid-level","country","geography - high level",NA,NA
-"231","age","country","3-6-1","age","geography - high level",NA,NA,NA,NA
-"232","age","country","3-6-1","age","geography - high level","sex","sex/gender",NA,NA
-"233","age","sex","3-6-1","age","sex/gender","country","geography - high level",NA,NA
-"234","age","sex","3-6-1","age","sex/gender",NA,NA,NA,NA
-"235","country","age","3-6-1","geography - high level","age",NA,NA,NA,NA
-"236","country","age","3-6-1","geography - high level","age","sex","sex/gender",NA,NA
-"237","country","region","3-6-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"238","country","sex","3-6-1","geography - high level","sex/gender",NA,NA,NA,NA
-"239","country","sex","3-6-1","geography - high level","sex/gender","age","age",NA,NA
-"240","region","country","3-6-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"241","sex","age","3-6-1","sex/gender","age","country","geography - high level",NA,NA
-"242","sex","age","3-6-1","sex/gender","age",NA,NA,NA,NA
-"243","sex","country","3-6-1","sex/gender","geography - high level",NA,NA,NA,NA
-"244","sex","country","3-6-1","sex/gender","geography - high level","age","age",NA,NA
-"245","local authority","region","3-7-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"246","region","local authority","3-7-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"247","age","country","3-7-2","age","geography - high level",NA,NA,NA,NA
-"248","country","age","3-7-2","geography - high level","age",NA,NA,NA,NA
-"249","county","region","3-9-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"250","local authority","region","3-9-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"251","region","county","3-9-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"252","region","local authority","3-9-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"253","country","sex","3-9-2","geography - high level","sex/gender",NA,NA,NA,NA
-"254","sex","country","3-9-2","sex/gender","geography - high level",NA,NA,NA,NA
-"255","age","country","3-9-3","age","geography - high level",NA,NA,NA,NA
-"256","age","country","3-9-3","age","geography - high level","sex","sex/gender",NA,NA
-"257","age","sex","3-9-3","age","sex/gender","country","geography - high level",NA,NA
-"258","age","sex","3-9-3","age","sex/gender",NA,NA,NA,NA
-"259","country","age","3-9-3","geography - high level","age",NA,NA,NA,NA
-"260","country","age","3-9-3","geography - high level","age","sex","sex/gender",NA,NA
-"261","country","region","3-9-3","geography - high level","geography - mid-level",NA,NA,NA,NA
-"262","country","region","3-9-3","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
-"263","country","sex","3-9-3","geography - high level","sex/gender",NA,NA,NA,NA
-"264","country","sex","3-9-3","geography - high level","sex/gender","age","age",NA,NA
-"265","country","sex","3-9-3","geography - high level","sex/gender","region","geography - mid-level",NA,NA
-"266","region","country","3-9-3","geography - mid-level","geography - high level",NA,NA,NA,NA
-"267","region","country","3-9-3","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
-"268","region","sex","3-9-3","geography - mid-level","sex/gender",NA,NA,NA,NA
-"269","region","sex","3-9-3","geography - mid-level","sex/gender","country","geography - high level",NA,NA
-"270","sex","age","3-9-3","sex/gender","age","country","geography - high level",NA,NA
-"271","sex","age","3-9-3","sex/gender","age",NA,NA,NA,NA
-"272","sex","country","3-9-3","sex/gender","geography - high level",NA,NA,NA,NA
-"273","sex","country","3-9-3","sex/gender","geography - high level","age","age",NA,NA
-"274","sex","country","3-9-3","sex/gender","geography - high level","region","geography - mid-level",NA,NA
-"275","sex","region","3-9-3","sex/gender","geography - mid-level",NA,NA,NA,NA
-"276","sex","region","3-9-3","sex/gender","geography - mid-level","country","geography - high level",NA,NA
-"277","age","country","3-a-1","age","geography - high level",NA,NA,NA,NA
-"278","age","country","3-a-1","age","geography - high level","region","geography - mid-level",NA,NA
-"279","age","country","3-a-1","age","geography - high level","region","geography - mid-level","sex","sex/gender"
-"280","age","country","3-a-1","age","geography - high level","sex","sex/gender",NA,NA
-"281","age","country","3-a-1","age","geography - high level","sex","sex/gender","region","geography - mid-level"
-"282","age","region","3-a-1","age","geography - mid-level","country","geography - high level",NA,NA
-"283","age","region","3-a-1","age","geography - mid-level","country","geography - high level","sex","sex/gender"
-"284","age","region","3-a-1","age","geography - mid-level",NA,NA,NA,NA
-"285","age","region","3-a-1","age","geography - mid-level","sex","sex/gender","country","geography - high level"
-"286","age","region","3-a-1","age","geography - mid-level","sex","sex/gender",NA,NA
-"287","age","sex","3-a-1","age","sex/gender","country","geography - high level",NA,NA
-"288","age","sex","3-a-1","age","sex/gender",NA,NA,NA,NA
-"289","age","sex","3-a-1","age","sex/gender","country","geography - high level","region","geography - mid-level"
-"290","age","sex","3-a-1","age","sex/gender","region","geography - mid-level","country","geography - high level"
-"291","age","sex","3-a-1","age","sex/gender","region","geography - mid-level",NA,NA
-"292","country","age","3-a-1","geography - high level","age",NA,NA,NA,NA
-"293","country","age","3-a-1","geography - high level","age","region","geography - mid-level",NA,NA
-"294","country","age","3-a-1","geography - high level","age","region","geography - mid-level","sex","sex/gender"
-"295","country","age","3-a-1","geography - high level","age","sex","sex/gender",NA,NA
-"296","country","age","3-a-1","geography - high level","age","sex","sex/gender","region","geography - mid-level"
-"297","country","country of birth","3-a-1","geography - high level","migration status etc",NA,NA,NA,NA
-"298","country","ethnicity","3-a-1","geography - high level","ethnicity",NA,NA,NA,NA
-"299","country","ethnicity","3-a-1","geography - high level","ethnicity","sex","sex/gender",NA,NA
-"300","country","region","3-a-1","geography - high level","geography - mid-level","age","age",NA,NA
-"301","country","region","3-a-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"302","country","region","3-a-1","geography - high level","geography - mid-level","age","age","sex","sex/gender"
-"303","country","region","3-a-1","geography - high level","geography - mid-level","sex","sex/gender","age","age"
-"304","country","region","3-a-1","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
-"305","country","sex","3-a-1","geography - high level","sex/gender","age","age",NA,NA
-"306","country","sex","3-a-1","geography - high level","sex/gender",NA,NA,NA,NA
-"307","country","sex","3-a-1","geography - high level","sex/gender","age","age","region","geography - mid-level"
-"308","country","sex","3-a-1","geography - high level","sex/gender","ethnicity","ethnicity",NA,NA
-"309","country","sex","3-a-1","geography - high level","sex/gender","region","geography - mid-level","age","age"
-"310","country","sex","3-a-1","geography - high level","sex/gender","region","geography - mid-level",NA,NA
-"311","country of birth","country","3-a-1","migration status etc","geography - high level",NA,NA,NA,NA
-"312","ethnicity","country","3-a-1","ethnicity","geography - high level",NA,NA,NA,NA
-"313","ethnicity","country","3-a-1","ethnicity","geography - high level","sex","sex/gender",NA,NA
-"314","ethnicity","sex","3-a-1","ethnicity","sex/gender",NA,NA,NA,NA
-"315","ethnicity","sex","3-a-1","ethnicity","sex/gender","country","geography - high level",NA,NA
-"316","region","age","3-a-1","geography - mid-level","age","country","geography - high level",NA,NA
-"317","region","age","3-a-1","geography - mid-level","age","country","geography - high level","sex","sex/gender"
-"318","region","age","3-a-1","geography - mid-level","age",NA,NA,NA,NA
-"319","region","age","3-a-1","geography - mid-level","age","sex","sex/gender","country","geography - high level"
-"320","region","age","3-a-1","geography - mid-level","age","sex","sex/gender",NA,NA
-"321","region","country","3-a-1","geography - mid-level","geography - high level","age","age",NA,NA
-"322","region","country","3-a-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"323","region","country","3-a-1","geography - mid-level","geography - high level","age","age","sex","sex/gender"
-"324","region","country","3-a-1","geography - mid-level","geography - high level","sex","sex/gender","age","age"
-"325","region","country","3-a-1","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
-"326","region","sex","3-a-1","geography - mid-level","sex/gender","age","age","country","geography - high level"
-"327","region","sex","3-a-1","geography - mid-level","sex/gender","age","age",NA,NA
-"328","region","sex","3-a-1","geography - mid-level","sex/gender",NA,NA,NA,NA
-"329","region","sex","3-a-1","geography - mid-level","sex/gender","country","geography - high level","age","age"
-"330","region","sex","3-a-1","geography - mid-level","sex/gender","country","geography - high level",NA,NA
-"331","sex","age","3-a-1","sex/gender","age","country","geography - high level",NA,NA
-"332","sex","age","3-a-1","sex/gender","age",NA,NA,NA,NA
-"333","sex","age","3-a-1","sex/gender","age","country","geography - high level","region","geography - mid-level"
-"334","sex","age","3-a-1","sex/gender","age","region","geography - mid-level","country","geography - high level"
-"335","sex","age","3-a-1","sex/gender","age","region","geography - mid-level",NA,NA
-"336","sex","country","3-a-1","sex/gender","geography - high level","age","age",NA,NA
-"337","sex","country","3-a-1","sex/gender","geography - high level",NA,NA,NA,NA
-"338","sex","country","3-a-1","sex/gender","geography - high level","age","age","region","geography - mid-level"
-"339","sex","country","3-a-1","sex/gender","geography - high level","ethnicity","ethnicity",NA,NA
-"340","sex","country","3-a-1","sex/gender","geography - high level","region","geography - mid-level","age","age"
-"341","sex","country","3-a-1","sex/gender","geography - high level","region","geography - mid-level",NA,NA
-"342","sex","ethnicity","3-a-1","sex/gender","ethnicity",NA,NA,NA,NA
-"343","sex","ethnicity","3-a-1","sex/gender","ethnicity","country","geography - high level",NA,NA
-"344","sex","region","3-a-1","sex/gender","geography - mid-level","age","age","country","geography - high level"
-"345","sex","region","3-a-1","sex/gender","geography - mid-level","age","age",NA,NA
-"346","sex","region","3-a-1","sex/gender","geography - mid-level",NA,NA,NA,NA
-"347","sex","region","3-a-1","sex/gender","geography - mid-level","country","geography - high level","age","age"
-"348","sex","region","3-a-1","sex/gender","geography - mid-level","country","geography - high level",NA,NA
-"349","age","country","3-b-1","age","geography - high level",NA,NA,NA,NA
-"350","age","country","3-b-1","age","geography - high level","region","geography - mid-level",NA,NA
-"351","age","region","3-b-1","age","geography - mid-level","country","geography - high level",NA,NA
-"352","country","age","3-b-1","geography - high level","age",NA,NA,NA,NA
-"353","country","age","3-b-1","geography - high level","age","region","geography - mid-level",NA,NA
-"354","country","region","3-b-1","geography - high level","geography - mid-level","age","age",NA,NA
-"355","region","age","3-b-1","geography - mid-level","age","country","geography - high level",NA,NA
-"356","region","country","3-b-1","geography - mid-level","geography - high level","age","age",NA,NA
-"357","ethnic group","ethnicity","4-1-1","ethnic group","ethnicity",NA,NA,NA,NA
-"358","ethnicity","ethnic group","4-1-1","ethnicity","ethnic group",NA,NA,NA,NA
-"359","free school meals","sex","4-1-1","wealth","sex/gender",NA,NA,NA,NA
-"360","local authority","region","4-1-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"361","region","local authority","4-1-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"362","sex","free school meals","4-1-1","sex/gender","wealth",NA,NA,NA,NA
-"363","sex","special educational needs","4-1-1","sex/gender","disability status etc",NA,NA,NA,NA
-"364","special educational needs","sex","4-1-1","disability status etc","sex/gender",NA,NA,NA,NA
-"365","ethnic group","ethnicity","4-2-1","ethnic group","ethnicity",NA,NA,NA,NA
-"366","ethnic group","ethnicity","4-2-1","ethnic group","ethnicity","gender","sex/gender",NA,NA
-"367","ethnic group","gender","4-2-1","ethnic group","sex/gender","ethnicity","ethnicity",NA,NA
-"368","ethnic group","gender","4-2-1","ethnic group","sex/gender",NA,NA,NA,NA
-"369","ethnicity","ethnic group","4-2-1","ethnicity","ethnic group",NA,NA,NA,NA
-"370","ethnicity","ethnic group","4-2-1","ethnicity","ethnic group","gender","sex/gender",NA,NA
-"371","ethnicity","gender","4-2-1","ethnicity","sex/gender",NA,NA,NA,NA
-"372","ethnicity","gender","4-2-1","ethnicity","sex/gender","ethnic group","ethnic group",NA,NA
-"373","free school meals","gender","4-2-1","wealth","sex/gender",NA,NA,NA,NA
-"374","gender","ethnic group","4-2-1","sex/gender","ethnic group","ethnicity","ethnicity",NA,NA
-"375","gender","ethnic group","4-2-1","sex/gender","ethnic group",NA,NA,NA,NA
-"376","gender","ethnicity","4-2-1","sex/gender","ethnicity",NA,NA,NA,NA
-"377","gender","ethnicity","4-2-1","sex/gender","ethnicity","ethnic group","ethnic group",NA,NA
-"378","gender","free school meals","4-2-1","sex/gender","wealth",NA,NA,NA,NA
-"379","gender","local authority","4-2-1","sex/gender","geography - low level",NA,NA,NA,NA
-"380","gender","local authority","4-2-1","sex/gender","geography - low level","region","geography - mid-level",NA,NA
-"381","gender","region","4-2-1","sex/gender","geography - mid-level",NA,NA,NA,NA
-"382","gender","region","4-2-1","sex/gender","geography - mid-level","local authority","geography - low level",NA,NA
-"383","local authority","gender","4-2-1","geography - low level","sex/gender",NA,NA,NA,NA
-"384","local authority","gender","4-2-1","geography - low level","sex/gender","region","geography - mid-level",NA,NA
-"385","local authority","region","4-2-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"386","local authority","region","4-2-1","geography - low level","geography - mid-level","gender","sex/gender",NA,NA
-"387","region","gender","4-2-1","geography - mid-level","sex/gender",NA,NA,NA,NA
-"388","region","gender","4-2-1","geography - mid-level","sex/gender","local authority","geography - low level",NA,NA
-"389","region","local authority","4-2-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"390","region","local authority","4-2-1","geography - mid-level","geography - low level","gender","sex/gender",NA,NA
-"391","region","special educational needs","4-2-1","geography - mid-level","disability status etc",NA,NA,NA,NA
-"392","special educational needs","region","4-2-1","disability status etc","geography - mid-level",NA,NA,NA,NA
-"393","age","region","4-2-2","age","geography - mid-level",NA,NA,NA,NA
-"394","region","age","4-2-2","geography - mid-level","age",NA,NA,NA,NA
-"395","local authority","region","4-c-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"396","region","local authority","4-c-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"397","ethnic group","ethnicity","5-2-1","ethnic group","ethnicity",NA,NA,NA,NA
-"398","ethnicity","ethnic group","5-2-1","ethnicity","ethnic group",NA,NA,NA,NA
-"399","ethnic group","ethnicity","5-2-2","ethnic group","ethnicity",NA,NA,NA,NA
-"400","ethnicity","ethnic group","5-2-2","ethnicity","ethnic group",NA,NA,NA,NA
-"401","country","local authority","8-10-1","geography - high level","geography - low level",NA,NA,NA,NA
-"402","country","local authority","8-10-1","geography - high level","geography - low level","region","geography - mid-level",NA,NA
-"403","country","region","8-10-1","geography - high level","geography - mid-level","local authority","geography - low level",NA,NA
-"404","country","region","8-10-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"405","country","urban or rural","8-10-1","geography - high level","geography - high level",NA,NA,NA,NA
-"406","local authority","country","8-10-1","geography - low level","geography - high level",NA,NA,NA,NA
-"407","local authority","country","8-10-1","geography - low level","geography - high level","region","geography - mid-level",NA,NA
-"408","local authority","region","8-10-1","geography - low level","geography - mid-level","country","geography - high level",NA,NA
-"409","local authority","region","8-10-1","geography - low level","geography - mid-level",NA,NA,NA,NA
-"410","region","country","8-10-1","geography - mid-level","geography - high level","local authority","geography - low level",NA,NA
-"411","region","country","8-10-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"412","region","local authority","8-10-1","geography - mid-level","geography - low level","country","geography - high level",NA,NA
-"413","region","local authority","8-10-1","geography - mid-level","geography - low level",NA,NA,NA,NA
-"414","urban or rural","country","8-10-1","geography - high level","geography - high level",NA,NA,NA,NA
-"415","age","sex","8-10-2","age","sex/gender",NA,NA,NA,NA
-"416","sex","age","8-10-2","sex/gender","age",NA,NA,NA,NA
-"417","region","sex","8-3-1","geography - mid-level","sex/gender",NA,NA,NA,NA
-"418","sex","region","8-3-1","sex/gender","geography - mid-level",NA,NA,NA,NA
-"419","age","sex","8-5-1","age","sex/gender",NA,NA,NA,NA
-"420","country","region","8-5-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"421","country","region","8-5-1","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
-"422","country","sex","8-5-1","geography - high level","sex/gender",NA,NA,NA,NA
-"423","country","sex","8-5-1","geography - high level","sex/gender","region","geography - mid-level",NA,NA
-"424","region","country","8-5-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"425","region","country","8-5-1","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
-"426","region","sex","8-5-1","geography - mid-level","sex/gender",NA,NA,NA,NA
-"427","region","sex","8-5-1","geography - mid-level","sex/gender","country","geography - high level",NA,NA
-"428","sex","age","8-5-1","sex/gender","age",NA,NA,NA,NA
-"429","sex","country","8-5-1","sex/gender","geography - high level",NA,NA,NA,NA
-"430","sex","country","8-5-1","sex/gender","geography - high level","region","geography - mid-level",NA,NA
-"431","sex","region","8-5-1","sex/gender","geography - mid-level",NA,NA,NA,NA
-"432","sex","region","8-5-1","sex/gender","geography - mid-level","country","geography - high level",NA,NA
-"433","age","sex","8-5-2","age","sex/gender",NA,NA,NA,NA
-"434","country","region","8-5-2","geography - high level","geography - mid-level",NA,NA,NA,NA
-"435","country","region","8-5-2","geography - high level","geography - mid-level","sex","sex/gender",NA,NA
-"436","country","sex","8-5-2","geography - high level","sex/gender",NA,NA,NA,NA
-"437","country","sex","8-5-2","geography - high level","sex/gender","region","geography - mid-level",NA,NA
-"438","disability status","sex","8-5-2","disability status etc","sex/gender",NA,NA,NA,NA
-"439","region","country","8-5-2","geography - mid-level","geography - high level",NA,NA,NA,NA
-"440","region","country","8-5-2","geography - mid-level","geography - high level","sex","sex/gender",NA,NA
-"441","region","sex","8-5-2","geography - mid-level","sex/gender",NA,NA,NA,NA
-"442","region","sex","8-5-2","geography - mid-level","sex/gender","country","geography - high level",NA,NA
-"443","sex","age","8-5-2","sex/gender","age",NA,NA,NA,NA
-"444","sex","country","8-5-2","sex/gender","geography - high level",NA,NA,NA,NA
-"445","sex","country","8-5-2","sex/gender","geography - high level","region","geography - mid-level",NA,NA
-"446","sex","disability status","8-5-2","sex/gender","disability status etc",NA,NA,NA,NA
-"447","sex","region","8-5-2","sex/gender","geography - mid-level",NA,NA,NA,NA
-"448","sex","region","8-5-2","sex/gender","geography - mid-level","country","geography - high level",NA,NA
-"449","age","sex","8-6-1","age","sex/gender",NA,NA,NA,NA
-"450","sex","age","8-6-1","sex/gender","age",NA,NA,NA,NA
-"451","age","sex","8-8-1","age","sex/gender",NA,NA,NA,NA
-"452","country","region","8-8-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"453","region","country","8-8-1","geography - mid-level","geography - high level",NA,NA,NA,NA
-"454","sex","age","8-8-1","sex/gender","age",NA,NA,NA,NA
-"455","country","local authority","9-1-1","geography - high level","geography - low level",NA,NA,NA,NA
-"456","local authority","country","9-1-1","geography - low level","geography - high level",NA,NA,NA,NA
-"457","country","region","9-5-1","geography - high level","geography - mid-level",NA,NA,NA,NA
-"458","region","country","9-5-1","geography - mid-level","geography - high level",NA,NA,NA,NA
+"Indicator","indicator_title","variable1","variable2","variable3","variable4","variable_group_1","variable_group_2","variable_group_3","variable_group_4"
+"1.2.1","1.2.1 Proportion of population living below the national poverty line, by sex and age","age","sex",NA,NA,"age","sex/gender",NA,NA
+"1.2.1","1.2.1 Proportion of population living below the national poverty line, by sex and age","sex","age",NA,NA,"sex/gender","age",NA,NA
+"1.2.2","1.2.2 Proportion of men, women and children of all ages living in poverty in all its dimensions according to national definitions","age","sex",NA,NA,"age","sex/gender",NA,NA
+"1.2.2","1.2.2 Proportion of men, women and children of all ages living in poverty in all its dimensions according to national definitions","sex","age",NA,NA,"sex/gender","age",NA,NA
+"1.5.1","1.5.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"1.5.1","1.5.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"10.2.1","10.2.1 Proportion of people living below 50áperácent of median income, by sex, age and persons with disabilities","age","sex",NA,NA,"age","sex/gender",NA,NA
+"10.2.1","10.2.1 Proportion of people living below 50áperácent of median income, by sex, age and persons with disabilities","sex","age",NA,NA,"sex/gender","age",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","country","local authority","region",NA,"geography - high level","geography - low level","geography - mid-level",NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","country","local authority",NA,NA,"geography - high level","geography - low level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","country","region","local authority",NA,"geography - high level","geography - mid-level","geography - low level",NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","country","scottish council area",NA,NA,"geography - high level","geography - low level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","country","welsh unitary authority",NA,NA,"geography - high level","geography - low level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","local authority","country","region",NA,"geography - low level","geography - high level","geography - mid-level",NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","local authority","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","local authority","region","country",NA,"geography - low level","geography - mid-level","geography - high level",NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","region","country","local authority",NA,"geography - mid-level","geography - high level","geography - low level",NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","region","local authority","country",NA,"geography - mid-level","geography - low level","geography - high level",NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","scottish council area","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"11.3.1","11.3.1 Ratio of land consumption rate to population growth rate","welsh unitary authority","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"11.5.1","11.5.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"11.5.1","11.5.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"11.6.1","11.6.1 Proportion of municipal solid waste collected and managed in controlled facilities out of total municipal waste generated, by cities","region","waste collection authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"11.6.1","11.6.1 Proportion of municipal solid waste collected and managed in controlled facilities out of total municipal waste generated, by cities","waste collection authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","age","sex",NA,NA,"age","sex/gender",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","country of birth","sex",NA,NA,"migration status etc","sex/gender",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","disability status","sex",NA,NA,"disability status etc","sex/gender",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","ethnicity","sex",NA,NA,"ethnicity","sex/gender",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","income","sex",NA,NA,"wealth","sex/gender",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","sex","age",NA,NA,"sex/gender","age",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","sex","country of birth",NA,NA,"sex/gender","migration status etc",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","sex","disability status",NA,NA,"sex/gender","disability status etc",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","sex","ethnicity",NA,NA,"sex/gender","ethnicity",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","sex","income",NA,NA,"sex/gender","wealth",NA,NA
+"11.7.2","11.7.2 Proportion of persons victim of physical or sexual harassment, by sex, age, disability status and place of occurrence, in the previous 12 months","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"13.1.1","13.1.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"13.1.1","13.1.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","age","sex",NA,NA,"age","sex/gender",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","country","police force area",NA,NA,"geography - high level","geography - low level",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","country","police force area","region",NA,"geography - high level","geography - low level","geography - mid-level",NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","country","region","police force area",NA,"geography - high level","geography - mid-level","geography - low level",NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","police force area","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","police force area","country","region",NA,"geography - low level","geography - high level","geography - mid-level",NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","police force area","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","police force area","region","country",NA,"geography - low level","geography - mid-level","geography - high level",NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","region","country","police force area",NA,"geography - mid-level","geography - high level","geography - low level",NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","region","police force area",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","region","police force area","country",NA,"geography - mid-level","geography - low level","geography - high level",NA
+"16.1.1","16.1.1 Number of victims of intentional homicide per 100,000 population, by sex and age","sex","age",NA,NA,"sex/gender","age",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","age","sex",NA,NA,"age","sex/gender",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","country of birth","sex",NA,NA,"migration status etc","sex/gender",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","disability status","sex",NA,NA,"disability status etc","sex/gender",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","ethnic group","ethnicity",NA,NA,"ethnic group","ethnicity",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","ethnicity","ethnic group",NA,NA,"ethnicity","ethnic group",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","ethnicity","sex",NA,NA,"ethnicity","sex/gender",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","highest qualification","sex",NA,NA,"education level","sex/gender",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","household income","sex",NA,NA,"wealth","sex/gender",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","sex","age",NA,NA,"sex/gender","age",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","sex","country of birth",NA,NA,"sex/gender","migration status etc",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","sex","disability status",NA,NA,"sex/gender","disability status etc",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","sex","ethnicity",NA,NA,"sex/gender","ethnicity",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","sex","highest qualification",NA,NA,"sex/gender","education level",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","sex","household income",NA,NA,"sex/gender","wealth",NA,NA
+"16.1.3","16.1.3 Proportion of population subjected to (a) physical violence, (b) psychological violence and (c) sexual violence in the previous 12ámonths","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"16.1.4","16.1.4 Proportion of population that feel safe walking alone around the area they live","age","sex",NA,NA,"age","sex/gender",NA,NA
+"16.1.4","16.1.4 Proportion of population that feel safe walking alone around the area they live","ethnic group","ethnicity",NA,NA,"ethnic group","ethnicity",NA,NA
+"16.1.4","16.1.4 Proportion of population that feel safe walking alone around the area they live","ethnicity","ethnic group",NA,NA,"ethnicity","ethnic group",NA,NA
+"16.1.4","16.1.4 Proportion of population that feel safe walking alone around the area they live","sex","age",NA,NA,"sex/gender","age",NA,NA
+"16.3.2","16.3.2 Unsentenced detainees as a proportion of overall prison population","age","sex",NA,NA,"age","sex/gender",NA,NA
+"16.3.2","16.3.2 Unsentenced detainees as a proportion of overall prison population","sex","age",NA,NA,"sex/gender","age",NA,NA
+"16.7.1","16.7.1 Proportions of positions in national and local institutions, including (a) the legislatures; (b) the public service; and (c) the judiciary, compared to national distributions, by sex, age, persons with disabilities and population groups","age","sex",NA,NA,"age","sex/gender",NA,NA
+"16.7.1","16.7.1 Proportions of positions in national and local institutions, including (a) the legislatures; (b) the public service; and (c) the judiciary, compared to national distributions, by sex, age, persons with disabilities and population groups","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"16.7.1","16.7.1 Proportions of positions in national and local institutions, including (a) the legislatures; (b) the public service; and (c) the judiciary, compared to national distributions, by sex, age, persons with disabilities and population groups","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"16.7.1","16.7.1 Proportions of positions in national and local institutions, including (a) the legislatures; (b) the public service; and (c) the judiciary, compared to national distributions, by sex, age, persons with disabilities and population groups","sex","age",NA,NA,"sex/gender","age",NA,NA
+"17.8.1","17.8.1 Proportion of individuals using the Internet","age","disability status",NA,NA,"age","disability status etc",NA,NA
+"17.8.1","17.8.1 Proportion of individuals using the Internet","disability status","age",NA,NA,"disability status etc","age",NA,NA
+"17.8.1","17.8.1 Proportion of individuals using the Internet","ethnic group","ethnicity",NA,NA,"ethnic group","ethnicity",NA,NA
+"17.8.1","17.8.1 Proportion of individuals using the Internet","ethnicity","ethnic group",NA,NA,"ethnicity","ethnic group",NA,NA
+"17.8.1","17.8.1 Proportion of individuals using the Internet","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"17.8.1","17.8.1 Proportion of individuals using the Internet","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"2.1.1","2.1.1 Prevalence of undernourishment","age","sex",NA,NA,"age","sex/gender",NA,NA
+"2.1.1","2.1.1 Prevalence of undernourishment","sex","age",NA,NA,"sex/gender","age",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","age","sex",NA,NA,"age","sex/gender",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","children under 16 in the household","sex",NA,NA,"age","sex/gender",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","children under 6 in the household","sex",NA,NA,"age","sex/gender",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","household income","sex",NA,NA,"wealth","sex/gender",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","sex","age",NA,NA,"sex/gender","age",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","sex","children under 16 in the household",NA,NA,"sex/gender","age",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","sex","children under 6 in the household",NA,NA,"sex/gender","age",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"2.1.2","2.1.2 Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)","sex","household income",NA,NA,"sex/gender","wealth",NA,NA
+"2.2.2","2.2.2 Prevalence of malnutrition (weight for height >+2 or <-2 standard deviation from the median of the WHO Child Growth Standards) among children under 5áyears of age, by type (wasting and overweight)","country","ethnicity",NA,NA,"geography - high level","ethnicity",NA,NA
+"2.2.2","2.2.2 Prevalence of malnutrition (weight for height >+2 or <-2 standard deviation from the median of the WHO Child Growth Standards) among children under 5áyears of age, by type (wasting and overweight)","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"2.2.2","2.2.2 Prevalence of malnutrition (weight for height >+2 or <-2 standard deviation from the median of the WHO Child Growth Standards) among children under 5áyears of age, by type (wasting and overweight)","ethnicity","country",NA,NA,"ethnicity","geography - high level",NA,NA
+"2.2.2","2.2.2 Prevalence of malnutrition (weight for height >+2 or <-2 standard deviation from the median of the WHO Child Growth Standards) among children under 5áyears of age, by type (wasting and overweight)","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"2.4.1","2.4.1 Proportion of agricultural area under productive and sustainable agriculture","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"2.4.1","2.4.1 Proportion of agricultural area under productive and sustainable agriculture","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.1.2","3.1.2 Proportion of births attended by skilled health personnel","country","health board",NA,NA,"geography - high level","geography - low level",NA,NA
+"3.1.2","3.1.2 Proportion of births attended by skilled health personnel","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"3.1.2","3.1.2 Proportion of births attended by skilled health personnel","health board","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"3.1.2","3.1.2 Proportion of births attended by skilled health personnel","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.2.1","3.2.1 Under?5 mortality rate","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.2.1","3.2.1 Under?5 mortality rate","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","country","health board",NA,NA,"geography - high level","geography - low level",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","health board","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.2.2","3.2.2 Neonatal mortality rate","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","age","country","sex",NA,"age","geography - high level","sex/gender",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","age","sex",NA,NA,"age","sex/gender",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","age","sex","country",NA,"age","sex/gender","geography - high level",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","country","age","sex",NA,"geography - high level","age","sex/gender",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","country","ethnicity",NA,NA,"geography - high level","ethnicity",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","country","ethnicity","sex",NA,"geography - high level","ethnicity","sex/gender",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","country","sex","age",NA,"geography - high level","sex/gender","age",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","country","sex","ethnicity",NA,"geography - high level","sex/gender","ethnicity",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","ethnicity","country",NA,NA,"ethnicity","geography - high level",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","ethnicity","country","sex",NA,"ethnicity","geography - high level","sex/gender",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","ethnicity","sex",NA,NA,"ethnicity","sex/gender",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","ethnicity","sex","country",NA,"ethnicity","sex/gender","geography - high level",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","sex","age",NA,NA,"sex/gender","age",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","sex","age","country",NA,"sex/gender","age","geography - high level",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","sex","country","age",NA,"sex/gender","geography - high level","age",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","sex","country","ethnicity",NA,"sex/gender","geography - high level","ethnicity",NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","sex","ethnicity",NA,NA,"sex/gender","ethnicity",NA,NA
+"3.3.1","3.3.1 Number of new HIV infections per 1,000 uninfected population, by sex, age and key populations","sex","ethnicity","country",NA,"sex/gender","ethnicity","geography - high level",NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country","country of birth",NA,NA,"geography - high level","migration status etc",NA,NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country","country of birth","ethnic group",NA,"geography - high level","migration status etc","ethnic group",NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country","ethnic group","country of birth",NA,"geography - high level","ethnic group","migration status etc",NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country","ethnic group",NA,NA,"geography - high level","ethnic group",NA,NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country of birth","country",NA,NA,"migration status etc","geography - high level",NA,NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country of birth","country","ethnic group",NA,"migration status etc","geography - high level","ethnic group",NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country of birth","ethnic group","country",NA,"migration status etc","ethnic group","geography - high level",NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","country of birth","ethnic group",NA,NA,"migration status etc","ethnic group",NA,NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","ethnic group","country","country of birth",NA,"ethnic group","geography - high level","migration status etc",NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","ethnic group","country",NA,NA,"ethnic group","geography - high level",NA,NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","ethnic group","country of birth","country",NA,"ethnic group","migration status etc","geography - high level",NA
+"3.3.2","3.3.2 Tuberculosis incidence per 100,000 population","ethnic group","country of birth",NA,NA,"ethnic group","migration status etc",NA,NA
+"3.3.3","3.3.3 Malaria incidence per 1,000 population","age","sex",NA,NA,"age","sex/gender",NA,NA
+"3.3.3","3.3.3 Malaria incidence per 1,000 population","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"3.3.3","3.3.3 Malaria incidence per 1,000 population","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.3.3","3.3.3 Malaria incidence per 1,000 population","sex","age",NA,NA,"sex/gender","age",NA,NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","age","region",NA,NA,"age","geography - mid-level",NA,NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","age","region","sex",NA,"age","geography - mid-level","sex/gender",NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","age","sex",NA,NA,"age","sex/gender",NA,NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","age","sex","region",NA,"age","sex/gender","geography - mid-level",NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","region","age",NA,NA,"geography - mid-level","age",NA,NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","region","age","sex",NA,"geography - mid-level","age","sex/gender",NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","region","sex","age",NA,"geography - mid-level","sex/gender","age",NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","sex","age",NA,NA,"sex/gender","age",NA,NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","sex","age","region",NA,"sex/gender","age","geography - mid-level",NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"3.3.4","3.3.4 Hepatitis B incidence per 100,000 population","sex","region","age",NA,"sex/gender","geography - mid-level","age",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","country","region",NA,"age","geography - high level","geography - mid-level",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","country","region","sex","age","geography - high level","geography - mid-level","sex/gender"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","country","sex",NA,"age","geography - high level","sex/gender",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","country","sex","region","age","geography - high level","sex/gender","geography - mid-level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","region","country",NA,"age","geography - mid-level","geography - high level",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","region","country","sex","age","geography - mid-level","geography - high level","sex/gender"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","region","sex","country","age","geography - mid-level","sex/gender","geography - high level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","sex","country",NA,"age","sex/gender","geography - high level",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","sex","country","region","age","sex/gender","geography - high level","geography - mid-level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","age","sex","region","country","age","sex/gender","geography - mid-level","geography - high level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","age","region",NA,"geography - high level","age","geography - mid-level",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","age","region","sex","geography - high level","age","geography - mid-level","sex/gender"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","age","sex",NA,"geography - high level","age","sex/gender",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","age","sex","region","geography - high level","age","sex/gender","geography - mid-level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","region","age",NA,"geography - high level","geography - mid-level","age",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","region","age","sex","geography - high level","geography - mid-level","age","sex/gender"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","region","sex","age","geography - high level","geography - mid-level","sex/gender","age"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","sex","age",NA,"geography - high level","sex/gender","age",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","sex","age","region","geography - high level","sex/gender","age","geography - mid-level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","country","sex","region","age","geography - high level","sex/gender","geography - mid-level","age"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","age","country",NA,"geography - mid-level","age","geography - high level",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","age","country","sex","geography - mid-level","age","geography - high level","sex/gender"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","age","sex","country","geography - mid-level","age","sex/gender","geography - high level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","country","age",NA,"geography - mid-level","geography - high level","age",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","country","age","sex","geography - mid-level","geography - high level","age","sex/gender"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","country","sex","age","geography - mid-level","geography - high level","sex/gender","age"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","sex","age","country","geography - mid-level","sex/gender","age","geography - high level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","region","sex","country","age","geography - mid-level","sex/gender","geography - high level","age"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","age","country",NA,"sex/gender","age","geography - high level",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","age","country","region","sex/gender","age","geography - high level","geography - mid-level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","age","region","country","sex/gender","age","geography - mid-level","geography - high level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","country","age",NA,"sex/gender","geography - high level","age",NA
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","country","age","region","sex/gender","geography - high level","age","geography - mid-level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","country","region","age","sex/gender","geography - high level","geography - mid-level","age"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","region","age","country","sex/gender","geography - mid-level","age","geography - high level"
+"3.4.1","3.4.1 Mortality rate attributed to cardiovascular disease, cancer, diabetes or chronic respiratory disease","sex","region","country","age","sex/gender","geography - mid-level","geography - high level","age"
+"3.4.2","3.4.2 Suicide mortality rate","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","age","country","sex",NA,"age","geography - high level","sex/gender",NA
+"3.4.2","3.4.2 Suicide mortality rate","age","sex",NA,NA,"age","sex/gender",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","age","sex","country",NA,"age","sex/gender","geography - high level",NA
+"3.4.2","3.4.2 Suicide mortality rate","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","country","age","sex",NA,"geography - high level","age","sex/gender",NA
+"3.4.2","3.4.2 Suicide mortality rate","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","country","region","sex",NA,"geography - high level","geography - mid-level","sex/gender",NA
+"3.4.2","3.4.2 Suicide mortality rate","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","country","sex","age",NA,"geography - high level","sex/gender","age",NA
+"3.4.2","3.4.2 Suicide mortality rate","country","sex","region",NA,"geography - high level","sex/gender","geography - mid-level",NA
+"3.4.2","3.4.2 Suicide mortality rate","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","region","country","sex",NA,"geography - mid-level","geography - high level","sex/gender",NA
+"3.4.2","3.4.2 Suicide mortality rate","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","region","sex","country",NA,"geography - mid-level","sex/gender","geography - high level",NA
+"3.4.2","3.4.2 Suicide mortality rate","sex","age",NA,NA,"sex/gender","age",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","sex","age","country",NA,"sex/gender","age","geography - high level",NA
+"3.4.2","3.4.2 Suicide mortality rate","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","sex","country","age",NA,"sex/gender","geography - high level","age",NA
+"3.4.2","3.4.2 Suicide mortality rate","sex","country","region",NA,"sex/gender","geography - high level","geography - mid-level",NA
+"3.4.2","3.4.2 Suicide mortality rate","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"3.4.2","3.4.2 Suicide mortality rate","sex","region","country",NA,"sex/gender","geography - mid-level","geography - high level",NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","age","country","sex",NA,"age","geography - high level","sex/gender",NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","age","sex","country",NA,"age","sex/gender","geography - high level",NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","age","sex",NA,NA,"age","sex/gender",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","country","age","sex",NA,"geography - high level","age","sex/gender",NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","country","sex","age",NA,"geography - high level","sex/gender","age",NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","sex","age","country",NA,"sex/gender","age","geography - high level",NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","sex","age",NA,NA,"sex/gender","age",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.6.1","3.6.1 Death rate due to road traffic injuries","sex","country","age",NA,"sex/gender","geography - high level","age",NA
+"3.7.1","3.7.1 Proportion of women of reproductive age (aged 15û49áyears) who have their need for family planning satisfied with modern methods","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"3.7.1","3.7.1 Proportion of women of reproductive age (aged 15û49áyears) who have their need for family planning satisfied with modern methods","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"3.7.2","3.7.2 Adolescent birth rate (aged 10û14 years; aged 15û19áyears) per 1,000 women in that age group","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.7.2","3.7.2 Adolescent birth rate (aged 10û14 years; aged 15û19áyears) per 1,000 women in that age group","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.9.1","3.9.1 Mortality rate attributed to household and ambient air pollution","county","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"3.9.1","3.9.1 Mortality rate attributed to household and ambient air pollution","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"3.9.1","3.9.1 Mortality rate attributed to household and ambient air pollution","region","county",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"3.9.1","3.9.1 Mortality rate attributed to household and ambient air pollution","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"3.9.2","3.9.2 Mortality rate attributed to unsafe water, unsafe sanitation and lack of hygiene (exposure to unsafe Water, Sanitation and Hygiene for All (WASH) services)","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.9.2","3.9.2 Mortality rate attributed to unsafe water, unsafe sanitation and lack of hygiene (exposure to unsafe Water, Sanitation and Hygiene for All (WASH) services)","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","age","country","sex",NA,"age","geography - high level","sex/gender",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","age","sex","country",NA,"age","sex/gender","geography - high level",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","age","sex",NA,NA,"age","sex/gender",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","country","age","sex",NA,"geography - high level","age","sex/gender",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","country","region","sex",NA,"geography - high level","geography - mid-level","sex/gender",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","country","sex","age",NA,"geography - high level","sex/gender","age",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","country","sex","region",NA,"geography - high level","sex/gender","geography - mid-level",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","region","country","sex",NA,"geography - mid-level","geography - high level","sex/gender",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","region","sex","country",NA,"geography - mid-level","sex/gender","geography - high level",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","sex","age","country",NA,"sex/gender","age","geography - high level",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","sex","age",NA,NA,"sex/gender","age",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","sex","country","age",NA,"sex/gender","geography - high level","age",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","sex","country","region",NA,"sex/gender","geography - high level","geography - mid-level",NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"3.9.3","3.9.3 Mortality rate attributed to unintentional poisoning","sex","region","country",NA,"sex/gender","geography - mid-level","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","country","region",NA,"age","geography - high level","geography - mid-level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","country","region","sex","age","geography - high level","geography - mid-level","sex/gender"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","country","sex",NA,"age","geography - high level","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","country","sex","region","age","geography - high level","sex/gender","geography - mid-level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","region","country",NA,"age","geography - mid-level","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","region","country","sex","age","geography - mid-level","geography - high level","sex/gender"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","region",NA,NA,"age","geography - mid-level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","region","sex","country","age","geography - mid-level","sex/gender","geography - high level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","region","sex",NA,"age","geography - mid-level","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","sex","country",NA,"age","sex/gender","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","sex",NA,NA,"age","sex/gender",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","sex","country","region","age","sex/gender","geography - high level","geography - mid-level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","sex","region","country","age","sex/gender","geography - mid-level","geography - high level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","age","sex","region",NA,"age","sex/gender","geography - mid-level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","age","region",NA,"geography - high level","age","geography - mid-level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","age","region","sex","geography - high level","age","geography - mid-level","sex/gender"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","age","sex",NA,"geography - high level","age","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","age","sex","region","geography - high level","age","sex/gender","geography - mid-level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","country of birth",NA,NA,"geography - high level","migration status etc",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","ethnicity",NA,NA,"geography - high level","ethnicity",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","ethnicity","sex",NA,"geography - high level","ethnicity","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","region","age",NA,"geography - high level","geography - mid-level","age",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","region","age","sex","geography - high level","geography - mid-level","age","sex/gender"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","region","sex","age","geography - high level","geography - mid-level","sex/gender","age"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","region","sex",NA,"geography - high level","geography - mid-level","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","sex","age",NA,"geography - high level","sex/gender","age",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","sex","age","region","geography - high level","sex/gender","age","geography - mid-level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","sex","ethnicity",NA,"geography - high level","sex/gender","ethnicity",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","sex","region","age","geography - high level","sex/gender","geography - mid-level","age"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country","sex","region",NA,"geography - high level","sex/gender","geography - mid-level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","country of birth","country",NA,NA,"migration status etc","geography - high level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","ethnicity","country",NA,NA,"ethnicity","geography - high level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","ethnicity","country","sex",NA,"ethnicity","geography - high level","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","ethnicity","sex",NA,NA,"ethnicity","sex/gender",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","ethnicity","sex","country",NA,"ethnicity","sex/gender","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","age","country",NA,"geography - mid-level","age","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","age","country","sex","geography - mid-level","age","geography - high level","sex/gender"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","age",NA,NA,"geography - mid-level","age",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","age","sex","country","geography - mid-level","age","sex/gender","geography - high level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","age","sex",NA,"geography - mid-level","age","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","country","age",NA,"geography - mid-level","geography - high level","age",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","country","age","sex","geography - mid-level","geography - high level","age","sex/gender"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","country","sex","age","geography - mid-level","geography - high level","sex/gender","age"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","country","sex",NA,"geography - mid-level","geography - high level","sex/gender",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","sex","age","country","geography - mid-level","sex/gender","age","geography - high level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","sex","age",NA,"geography - mid-level","sex/gender","age",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","sex","country","age","geography - mid-level","sex/gender","geography - high level","age"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","region","sex","country",NA,"geography - mid-level","sex/gender","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","age","country",NA,"sex/gender","age","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","age",NA,NA,"sex/gender","age",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","age","country","region","sex/gender","age","geography - high level","geography - mid-level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","age","region","country","sex/gender","age","geography - mid-level","geography - high level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","age","region",NA,"sex/gender","age","geography - mid-level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","country","age",NA,"sex/gender","geography - high level","age",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","country","age","region","sex/gender","geography - high level","age","geography - mid-level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","country","ethnicity",NA,"sex/gender","geography - high level","ethnicity",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","country","region","age","sex/gender","geography - high level","geography - mid-level","age"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","country","region",NA,"sex/gender","geography - high level","geography - mid-level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","ethnicity",NA,NA,"sex/gender","ethnicity",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","ethnicity","country",NA,"sex/gender","ethnicity","geography - high level",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","region","age","country","sex/gender","geography - mid-level","age","geography - high level"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","region","age",NA,"sex/gender","geography - mid-level","age",NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","region","country","age","sex/gender","geography - mid-level","geography - high level","age"
+"3.a.1","3.a.1 Age-standardized prevalence of current tobacco use among persons aged 15áyears and older","sex","region","country",NA,"sex/gender","geography - mid-level","geography - high level",NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","age","country",NA,NA,"age","geography - high level",NA,NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","age","country","region",NA,"age","geography - high level","geography - mid-level",NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","age","region","country",NA,"age","geography - mid-level","geography - high level",NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","country","age",NA,NA,"geography - high level","age",NA,NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","country","age","region",NA,"geography - high level","age","geography - mid-level",NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","country","region","age",NA,"geography - high level","geography - mid-level","age",NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","region","age","country",NA,"geography - mid-level","age","geography - high level",NA
+"3.b.1","3.b.1 Proportion of the target population covered by all vaccines included in their national programme","region","country","age",NA,"geography - mid-level","geography - high level","age",NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","ethnic group","ethnicity",NA,NA,"ethnic group","ethnicity",NA,NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","ethnicity","ethnic group",NA,NA,"ethnicity","ethnic group",NA,NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","free school meals","sex",NA,NA,"wealth","sex/gender",NA,NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","sex","free school meals",NA,NA,"sex/gender","wealth",NA,NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","sex","special educational needs",NA,NA,"sex/gender","disability status etc",NA,NA
+"4.1.1","4.1.1 Proportion of children and young people (a) in grades 2/3; (b) at the end of primary; and (c) at the end of lower secondary achieving at least a minimum proficiency level in (i) reading and (ii) mathematics, by sex","special educational needs","sex",NA,NA,"disability status etc","sex/gender",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnic group","ethnicity",NA,NA,"ethnic group","ethnicity",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnic group","ethnicity","gender",NA,"ethnic group","ethnicity","sex/gender",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnic group","gender","ethnicity",NA,"ethnic group","sex/gender","ethnicity",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnic group","gender",NA,NA,"ethnic group","sex/gender",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnicity","ethnic group",NA,NA,"ethnicity","ethnic group",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnicity","ethnic group","gender",NA,"ethnicity","ethnic group","sex/gender",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnicity","gender",NA,NA,"ethnicity","sex/gender",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","ethnicity","gender","ethnic group",NA,"ethnicity","sex/gender","ethnic group",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","free school meals","gender",NA,NA,"wealth","sex/gender",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","ethnic group","ethnicity",NA,"sex/gender","ethnic group","ethnicity",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","ethnic group",NA,NA,"sex/gender","ethnic group",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","ethnicity",NA,NA,"sex/gender","ethnicity",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","ethnicity","ethnic group",NA,"sex/gender","ethnicity","ethnic group",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","free school meals",NA,NA,"sex/gender","wealth",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","local authority",NA,NA,"sex/gender","geography - low level",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","local authority","region",NA,"sex/gender","geography - low level","geography - mid-level",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","gender","region","local authority",NA,"sex/gender","geography - mid-level","geography - low level",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","local authority","gender",NA,NA,"geography - low level","sex/gender",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","local authority","gender","region",NA,"geography - low level","sex/gender","geography - mid-level",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","local authority","region","gender",NA,"geography - low level","geography - mid-level","sex/gender",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","region","gender",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","region","gender","local authority",NA,"geography - mid-level","sex/gender","geography - low level",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","region","local authority","gender",NA,"geography - mid-level","geography - low level","sex/gender",NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","region","special educational needs",NA,NA,"geography - mid-level","disability status etc",NA,NA
+"4.2.1","4.2.1 Proportion of children aged 24-59 months who are developmentally on track in health, learning and psychosocial well-being, by sex","special educational needs","region",NA,NA,"disability status etc","geography - mid-level",NA,NA
+"4.2.2","4.2.2 Participation rate in organized learning (one year before the official primary entry age), by sex","age","region",NA,NA,"age","geography - mid-level",NA,NA
+"4.2.2","4.2.2 Participation rate in organized learning (one year before the official primary entry age), by sex","region","age",NA,NA,"geography - mid-level","age",NA,NA
+"4.c.1","4.c.1 Proportion of teachers with the minimum required qualifications, by education level","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"4.c.1","4.c.1 Proportion of teachers with the minimum required qualifications, by education level","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"5.2.1","5.2.1 Proportion of ever-partnered women and girls aged 15áyears and older subjected to physical, sexual or psychological violence by a current or former intimate partner in the previous 12 months, by form of violence and by age","ethnic group","ethnicity",NA,NA,"ethnic group","ethnicity",NA,NA
+"5.2.1","5.2.1 Proportion of ever-partnered women and girls aged 15áyears and older subjected to physical, sexual or psychological violence by a current or former intimate partner in the previous 12 months, by form of violence and by age","ethnicity","ethnic group",NA,NA,"ethnicity","ethnic group",NA,NA
+"5.2.2","5.2.2 Proportion of women and girls aged 15áyears and older subjected to sexual violence by persons other than anáintimate partner in the previous 12ámonths, by age and place of occurrence","ethnic group","ethnicity",NA,NA,"ethnic group","ethnicity",NA,NA
+"5.2.2","5.2.2 Proportion of women and girls aged 15áyears and older subjected to sexual violence by persons other than anáintimate partner in the previous 12ámonths, by age and place of occurrence","ethnicity","ethnic group",NA,NA,"ethnicity","ethnic group",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","country","local authority",NA,NA,"geography - high level","geography - low level",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","country","local authority","region",NA,"geography - high level","geography - low level","geography - mid-level",NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","country","region","local authority",NA,"geography - high level","geography - mid-level","geography - low level",NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","country","urban or rural",NA,NA,"geography - high level","geography - high level",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","local authority","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","local authority","country","region",NA,"geography - low level","geography - high level","geography - mid-level",NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","local authority","region","country",NA,"geography - low level","geography - mid-level","geography - high level",NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","local authority","region",NA,NA,"geography - low level","geography - mid-level",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","region","country","local authority",NA,"geography - mid-level","geography - high level","geography - low level",NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","region","local authority","country",NA,"geography - mid-level","geography - low level","geography - high level",NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","region","local authority",NA,NA,"geography - mid-level","geography - low level",NA,NA
+"8.10.1","8.10.1 (a) Number of commercial bank branches per 100,000 adults and (b) number of automated teller machines (ATMs) per 100,000 adults","urban or rural","country",NA,NA,"geography - high level","geography - high level",NA,NA
+"8.10.2","8.10.2 Proportion of adults (15áyears and older) with an account at a bank or other financial institution or with a mobile-money-service provider","age","sex",NA,NA,"age","sex/gender",NA,NA
+"8.10.2","8.10.2 Proportion of adults (15áyears and older) with an account at a bank or other financial institution or with a mobile-money-service provider","sex","age",NA,NA,"sex/gender","age",NA,NA
+"8.3.1","8.3.1 Proportion of informal employment in total employment, by sector and sex","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"8.3.1","8.3.1 Proportion of informal employment in total employment, by sector and sex","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","age","sex",NA,NA,"age","sex/gender",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","country","region","sex",NA,"geography - high level","geography - mid-level","sex/gender",NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","country","sex","region",NA,"geography - high level","sex/gender","geography - mid-level",NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","region","country","sex",NA,"geography - mid-level","geography - high level","sex/gender",NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","region","sex","country",NA,"geography - mid-level","sex/gender","geography - high level",NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","sex","age",NA,NA,"sex/gender","age",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","sex","country","region",NA,"sex/gender","geography - high level","geography - mid-level",NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"8.5.1","8.5.1 Average hourly earnings of employees, by sex, age, occupation and persons with disabilities","sex","region","country",NA,"sex/gender","geography - mid-level","geography - high level",NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","age","sex",NA,NA,"age","sex/gender",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","country","region","sex",NA,"geography - high level","geography - mid-level","sex/gender",NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","country","sex",NA,NA,"geography - high level","sex/gender",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","country","sex","region",NA,"geography - high level","sex/gender","geography - mid-level",NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","disability status","sex",NA,NA,"disability status etc","sex/gender",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","region","country","sex",NA,"geography - mid-level","geography - high level","sex/gender",NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","region","sex",NA,NA,"geography - mid-level","sex/gender",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","region","sex","country",NA,"geography - mid-level","sex/gender","geography - high level",NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","sex","age",NA,NA,"sex/gender","age",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","sex","country",NA,NA,"sex/gender","geography - high level",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","sex","country","region",NA,"sex/gender","geography - high level","geography - mid-level",NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","sex","disability status",NA,NA,"sex/gender","disability status etc",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","sex","region",NA,NA,"sex/gender","geography - mid-level",NA,NA
+"8.5.2","8.5.2 Unemployment rate, by sex, age and persons with disabilities","sex","region","country",NA,"sex/gender","geography - mid-level","geography - high level",NA
+"8.6.1","8.6.1 Proportion of youth (aged 15û24áyears) not in education, employment or training","age","sex",NA,NA,"age","sex/gender",NA,NA
+"8.6.1","8.6.1 Proportion of youth (aged 15û24áyears) not in education, employment or training","sex","age",NA,NA,"sex/gender","age",NA,NA
+"8.8.1","8.8.1 Fatal and non-fatal occupational injuries per 100,000 workers, by sex and migrant status","age","sex",NA,NA,"age","sex/gender",NA,NA
+"8.8.1","8.8.1 Fatal and non-fatal occupational injuries per 100,000 workers, by sex and migrant status","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"8.8.1","8.8.1 Fatal and non-fatal occupational injuries per 100,000 workers, by sex and migrant status","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
+"8.8.1","8.8.1 Fatal and non-fatal occupational injuries per 100,000 workers, by sex and migrant status","sex","age",NA,NA,"sex/gender","age",NA,NA
+"9.1.1","9.1.1 Proportion of the rural population who live within 2ákm of an all-season road","country","local authority",NA,NA,"geography - high level","geography - low level",NA,NA
+"9.1.1","9.1.1 Proportion of the rural population who live within 2ákm of an all-season road","local authority","country",NA,NA,"geography - low level","geography - high level",NA,NA
+"9.5.1","9.5.1 Research and development expenditure as a proportion of GDP","country","region",NA,NA,"geography - high level","geography - mid-level",NA,NA
+"9.5.1","9.5.1 Research and development expenditure as a proportion of GDP","region","country",NA,NA,"geography - mid-level","geography - high level",NA,NA
