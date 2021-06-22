@@ -103,9 +103,6 @@ for(i in 1:nrow(indicator_numbers)){
             
           }
           
-          # test:
-          # control_sheet_all_orders <- read.csv('to_test_row_removal.csv')
-          
           # remove unwanted rows (e.g. we want to keep 'Sex, Age, NA' but not 'Sex, NA, Age')
           number_of_variables <- ncol(control_sheet_all_orders)
           control_sheet_cleaned <- control_sheet_all_orders
