@@ -13,7 +13,7 @@ basic_plot_start
 test_facet_args <- function(df, facet2, linecolour) {
   
   facet2 <- sym(facet2)
-  linecolour <- sym(linecolour)
+  linecolour <- sym(line_colour)
   
   df <- df %>%
     mutate(facet2 = !!(enquo(facet2)),
