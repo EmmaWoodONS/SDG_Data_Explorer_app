@@ -1,4 +1,5 @@
-# This function creates a basic plot plotting X against y as a base
+
+
 basic_plot <- function(df){
   ggplot(data = filtered_data,
                      aes(Year, Value)) +
@@ -35,7 +36,7 @@ ggplot(data = filtered_data,
   geom_point() %+%
   test_facet_args(filtered_data, facet_row, line_colour)
 
-#This function is for facet gridding. Will facet by row and coloumn
+#This function is for facet gridding. Will facet by row and column
 test_facet_args_grid <- function(df, facet1, facet2, linecolour) {
   
   facet1 <- sym(facet1)
