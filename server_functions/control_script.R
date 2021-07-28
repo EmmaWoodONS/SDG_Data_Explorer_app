@@ -14,7 +14,7 @@ dat <- read.csv(paste0(csv_filepath, indicator, ".csv"),
                 na.strings=c("","NA")) %>% 
   mutate_if(is.factor, as.character)
 
-filtered_data <- filter_for_selections(dat)
+filtered_data <- filter_for_selections(final_NAs_to_all)
 
 # this is the script for plotting the data
 source("plotting_script.R")

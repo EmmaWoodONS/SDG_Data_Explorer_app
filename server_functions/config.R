@@ -5,8 +5,10 @@ indicator <- "8-5-1"
 
 char1 <- "Region"
 char2 <- "Sex"
-char3 <- "Country"
+char3 <- "Age"
 char4 <- NA
+char5 <- NA
+char6 <- NA
 
 # levels1 <- c("England")
 # levels2 <- c("18 to 24", "25 to 34")
@@ -14,7 +16,7 @@ char4 <- NA
 # levels4 <- c("London", "North East")
 levels1 <- c(NA)
 levels2 <- c(NA)
-levels3 <- c("England")
+levels3 <- c(NA)
 levels4 <- c(NA)
 
 line_colour <- "Sex"

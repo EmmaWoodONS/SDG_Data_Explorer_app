@@ -17,14 +17,17 @@ remove_unused_columns <- function(dat, cols_to_remove = unused_columns) {
 #----------
 source("config.R")
 
-csv <- read.csv(paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator_number, ".csv"), na.strings = "") %>% 
+csv <- read.csv(paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator, ".csv"), na.strings = "") %>% 
   mutate_if(is.factor, as.character)
 
-disagg_lookup <- read.csv('Disaggregation_group_lookup.csv')
+disagg_lookup <- read.csv('../Control_sheet/Disaggregation_group_lookup.csv')
 
 unused_columns <- c("Year", "Observation.status", "Unit.multiplier", "Unit.measure", "GeoCode", "Value")
-all_variables <- remove_unused_columns(csv)
+# all_variables <- remove_unused_columns(csv)
 
+unused_column_numbers <- which(colnames(csv) %in% unused_columns)
+
+all_variables <- csv
 
 # is_disagg_nested? i.e. does a column require a single value in any other column (not including NAs). 
 # Need to know this to know whether an NA should actually be 'All'
@@ -34,40 +37,42 @@ completely_nested_variables <- NULL
 
 for(i in 1:ncol(all_variables)) {
   
-  target_column_name <- colnames(all_variables)[i]
-  
-  target_column_options <- all_variables %>% 
-    filter(!is.na(!!as.name(target_column_name)))
-
-  unique_target_column_options <- distinct(target_column_options, !!as.name(target_column_name))
-  
-  for(j in 1:ncol(all_variables)) {
+  if(i %not_in% unused_column_numbers){
     
-    check_column_name <- colnames(all_variables)[j]
+    target_column_name <- colnames(all_variables)[i]
     
-    if(target_column_name != check_column_name) {
+    target_column_options <- all_variables %>% 
+      filter(!is.na(!!as.name(target_column_name)))
+    
+    unique_target_column_options <- distinct(target_column_options, !!as.name(target_column_name))
+    
+    for(j in 1:ncol(all_variables)) {
       
-      unique_check_column_options <- target_column_options %>% 
-        filter(!is.na(!!as.name(check_column_name))) %>% 
-        distinct(!!as.name(target_column_name)) %>% 
-        rename(unique_target_column_options = all_of(target_column_name)) %>% 
-        .$unique_target_column_options
+      check_column_name <- colnames(all_variables)[j]
       
-      
-      if(length(unique_check_column_options) < nrow(unique_target_column_options) &
-         length(unique_check_column_options) != 0) {
+      if(target_column_name != check_column_name) {
         
-        number_check_column_options <- length(unique_target_column_options)
-        incompletely_nested <- data.frame(nested_variable = rep(check_column_name, times = number_check_column_options),
-                                          nested_within = rep(target_column_name, times = number_check_column_options),
-                                          values_given_for = unique_check_column_options)
-        incompletely_nested_variables <- bind_rows(incompletely_nested_variables, incompletely_nested)
+        unique_check_column_options <- target_column_options %>% 
+          filter(!is.na(!!as.name(check_column_name))) %>% 
+          distinct(!!as.name(target_column_name)) %>% 
+          rename(unique_target_column_options = all_of(target_column_name)) %>% 
+          .$unique_target_column_options
+        
+        
+        if(length(unique_check_column_options) < nrow(unique_target_column_options) &
+           length(unique_check_column_options) != 0) {
+          
+          number_check_column_options <- length(unique_target_column_options)
+          incompletely_nested <- data.frame(nested_variable = rep(check_column_name, times = number_check_column_options),
+                                            nested_within = rep(target_column_name, times = number_check_column_options),
+                                            values_given_for = unique_check_column_options)
+          incompletely_nested_variables <- bind_rows(incompletely_nested_variables, incompletely_nested)
+          
+        }
         
       }
-
     }
   }
-  
 }
 
 nested_variables <- as.character(incompletely_nested_variables$nested_variable)
