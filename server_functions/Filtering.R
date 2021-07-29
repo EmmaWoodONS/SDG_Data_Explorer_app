@@ -1,4 +1,5 @@
-# function to take the user arguments (currently given in config) and filter the csv data based on these.
+# function to take the user arguments (currently given in config) and filter the 
+#   csv data based on these.
 # args: dat - the csv data file for a single indicator
 # returns a filtered tibble
 
@@ -25,16 +26,22 @@ filter_for_selections <- function(dat){
                             "Unit.multiplier", "Unit.measure",
                             "GeoCode", "Value", "Year")
   
-  # remove any columns that are entirely NA
+  # remove any columns that are entirely NA (which may be the case as we have 
+  # filtered for Series and Units already)
   NA_counts <- sapply(new_dat, function(x) sum(is.na(x)))
   row_count <- nrow(new_dat)
   NA_only_cols <- names(new_dat)[row_count - NA_counts == 0] # cols to remove completely
   
+  #### TO DO:
+  # Add a check: If the selected characteristicss are in the 'NA_only_cols' vector,
+  # A warning must be sent to the user to say that their selected cross-disaggregation
+  # is not available with that Units and Series selection.
+  # This can later be improved so that only valid levels are made available in 
+  # the Series and Units drop-downs given the disaggregation selections
+  ######
+  
   new_dat <- select(new_dat, -all_of(NA_only_cols))
   
-  # cols_to_filter_for_All <- setdiff(relevant_unselected_characteristics, NA_only_cols)
-  
- 
   unselected_characteristics <- setdiff(names(new_dat), selections)
   relevant_unselected_characteristics <- setdiff(unselected_characteristics, irrelevant_variables)
   
@@ -44,87 +51,70 @@ filter_for_selections <- function(dat){
   # filtered to only contain NAs (or Alls), there will be no data left to 
   # plot for region
   dependencies <- identify_complete_nesting(new_dat)
-  required_columns <- unique(dependencies$dependent_on)[selections %in% dependencies$dependent_column]
-  required_column_not_chosen <- required_columns[required_columns %not_in% selections]
   
+  choice_required <- dependencies %>% 
+    filter(dependent_on %not_in% selections & 
+             dependent_column %in% selections)
+
   # what do we want to do with such columns? 
-  # I suggest We just take either 'All' (which shouldn't ever be there, but accidentally is in 8-5-1),
-  # or the first level of each non-selected but required disaggregation
-  # and print a statement to say that if they want to see plots for all levels, 
+  # -Remove rows that don't exist once the NAs are removed from the dependent 
+  # variable (i.e. if Country is required but not selected [dependent_on column],
+  # when you filter out NAs in the Region [dependent_column] only England will remain)
+  # - If more than one option remains, either filter dependent_on for 'All' if
+  # it exists (it shouldn't ever be there, but e.g. it accidentally is in 8-5-1),
+  # or use the first level 
+  # - in the latter 2 cases ('All' or first level) print a statement to say that
+  # if the user wants to see plots for all levels, 
   # they will need to select that characteristic in the drop-downs
   
   # select default level for required but non-selected disaggregations
-  required_non_selected <- matrix(data = NA,
-                                  nrow = 2, ncol = 2)
-  for(i in 1:length(required_column_not_chosen)) {
+  non_selected_choices <- NULL
+  for(i in 1:nrow(choice_required)) {
+    
+    selected <- choice_required$dependent_column[i]
+    non_selected <- choice_required$dependent_on[i]
     
     available_levels <- new_dat %>% 
-      distinct(!!as.name(required_column_not_chosen[i])) %>% 
-      pull(!!as.name(required_column_not_chosen[i]))
+      filter(!is.na(!!as.name(selected)) &
+               !is.na(!!as.name(non_selected))) %>% # I don't know if this is needed, but just in case
+      distinct(!!as.name(non_selected)) 
     
-    # We would usually filter for NAs for columns that aren't selected by the user
-    # however, these columns are special cases where doing so would get rid of 
-    # rows that we need, so NA mustn't be an option
-    available_levels <- available_levels[!is.na(available_levels)]
-    
-    # create a new selection characteristic, that will function like the char
-    # variables in config.R
-    # i.e. creates a new variable called e.g. char3 or char4 etc depending on 
-    # how many characteristics have already been assigned values:
-    
-    if("All" %in% available_levels){
-      required_non_selected[1, i] <- required_column_not_chosen[i]
-      required_non_selected[2, i] <- "All"
+    if(nrow(available_levels) == 1) {
+      non_selected_choices <- bind_cols(available_levels)
+      
     } else {
-      required_non_selected[1, i] <- required_column_not_chosen[i]
-      required_non_selected[2, i] <- available_levels[1]
+      
+      if("All" %in% available_levels){
+        
+        chosen_level <- available_levels %>% 
+          filter(!!as.name(non_selected) == "All") 
+        
+      } else { chosen_level <- available_levels[i, ] }
+      
+      non_selected_choices <- bind_cols(chosen_level)
+      
     }
-   
   }
-  # turn resulting matrix into a dataframe ready to be joined to new_data (as a way of filtering)
-  required_non_selected_df <- as.data.frame(required_non_selected)
-  colnames(required_non_selected_df) <- required_non_selected[1, ]
-  required_non_selected_df <- required_non_selected_df[-1, ]
 
-  NA_characteristics <- setdiff(relevant_unselected_characteristics, c(selected_characteristics, required_column_not_chosen))
+  # get the characteristics for which we only want NA rows
+  NA_characteristics <- setdiff(relevant_unselected_characteristics, 
+                                c(selected_characteristics, 
+                                  names(non_selected_choices)))
   
   filtered_data <- new_dat %>%
-    filter(across(all_of(NA_characteristics), function(x) is.na(x)))
+    # remove of rows with entries (levels) for non-selected characteristics that 
+    # none of the selected characteristics are dependent on: 
+    filter(across(all_of(NA_characteristics), function(x) is.na(x))) %>% 
+    # remove rows for non-selected characteristics for which a particular entry 
+    # is required (e.g. "England" for Country when Region is a selected char), or 
+    # for which there are multiple possible entries (where we have set a default 
+    # of 'All', or the first one alphanumerically)
+    right_join(non_selected_choices, by = choice_required$dependent_on)
 
-  # try a plot to see where we've got to
-  filtered_data %>%
-    filter(is.na(Sex) & is.na(Age)) %>%
-    ggplot(data = .,
-           aes(x = Year,
-               y = Value)) +
-    geom_point() +
-    facet_grid(.~Region)
-  
-  # somehow need to figure out the filtering of required non-selected columns.
-  # for 8-5-1:
-  # Country needs to be England but only when plotting region, otherwise it should be NA
-  # Occupation needs to be All but only when plotting age
-  # this info is in `dependencies`
+
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  # ----- still to look at and edit ->
-  
-  
-  
-  
-  
-  
-  
+    # ----- still to look at and maybe edit ->
   
   
   

@@ -5,7 +5,7 @@ indicator <- "8-5-1"
 
 char1 <- "Region"
 char2 <- "Sex"
-char3 <- "Age"
+char3 <- NA
 char4 <- NA
 char5 <- NA
 char6 <- NA
