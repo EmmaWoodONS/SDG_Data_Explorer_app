@@ -27,13 +27,25 @@ ui <- fluidPage(
         
         uiOutput("Choice1"),
         uiOutput("Choice2"),
-        uiOutput("Choice3"),
-        uiOutput("Choice4")
-        
-        # dataTableOutput('table')
+        conditionalPanel(
+            condition = "input.Choice2" != "All",
+            uiOutput("Choice3")
+        ),
+        # uiOutput("Choice3"),
+        uiOutput("Choice4"), 
+        uiOutput("Select Indicator"),
+        downloadButton('download',"Download the data")
+    ),
+    mainPanel(
+        fluidRow(column(7,dataTableOutput('dto')))
     )
     
+    
+        
+        
+        # dataTableOutput('table')
 )
+
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
@@ -57,35 +69,97 @@ server <- function(input, output, session) {
     output$Choice2 <- renderUI({
         req(input$Choice1)
 
-    selectInput("Choice2", "Characteristic 2", choices = c(unique(filtered1()$variable2)))
+    selectInput("Choice2", "Characteristic 2", choices = c("All", unique(filtered1()$variable2)))
 
     })
 
 
     filtered2 <- reactive ({
-        filtered1() %>%
-        filter(variable2 == input$Choice2)
-    })
-
-    output$Choice3 <- renderUI({
-        req(input$Choice2)
-
-        selectInput("Choice3", "Characteristic 3", choices = c(unique(filtered2()$variable3)))
+        
+        if (input$Choice2 == "All") {
+            filtered1()
+        } else {
+            filtered1() %>%
+                filter(variable2 == input$Choice2)
+        }
 
     })
     
+    output$Choice3 <- renderUI({
+      req(input$Choice2)
+      
+      if(input$Choice2 == "All") {
+        
+        NULL
+        # selectInput("Choice3", "Characterstic 3", choices = c("All"))
+      } else if(length(unique(filtered2()$variable3)) == 1) {
+          if(unique(filtered2()$variable3) == ""){
+            NULL
+          }
+        } else {
+          selectInput("Choice3", "Characteristic 3", choices = c("All", unique(filtered2()$variable3)))
+        }
+      }) 
+    
+    
+    
     filtered3 <- reactive ({
+        
+        if(input$Choice3 == "All"){
+            filtered2()
+        } else
         filtered2() %>%
             filter(variable3 == input$Choice3)
     })
     
     output$Choice4 <- renderUI({
-        req(input$Choice3)
+            req(input$Choice3)
         
-        selectInput("Choice4", "Characteristic 4", choices = c(unique(filtered3()$variable4)))
+        if(input$Choice3 == "All"){
+          NULL
+            
+        }  else if(length(unique(filtered3()$variable4)) == 1) {
+          if(unique(filtered3()$variable4) == ""){
+            NULL
+          }
+        } else {
+          (selectInput("Choice4", "Characteristic 4", choices = c("All", unique(filtered3()$variable4))))
+        
+            
+        }
+
+    })
+    filtered4 <- reactive ({
+        if(input$Choice4 == "All"){
+            filtered3()
+        } else
+        filtered3() %>%
+            filter(variable4 == input$Choice4)
+    })
+    
+    
+    
+    output$`Select Indicator` <- renderUI({
+        req(input$Choice4)
+        if(input$Choice4 == "All"){
+            selectInput("Select Indicator", "Select Indicator", choices = c("All", unique(filtered1()$indicator_title)))
+        }
+        else {
+            selectInput("Select Indicator", "Select Indicator", choices = c("All", unique(filtered4()$indicator_title)))
+        }
         
     })
     
+    output$dto <- renderDataTable({
+        req(input$`Select Indicator`)
+        filtered4()
+        })
+    output$download <- downloadHandler(
+        filename = function(){"thename.csv"}, 
+        content = function(fname){
+            write.csv(filtered4(), fname, row.names = FALSE)
+        }
+    )
 
 }
 
