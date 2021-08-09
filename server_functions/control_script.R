@@ -11,6 +11,8 @@ source("identify_complete_nesting.R")
 source("Filtering.R")
 # source("plotting_functions.R")
 
+`%not_in%` <- Negate(`%in%`)
+
 dat <- read.csv(paste0(csv_filepath, indicator, ".csv"),
                 na.strings=c("","NA")) %>% 
   mutate_if(is.factor, as.character)

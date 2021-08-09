@@ -3,6 +3,27 @@
 # args: dat - the csv data file for a single indicator
 # returns a filtered tibble
 
+# test data for two sets of dependencies (Region dependent on country,
+#   Ethnicity dependent on Ethnic Group
+
+dat <- data.frame(Year = rep("2100", 9),
+                  Country = c(rep("England", 5), 
+                              rep("Wales", 2),
+                              "Scotland",
+                              NA),
+                  Region = c(rep("London", 2), 
+                             rep("East", 2), 
+                             rep(NA, 5)),
+                  Ethnic_group = c(rep("Asian/Asian British", 4),
+                                   NA,
+                                   rep("Asian/Asian British", 2),
+                                   rep(NA, 2)),
+                  Ethnicity = c(rep(c("Bangladeshi", "Chinese"), 2), 
+                                NA,
+                                "Bangladeshi", "Chinese",
+                                rep(NA, 2)),
+                  Value = c(1:4, 10, 5:7, 28))
+
 filter_for_selections <- function(dat){
   
   special_columns <- c("Units", "Series")
@@ -11,6 +32,7 @@ filter_for_selections <- function(dat){
   number_of_selections <- sum(!is.na(selected_characteristics))
   
   special_characteristics <- NULL
+  new_dat <- dat
   if("Units" %in% names(dat)) {
     new_dat <- filter(dat, Units == Units_selection) 
     special_characteristics <- c(special_characteristics, "Units")
@@ -62,12 +84,20 @@ filter_for_selections <- function(dat){
   # when you filter out NAs in the Region [dependent_column] only England will remain)
   # - If more than one option remains, either filter dependent_on for 'All' if
   # it exists (it shouldn't ever be there, but e.g. it accidentally is in 8-5-1),
-  # or use the first level 
-  # - in the latter 2 cases ('All' or first level) print a statement to say that
-  # if the user wants to see plots for all levels, 
-  # they will need to select that characteristic in the drop-downs
+  # or use all non-NA levels. E.g. if you wanted to look at Ethnicity, you would 
+  # want all the ethnic groups to be selected.
+  #
+  # To do at a future time (maybe):
+  # - If 'All' was selected print a statement to say that is what has been done
+
   
-  # select default level for required but non-selected disaggregations
+  
+  ############ EDIT FROM HERE! ###################
+  
+  
+  
+  # select default level for required-but-not-selected disaggregations
+  # TO DO: non_selected_choices needs to be a dataframe for the test data!
   non_selected_choices <- NULL
   for(i in 1:nrow(choice_required)) {
     
@@ -89,7 +119,11 @@ filter_for_selections <- function(dat){
         chosen_level <- available_levels %>% 
           filter(!!as.name(non_selected) == "All") 
         
-      } else { chosen_level <- available_levels[i, ] }
+      } else { 
+        
+        chosen_level <- available_levels[!is.na(available_levels), ] 
+        
+      }
       
       non_selected_choices <- bind_cols(chosen_level)
       
@@ -112,31 +146,26 @@ filter_for_selections <- function(dat){
     right_join(non_selected_choices, by = choice_required$dependent_on)
 
 
+  # We could turn the following into a loop, but I'm struggling with it and 
+  # it's not overly mportant, so leaving as individual statements for now.
+
   
-  
-    # ----- still to look at and maybe edit ->
-  
-  
-  
-  
-  number_of_selections <- sum(!is.na(selected_characteristics))
-  
-  if(number_of_selections >= 1 & !is.na(levels1)) {
+  if(number_of_selections >= 1 & !is.na(levels1)[1]) {
     filtered_data <- filtered_data %>% 
       filter(!!rlang::sym(char1) %in% c(levels1))
   } 
 
-  if(number_of_selections >= 2 & !is.na(levels2)) {
+  if(number_of_selections >= 2 & !is.na(levels2)[1]) {
     filtered_data <- filtered_data %>% 
       filter(!!rlang::sym(char2) %in% c(levels2))
   } 
   
-  if(number_of_selections >= 3 & !is.na(levels3)) {
+  if(number_of_selections >= 3 & !is.na(levels3[1])) {
     filtered_data <- filtered_data %>% 
       filter(!!rlang::sym(char3) %in% c(levels3))
   }
   
-  if(number_of_selections == 4 & !is.na(levels4)) {
+  if(number_of_selections == 4 & !is.na(levels4)[1]) {
     filtered_data <- filtered_data %>% 
       filter(!!rlang::sym(char4) %in% c(levels4))
   }

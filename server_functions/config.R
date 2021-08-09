@@ -4,7 +4,7 @@ csv_filepath <- "Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_"
 indicator <- "8-5-1"
 
 char1 <- "Region"
-char2 <- "Sex"
+char2 <- "Ethnicity" #"Sex"
 char3 <- NA
 char4 <- NA
 char5 <- NA
@@ -14,7 +14,7 @@ char6 <- NA
 # levels2 <- c("18 to 24", "25 to 34")
 # levels3 <- c("Male", "Female")
 # levels4 <- c("London", "North East")
-levels1 <- c(NA)
+levels1 <- c("East")
 levels2 <- c(NA)
 levels3 <- c(NA)
 levels4 <- c(NA)

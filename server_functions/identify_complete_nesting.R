@@ -13,7 +13,15 @@ identify_complete_nesting <- function(dat){
   non_disaggregation_columns <- c("Observation.status", 
                                   "Unit.multiplier", "Unit.measure",
                                   "GeoCode", "Value", "Year")
-  disagg_dat <- select(dat, -all_of(non_disaggregation_columns))
+
+   
+  # some indicators may not have all of the non_disaggregation_columns
+  # and select doesn't work if they are not all valid, so get relevant column names before removal
+  indices_of_columns_to_remove <- which(non_disaggregation_columns %in% names(dat))
+  columns_to_remove <- non_disaggregation_columns[indices_of_columns_to_remove]
+  disagg_dat <- select(dat, -all_of(columns_to_remove))
+
+  
   
   dependent_columns <- data.frame(dependent_column = NA, dependent_on = NA)
   
