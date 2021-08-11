@@ -6,23 +6,35 @@
 # test data for two sets of dependencies (Region dependent on country,
 #   Ethnicity dependent on Ethnic Group
 
-dat <- data.frame(Year = rep("2100", 9),
+#########################  TEST DATA #############################
+dat <- data.frame(Year = rep("2100", 12),
                   Country = c(rep("England", 5), 
                               rep("Wales", 2),
                               "Scotland",
-                              NA),
+                              rep(NA, 4)),
                   Region = c(rep("London", 2), 
                              rep("East", 2), 
-                             rep(NA, 5)),
+                             rep(NA, 8)),
                   Ethnic_group = c(rep("Asian/Asian British", 4),
                                    NA,
                                    rep("Asian/Asian British", 2),
-                                   rep(NA, 2)),
+                                   rep(NA, 5)),
                   Ethnicity = c(rep(c("Bangladeshi", "Chinese"), 2), 
                                 NA,
                                 "Bangladeshi", "Chinese",
-                                rep(NA, 2)),
-                  Value = c(1:4, 10, 5:7, 28))
+                                rep(NA, 5)),
+                  Ageband = c(rep(NA, 9),
+                              rep("Adult", 3)),
+                  Age = c(rep(NA, 9),
+                          "20 to 29",
+                          "30 to 39",
+                          "All"),
+                  Value = c(1:4, 10, 5:7, 28, 1, 2, 3))
+
+char1 <- "Region"
+char2 <- "Ethnicity" 
+char3 <- "Age"
+####################################################
 
 filter_for_selections <- function(dat){
   
@@ -55,7 +67,7 @@ filter_for_selections <- function(dat){
   NA_only_cols <- names(new_dat)[row_count - NA_counts == 0] # cols to remove completely
   
   #### TO DO:
-  # Add a check: If the selected characteristicss are in the 'NA_only_cols' vector,
+  # Add a check: If the selected characteristics are in the 'NA_only_cols' vector,
   # A warning must be sent to the user to say that their selected cross-disaggregation
   # is not available with that Units and Series selection.
   # This can later be improved so that only valid levels are made available in 
@@ -94,11 +106,11 @@ filter_for_selections <- function(dat){
   
   ############ EDIT FROM HERE! ###################
   
-  
-  
   # select default level for required-but-not-selected disaggregations
   # TO DO: non_selected_choices needs to be a dataframe for the test data!
+  
   non_selected_choices <- NULL
+  info_to_select_levels <- new_dat
   for(i in 1:nrow(choice_required)) {
     
     selected <- choice_required$dependent_column[i]
@@ -107,44 +119,55 @@ filter_for_selections <- function(dat){
     available_levels <- new_dat %>% 
       filter(!is.na(!!as.name(selected)) &
                !is.na(!!as.name(non_selected))) %>% # I don't know if this is needed, but just in case
-      distinct(!!as.name(non_selected)) 
+      distinct(!!as.name(non_selected)) %>% 
+      # mutate(selected = selected) %>%
+      mutate(available_for_selected = TRUE)
     
-    if(nrow(available_levels) == 1) {
-      non_selected_choices <- bind_cols(available_levels)
-      
-    } else {
-      
-      if("All" %in% available_levels){
-        
-        chosen_level <- available_levels %>% 
-          filter(!!as.name(non_selected) == "All") 
-        
-      } else { 
-        
-        chosen_level <- available_levels[!is.na(available_levels), ] 
-        
-      }
-      
-      non_selected_choices <- bind_cols(chosen_level)
-      
-    }
+    # if(i > 1) last_keep_var <- keep_var
+    keep_var <- paste0("keep", i)
+    # if(i > 1) all_keep_vars <- vctrs::vec_c(last_keep_var, keep_var) 
+    
+    info_to_select_levels <- info_to_select_levels %>% 
+      left_join(available_levels, by = non_selected) %>%
+      mutate(!!as.name(keep_var) := ifelse(available_for_selected == TRUE &
+                             !is.na(!!as.name(selected)), 
+                           1, 0)) %>% 
+      select(-available_for_selected)
   }
+  
+  # we need to drop any rows that don't have 1 in ANY of the the 'keep..'
+  # columns. If we sum those columns, any that fill that criteria will = 0
+  
+  keep_column_start <- ncol(dat) + 1
+  keep_column_end <- ncol(dat) + nrow(choice_required)
+  keep_column_locations <- c(keep_column_start:keep_column_end)
+
+  info_to_select_levels$keep <- rowSums(
+    info_to_select_levels[, keep_column_locations], na.rm = TRUE)
+  
+  part_filtered_data <- info_to_select_levels %>% 
+    filter(keep > 0) 
+  part_filtered_data[, 1:(keep_column_start - 1)]
+  
+   
+
+# continue from here (10/08/2021)
+
+
 
   # get the characteristics for which we only want NA rows
   NA_characteristics <- setdiff(relevant_unselected_characteristics, 
                                 c(selected_characteristics, 
-                                  names(non_selected_choices)))
+                                  unique(choice_required$dependent_on)))
   
-  filtered_data <- new_dat %>%
+  if(length(NA_characteristics) > 0) {
+  filtered_data <- part_filtered_data %>%
     # remove of rows with entries (levels) for non-selected characteristics that 
     # none of the selected characteristics are dependent on: 
-    filter(across(all_of(NA_characteristics), function(x) is.na(x))) %>% 
-    # remove rows for non-selected characteristics for which a particular entry 
-    # is required (e.g. "England" for Country when Region is a selected char), or 
-    # for which there are multiple possible entries (where we have set a default 
-    # of 'All', or the first one alphanumerically)
-    right_join(non_selected_choices, by = choice_required$dependent_on)
-
+    filter(across(all_of(NA_characteristics), function(x) is.na(x)))
+  } else {
+    filtered_data <- part_filtered_data
+  }
 
   # We could turn the following into a loop, but I'm struggling with it and 
   # it's not overly mportant, so leaving as individual statements for now.
