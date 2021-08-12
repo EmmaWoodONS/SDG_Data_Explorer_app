@@ -1,20 +1,18 @@
 library(shiny)
 library(shinyWidgets)
+library(shinyjs)
 
 # data("mpg", package = "ggplot2")
 
 ui <- fluidPage(
-  tags$h2("Download bttn"),
-  downloadBttn(
-    outputId = "downloadData",
-    style = "bordered",
-    color = "primary"
-  ),
   fluidRow(
     column(
       width = 10, offset = 1,
       tags$h3("Filter data with selectize group"),
       panel(
+        useShinyjs(),
+        checkboxInput("chk", label = "Hide Table ", value = F
+        ),
         uiOutput("Select Indicator"),
         selectizeGroupUI(
           id = "my-filters",
@@ -23,6 +21,12 @@ ui <- fluidPage(
             variable2 = list(inputId = "variable2", title = "characteristic 2:"),
             variable3 = list(inputId = "variable3", title = "characteristic 3:"),
             variable4 = list(inputId = "variable4", title = "characteristic 4:")
+          ),
+          downloadBttn(
+            outputId = "downloadData",
+            style = "bordered",
+            color = "primary",
+            size = "sm",
           ),
         ), status = "primary"
       ),
@@ -57,6 +61,10 @@ server <- function(input, output, session) {
       write.csv(res_mod(), con, row.names = FALSE)
     }
   )
+  
+  observeEvent(input$chk, {
+    if (input$chk) hide("table") else show("table")
+  })
   
   output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
 }
