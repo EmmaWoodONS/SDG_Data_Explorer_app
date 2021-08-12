@@ -5,6 +5,9 @@ library(shinyjs)
 # data("mpg", package = "ggplot2")
 
 ui <- fluidPage(
+  tags$img(src = "SDG_logo.png",
+           align = "left",
+           height = 100, width = 300),
   fluidRow(
     column(
       width = 10, offset = 1,
