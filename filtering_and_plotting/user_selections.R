@@ -5,7 +5,7 @@ indicator <- "3-4-1"
 
 char1 <- "Age"
 char2 <- "Country" #"Sex"
-char3 <- NA #"Age"
+char3 <- "Sex" #"Age"
 char4 <- NA
 
 
@@ -20,7 +20,7 @@ levels4 <- c(NA)
 
 line_colour <- "Country"
 line_style <- NA
-facet_row <- NA #"Region"
+facet_row <- "Sex" #"Region"
 facet_column <- "Age"
 
 Units_selection <- NA

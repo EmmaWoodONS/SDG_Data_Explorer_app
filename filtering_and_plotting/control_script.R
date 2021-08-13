@@ -28,7 +28,7 @@ extra_dropdowns <- filtered_data_and_extra_dropdowns[[2]]
 # the user will then need to select the required levels from the extra drop-downs 
 # Until we have these on the platform, just select the first row 
 # (for testing and development purposes only)
-extra_dropdown_row <- 1
+extra_dropdown_row <- 11
 if(is.data.frame(extra_dropdowns)){
   
   further_selections <- extra_dropdowns[extra_dropdown_row, ]
@@ -40,6 +40,8 @@ if(is.data.frame(extra_dropdowns)){
 
 # create the plot:
 source("plotting.R")
+
+plot
 
 time_end <- Sys.time()
 time_end - time_start

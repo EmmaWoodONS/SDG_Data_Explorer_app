@@ -8,12 +8,13 @@ line_style_sym <- as.name(line_style)
 facet_row_sym <- as.name(facet_row)
 facet_column_sym <- as.name(facet_column)
 
+df <- filtered_data
 if(!is.na(facet_row)){
-df <- filtered_data %>% 
+df <- df %>% 
   mutate(facet_row := !!enquo(facet_row_sym))
 }
 if(!is.na(facet_column)){
-  df <- filtered_data %>% 
+  df <- df %>% 
     mutate(facet_column := !!enquo(facet_column_sym))
 }
 
@@ -24,13 +25,13 @@ plot <- ggplot(data = df,
 if(!is.na(line_colour) & !is.na(line_style)){
   plot <- plot +
     geom_line(aes(colour = !!line_colour_sym,
-                  lty = line_style))
+                  linetype = !!line_style_sym))
 } else if(!is.na(line_colour)) {
   plot <- plot +
     geom_line(aes(colour = !!line_colour_sym))
 } else if(!is.na(line_style)) {
   plot <- plot +
-    geom_line(aes(lty = line_style))
+    geom_line(aes(linetype = !!line_style_sym))
 } else {
   plot <- plot +
     geom_line()
@@ -49,5 +50,6 @@ if(!is.na(facet_row) & !is.na(facet_column)){
 }
 
 plot <- plot +
-  theme_bw()
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 
