@@ -28,7 +28,7 @@ extra_dropdowns <- filtered_data_and_extra_dropdowns[[2]]
 # the user will then need to select the required levels from the extra drop-downs 
 # Until we have these on the platform, just select the first row 
 # (for testing and development purposes only)
-extra_dropdown_row <- 66
+extra_dropdown_row <- 11
 if(is.data.frame(extra_dropdowns)){
   
   further_selections <- extra_dropdowns[extra_dropdown_row, ]
@@ -47,7 +47,7 @@ if(is.data.frame(extra_dropdowns)){
     check_for_NA <- further_selections %>% 
       mutate(current_is_na = ifelse(is.na(!!current_column), TRUE, FALSE)) %>% 
       pull(current_is_na)
-      
+    
     if(check_for_NA == TRUE){
       replaced_na <- further_selections_with_alls %>% 
         mutate(!!current_column := ifelse(is.na(!!current_column), "All", !!current_column)) 
@@ -57,14 +57,17 @@ if(is.data.frame(extra_dropdowns)){
     
     check_for_all <- further_selections %>% 
       mutate(current_is_all = ifelse(!!current_column == "All", TRUE, FALSE)) %>% 
+      mutate(current_is_all = ifelse(is.na(!!current_column), FALSE, current_is_all)) %>% 
       pull(current_is_all)
     
     if(check_for_all == TRUE){
       replaced_all <- further_selections_with_alls %>% 
         mutate(!!current_column := ifelse(!!current_column == "All", NA, !!current_column)) 
-      
       further_selections_with_alls <- bind_rows(further_selections_with_alls, replaced_all)
+      
     }
+    
+    
     
   }
     
