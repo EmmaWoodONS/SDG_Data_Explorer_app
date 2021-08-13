@@ -1,3 +1,4 @@
+library(dplyr)
 library(shiny)
 library(shinyWidgets)
 library(shinyjs)
@@ -39,7 +40,7 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-  control_sheet <- read.csv("D:\\Coding_repos\\SDG_Data_Explorer_app\\Control_sheet\\control_sheet_no_NAs.csv") %>% 
+  control_sheet <- read.csv("https://raw.githubusercontent.com/EmmaWoodONS/SDG_Data_Explorer_app/main/Control_sheet/control_sheet.csv") %>% 
     mutate(across(where(is.factor), as.character))
   
   res_mod <- callModule(
