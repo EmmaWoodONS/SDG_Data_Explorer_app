@@ -28,14 +28,49 @@ extra_dropdowns <- filtered_data_and_extra_dropdowns[[2]]
 # the user will then need to select the required levels from the extra drop-downs 
 # Until we have these on the platform, just select the first row 
 # (for testing and development purposes only)
-extra_dropdown_row <- 11
+extra_dropdown_row <- 66
 if(is.data.frame(extra_dropdowns)){
   
   further_selections <- extra_dropdowns[extra_dropdown_row, ]
+
+  # This loop and if statement are needed because for example, if region is 
+  # in the data, but not being plotted, while country is being plotted,
+  # the user may select NA for region, but this will lead to the filtering
+  # out of all England rows, just leaving the other countries. This is because
+  # for England, Region is either the name of a region or 'All', while for the
+  # other countries, the correct selection would be NA
+  further_selections_with_alls <- further_selections
+  for(i in 1:ncol(extra_dropdowns)){
+    
+    current_column <- as.name(names(extra_dropdowns)[i])
+    
+    check_for_NA <- further_selections %>% 
+      mutate(current_is_na = ifelse(is.na(!!current_column), TRUE, FALSE)) %>% 
+      pull(current_is_na)
+      
+    if(check_for_NA == TRUE){
+      replaced_na <- further_selections_with_alls %>% 
+        mutate(!!current_column := ifelse(is.na(!!current_column), "All", !!current_column)) 
+      
+      further_selections_with_alls <- bind_rows(further_selections_with_alls, replaced_na)
+    }
+    
+    check_for_all <- further_selections %>% 
+      mutate(current_is_all = ifelse(!!current_column == "All", TRUE, FALSE)) %>% 
+      pull(current_is_all)
+    
+    if(check_for_all == TRUE){
+      replaced_all <- further_selections_with_alls %>% 
+        mutate(!!current_column := ifelse(!!current_column == "All", NA, !!current_column)) 
+      
+      further_selections_with_alls <- bind_rows(further_selections_with_alls, replaced_all)
+    }
+    
+  }
     
   filtered_data <- filtered_data %>% 
-    right_join(further_selections, by = names(further_selections))
-  
+    right_join(further_selections_with_alls, by = names(further_selections)) %>% 
+    filter(!is.na(Value))
 }
 
 # create the plot:

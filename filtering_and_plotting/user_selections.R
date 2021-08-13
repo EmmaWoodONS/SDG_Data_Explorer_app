@@ -3,9 +3,9 @@
 csv_filepath <- "Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_"
 indicator <- "3-4-1"
 
-char1 <- "Age"
+char1 <- "Sex"
 char2 <- "Country" #"Sex"
-char3 <- "Sex" #"Age"
+char3 <- NA #"Sex" #"Age"
 char4 <- NA
 
 
@@ -18,10 +18,10 @@ levels2 <- c(NA)
 levels3 <- c(NA)
 levels4 <- c(NA)
 
-line_colour <- "Country"
+line_colour <- "Sex"
 line_style <- NA
-facet_row <- "Sex" #"Region"
-facet_column <- "Age"
+facet_row <- NA#"Sex" #"Region"
+facet_column <- "Country"
 
 Units_selection <- NA
 Series_selection <- NA
