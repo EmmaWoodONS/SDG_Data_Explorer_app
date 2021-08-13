@@ -2,7 +2,12 @@
     
 Once the indicator is selected by the user, the data needs to be filtered before it is plotted.
 This is because if the dataset includes rows for disaggregations that are not accounted for in the ggplot code
-ggplot will still try to plot them.
+ggplot will still try to plot them. For example, imagine an indicator where the user wants to plot Country by Sex.
+The data also includes Age but the user isn't interested in that. If we didn't filter the dataset to account for Age
+we would get the following plot:
+
+![Alt text](/incorrect_plot.jpeg?raw=true "Title")
+
 
 Until we have the input from the user, the filtering and plotting is run using fake inputs
 
@@ -17,4 +22,4 @@ Files:
   
 Extra dropdowns will lead to a second round of user selections. These will be based on the extra_dropdowns output created by filter_disaggregations()
 in the control_script. For testing purposes, there is a section of the control_script that allows selection of these prior to plotting.    
-    
+  
