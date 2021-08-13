@@ -1,0 +1,10 @@
+until we have the input from the user, the filtering and plotting is run using fake inputs
+
+Files:
+- user_selections.R - where you enter user selections until they can be selected through the app
+- config.R - currently just the names of irrelevant variables (these may change with SDMX work)
+- control_script.R - where all other scripts are run from
+- correctly_replace_NA_with_All - originally written for creating the control script, but reused here. Called by control_script.R
+- filter_disaggregations - filters disaggs according to user selections. Does not filter series, units, or levels of disaggregations.
+- filter_series_units - not yet tested or in the control_script, but will be called by the control_script. Will require extra dropdowns to appear.
+- filter_levels - not yet tested or in the control_script, but will be called by the control_script. Will require extra dropdowns to appear.
