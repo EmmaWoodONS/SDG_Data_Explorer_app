@@ -36,6 +36,8 @@ ui <- fluidPage(
         
         status = "primary"),
       
+      textOutput("csvlink"),
+      
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
         DT::dataTableOutput(outputId = "table")
@@ -60,6 +62,25 @@ server <- function(input, output, session) {
     selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()$Indicator)))
     
   })
+  
+    indicator <- reactive ({
+      input$Select_Indicator
+    })
+    
+    # indicator <- reactive({
+    #     gsub(".", "-", indicator())
+    # })
+    # output$indicator <- renderText({
+    #   indicator()
+    # })
+    
+    csvlink <- reactive({
+      paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator())
+    })
+    
+    output$csvlink <- renderText({
+      csvlink()
+    })
   
   output$downloadData <- downloadHandler(
     filename = function() {
