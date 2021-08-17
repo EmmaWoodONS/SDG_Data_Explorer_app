@@ -28,7 +28,7 @@ extra_dropdowns <- filtered_data_and_extra_dropdowns[[2]]
 # the user will then need to select the required levels from the extra drop-downs 
 # Until we have these on the platform, just select the first row 
 # (for testing and development purposes only)
-extra_dropdown_row <- 11
+extra_dropdown_row <- 14
 if(is.data.frame(extra_dropdowns)){
   
   further_selections <- extra_dropdowns[extra_dropdown_row, ]
@@ -90,7 +90,7 @@ time_end - time_start
 # dat <- data.frame(Year = rep("2100", 10),
 #                   Country = c(rep("England", 5),
 #                               rep("Wales", 2),
-#                               "Scotland", 
+#                               "Scotland",
 #                               rep("England", 2)),
 #                   Region = c(rep("London", 2),
 #                              rep("East", 2),
@@ -102,7 +102,7 @@ time_end - time_start
 #                   Sex = c(rep("M", 7),
 #                           rep(NA, 3)),
 #                   Industry = c(rep(NA, 8),
-#                                "A", "B"))%>% 
+#                                "A", "B"))%>%
 #   mutate_if(is.factor, as.character)
 
 
