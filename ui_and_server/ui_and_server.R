@@ -43,14 +43,15 @@ ui <- fluidPage(
         DT::dataTableOutput(outputId = "table")),
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
-        plotOutput("plot"))
+        plotOutput("plot"),
+        textOutput("selections"))
     )
   )
 )
 
 server <- function(input, output, session) {
   control_sheet <- read.csv("https://raw.githubusercontent.com/EmmaWoodONS/SDG_Data_Explorer_app/main/Control_sheet/control_sheet.csv") %>% 
-    mutate(across(where(is.factor), as.character))
+    mutate(across(where(is.factor), as.character)) 
   
   res_mod <- callModule(
     module = selectizeGroupServer,
@@ -94,6 +95,15 @@ server <- function(input, output, session) {
   })
   
   output$plot <- renderPlot(plot())
+  
+  
+  output$selections <- renderText({
+    # print(names(input))
+    # [1] "my-filters-reset_all"    "my-filters-manufacturer" "my-filters-trans"        "my-filters-model"        "my-filters-class"       
+    # [6] "vars
+    c(input[["my-filters-variable1"]], input[["my-filters-variable2"]], input[["my-filters-variable3"]], input[[ "my-filters-variable4"]])
+  })
+  
 }
 
 shinyApp(ui, server)
