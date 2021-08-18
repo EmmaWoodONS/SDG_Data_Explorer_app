@@ -3,4 +3,4 @@ irrelevant_variables <- c("Observation.status",
                           "GeoCode", "Value", "Year", 
                           "Series", "Units")
 
-csv_filepath <- "Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_"
+# csv_filepath <- "Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_"

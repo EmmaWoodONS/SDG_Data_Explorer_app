@@ -1,7 +1,11 @@
-
-selections <- c(line_colour, line_style, 
+facet_row <- input[["my-filters-variable1"]]
+facet_column <- input[["my-filters-variable2"]]
+line_colour <- input[["my-filters-variable3"]]
+line_style <- input[["my-filters-variable4"]]
+  
+plot_options <- c(line_colour, line_style, 
                 facet_row, facet_column)
-number_of_selections <- length(selections[!is.na(selections)])
+number_of_selections <- length(plot_options[!is.na(plot_options)])
 
 line_colour_sym <- as.name(line_colour)
 line_style_sym <- as.name(line_style)

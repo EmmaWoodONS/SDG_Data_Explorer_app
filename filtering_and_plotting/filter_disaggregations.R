@@ -9,7 +9,7 @@
 
 filter_disaggregations <- function(dat){
   
-  selections <- c(char1, char2, char3, char4)
+  selections <- selections() # c(char1, char2, char3, char4)
   selections <- selections[!is.na(selections)]
   number_of_selections <- length(selections)
   

@@ -90,7 +90,7 @@ server <- function(input, output, session) {
   
   plot <- reactive({
     req(input$Select_Indicator != "All")
-    source("../filtering_and_plotting/plotting_test.R", local = TRUE)
+    source("../filtering_and_plotting/control_script.R", local = TRUE)
     plot
   })
   
