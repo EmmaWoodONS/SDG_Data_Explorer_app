@@ -40,8 +40,10 @@ ui <- fluidPage(
       
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
-        DT::dataTableOutput(outputId = "table")
-      )
+        DT::dataTableOutput(outputId = "table")),
+      conditionalPanel(
+        condition = "input.Select_Indicator != 'All'",
+        plotOutput("plot"))
     )
   )
 )
@@ -63,25 +65,16 @@ server <- function(input, output, session) {
     
   })
   
-    indicator <- reactive ({
-      input$Select_Indicator
+    
+    dat <- reactive({
+      req(input$Select_Indicator != "All")
+      indicator_number <- gsub("\\.", "-", input$Select_Indicator)
+      csv_filepath <- paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator_number, ".csv")
+      read.csv(csv_filepath,
+                      na.strings=c("","NA")) %>%
+        mutate_if(is.factor, as.character)
     })
     
-    # indicator <- reactive({
-    #     gsub(".", "-", indicator())
-    # })
-    # output$indicator <- renderText({
-    #   indicator()
-    # })
-    
-    csvlink <- reactive({
-      paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator())
-    })
-    
-    output$csvlink <- renderText({
-      csvlink()
-    })
-  
   output$downloadData <- downloadHandler(
     filename = function() {
       paste('data-', Sys.Date(), '.csv', sep='')
@@ -93,6 +86,14 @@ server <- function(input, output, session) {
   
   
   output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
+  
+  plot <- reactive({
+    req(input$Select_Indicator != "All")
+    source("../filtering_and_plotting/plotting_test.R", local = TRUE)
+    plot
+  })
+  
+  output$plot <- renderPlot(plot())
 }
 
 shinyApp(ui, server)
