@@ -2,6 +2,9 @@ library(dplyr)
 library(shiny)
 library(shinyWidgets)
 library(shinyjs)
+library(tidyr)
+library(ggplot2)
+library(dplyr)
 
 # data("mpg", package = "ggplot2")
 
@@ -36,20 +39,25 @@ ui <- fluidPage(
         
         status = "primary"),
       
-      textOutput("csvlink"),
+      # textOutput("csvlink"),
       
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
         DT::dataTableOutput(outputId = "table")),
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
-        plotOutput("plot"),
+        # DT::dataTableOutput(outputId = "NA_as_all")
         textOutput("selections"))
+
+        # plotOutput("plot")#,
+        # textOutput("selections")
+        # )
     )
   )
 )
 
 server <- function(input, output, session) {
+  
   control_sheet <- read.csv("https://raw.githubusercontent.com/EmmaWoodONS/SDG_Data_Explorer_app/main/Control_sheet/control_sheet.csv") %>% 
     mutate(across(where(is.factor), as.character)) 
   
@@ -61,21 +69,9 @@ server <- function(input, output, session) {
   )
   
   output$`Select Indicator` <- renderUI({
-    
     selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()$Indicator)))
-    
   })
   
-    
-    dat <- reactive({
-      req(input$Select_Indicator != "All")
-      indicator_number <- gsub("\\.", "-", input$Select_Indicator)
-      csv_filepath <- paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator_number, ".csv")
-      read.csv(csv_filepath,
-                      na.strings=c("","NA")) %>%
-        mutate_if(is.factor, as.character)
-    })
-    
   output$downloadData <- downloadHandler(
     filename = function() {
       paste('data-', Sys.Date(), '.csv', sep='')
@@ -88,21 +84,315 @@ server <- function(input, output, session) {
   
   output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
   
-  plot <- reactive({
+  #-----------------------------------------------------------------------------
+  
+  irrelevant_variables <- c("Observation.status", 
+                            "Unit.multiplier", "Unit.measure",
+                            "GeoCode", "Value", "Year", 
+                            "Series", "Units")
+  
+  csv <- reactive({
     req(input$Select_Indicator != "All")
-    source("../filtering_and_plotting/control_script.R", local = TRUE)
-    plot
+    indicator_number <- gsub("\\.", "-", input$Select_Indicator)
+    csv_filepath <- paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", 
+                           indicator_number, ".csv")
+    csv <- read.csv(csv_filepath,
+             na.strings=c("","NA")) %>%
+      mutate_if(is.factor, as.character)
+    
+    #-----------------------------------------------------------------------------
+    # replace NAs with 'All':
+    #-----------------------------------------------------------------------------
+    `%not_in%` <- Negate(`%in%`)
+    
+    unused_columns <- c("Year", "Observation.status", "Unit.multiplier", "Unit.measure", "GeoCode", "Value")
+    # all_variables <- remove_unused_columns(csv)
+    
+    unused_column_numbers <- which(colnames(csv) %in% unused_columns)
+    
+    all_variables <- csv
+
+    # is_disagg_nested? i.e. does a column require a single value in any other column (not including NAs).
+    # Need to know this to know whether an NA should actually be 'All'
+    # For example, if
+    incompletely_nested_variables <- NULL
+    completely_nested_variables <- NULL
+
+    for(i in 1:ncol(all_variables)) {
+
+      if(i %not_in% unused_column_numbers){
+
+        target_column_name <- colnames(all_variables)[i]
+
+        target_column_options <- all_variables %>%
+          filter(!is.na(!!as.name(target_column_name)))
+
+        unique_target_column_options <- distinct(target_column_options, !!as.name(target_column_name))
+
+        for(j in 1:ncol(all_variables)) {
+
+          check_column_name <- colnames(all_variables)[j]
+
+          if(target_column_name != check_column_name) {
+
+            unique_check_column_options <- target_column_options %>%
+              filter(!is.na(!!as.name(check_column_name))) %>%
+              distinct(!!as.name(target_column_name)) %>%
+              rename(unique_target_column_options = all_of(target_column_name)) %>%
+              .$unique_target_column_options
+
+
+            if(length(unique_check_column_options) < nrow(unique_target_column_options) &
+               length(unique_check_column_options) != 0) {
+
+              number_check_column_options <- length(unique_target_column_options)
+              incompletely_nested <- data.frame(nested_variable = rep(check_column_name, times = number_check_column_options),
+                                                nested_within = rep(target_column_name, times = number_check_column_options),
+                                                values_given_for = unique_check_column_options)
+              incompletely_nested_variables <- bind_rows(incompletely_nested_variables, incompletely_nested)
+
+            }
+
+          }
+        }
+      }
+    }
+
+    nested_variables <- as.character(incompletely_nested_variables$nested_variable)
+    nested_within <- as.character(incompletely_nested_variables$nested_within)
+    values_given_for <- as.character(incompletely_nested_variables$values_given_for)
+
+
+    # where All does not make sense (e.g. All for Welsh-only Health Boards when England is selected), keep NAs
+    incompletely_nested_NAs_to_all <- all_variables
+    
+    #- ADDITIONAL IF STATEMENT!
+    if(!is.null(incompletely_nested_variables)) {
+      
+      for(i in 1:nrow(incompletely_nested_variables)) {
+        
+        nested_variable_colname <- sym(nested_variables[i])
+        nested_within_colname <- sym(nested_within[i])
+        
+        incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>%
+          # mutate(Region = ifelse(Country == "England" & is.na(Region), "England", Region)) : this is what the line below is doing as an example from 3.1.2
+          mutate(!!nested_variable_colname := ifelse(!!nested_within_colname == values_given_for[i] &
+                                                       is.na(!!nested_variable_colname),
+                                                     "All", !!nested_variable_colname))
+        
+      }
+      
+      final_incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>%
+        select(incompletely_nested_variables$nested_variable)
+      
+      all_other_NAs_to_all <- all_variables %>%
+        select(-incompletely_nested_variables$nested_variable) %>%
+        replace(is.na(.), "All")
+      
+    } else {
+      
+      final_incompletely_nested_NAs_to_all <- NULL
+      
+      
+      all_other_NAs_to_all <- all_variables %>%
+        replace(is.na(.), "All")
+      
+    }
+
+
+    dat_with_All <- bind_cols(final_incompletely_nested_NAs_to_all, all_other_NAs_to_all)
+    
+    #-----------------------------------------------------------------------------
+    # filter disaggregations
+    #-----------------------------------------------------------------------------
+    selections <- c(input[["my-filters-variable1"]], input[["my-filters-variable2"]], input[["my-filters-variable3"]], input[[ "my-filters-variable4"]]) # c(char1, char2, char3, char4)
+    selections <- selections[!is.na(selections)]
+
   })
+
   
-  output$plot <- renderPlot(plot())
+
+  # replace_NAs <- reactive({
+  #   req(input$Select_Indicator != "All")
+  #   
+  #   csv <- csv()
+  #   
+  #   
+  # })
+  
+  # output$NA_as_all <- DT::renderDataTable(csv(), rownames = FALSE)
+  output$selections <- renderText(csv())
+  #-----------------------------------------------------------------------------
+  # filter disaggregations
+  #-----------------------------------------------------------------------------
+  # filter <- reactive({
+  #   req(input$Select_Indicator != "All")
+  # 
+  #   dat_with_All <- replace_NAs()
+  # 
+  # 
+  #   number_of_selections <- length(selections)
+  # 
+  #   unselected_characteristics <- setdiff(names(dat_with_All), selections)
+  #   relevant_unselected_characteristics <- setdiff(unselected_characteristics, irrelevant_variables)
+  # 
+  #   real_values_in_selected <- dat_with_All
+  #   for(i in 1:number_of_selections){
+  # 
+  #     selected_var <- as.name(selections[i])
+  # 
+  #     real_values_in_selected <- real_values_in_selected %>%
+  #       filter(!!selected_var != "All" &
+  #                !is.na(!!selected_var))
+  #   }
+  # 
+  #   extra_dropdowns <- c()
+  #   only_one <- NULL
+  #   for(i in 1:length(relevant_unselected_characteristics)){
+  # 
+  #     unselected_var <- as.name(relevant_unselected_characteristics[i])
+  #     unique_entries <- distinct(real_values_in_selected, !!unselected_var) %>%
+  #       rename(levels = !!unselected_var) %>%
+  #       mutate(disaggregation = relevant_unselected_characteristics[i])
+  #     number_of_unique_entries <- nrow(unique_entries)
+  # 
+  #     if(number_of_unique_entries > 1){
+  #       extra_dropdowns <- c(extra_dropdowns, relevant_unselected_characteristics[i])
+  #       # extra_dropdowns <- bind_rows(extra_dropdowns,
+  #       #                              unique_entries)
+  #     } else {
+  #       only_one <- bind_rows(only_one,
+  #                             unique_entries)
+  #     }
+  #   }
+  # 
+  #   # Series and Units also need to be included in the extra dropdown so add them
+  #   # here to keep the original data structure
+  #   if("Series" %in% names(dat_with_All)) {
+  #     extra_dropdowns <- c(extra_dropdowns, "Series")
+  #   }
+  #   if("Units" %in% names(dat_with_All)) {
+  #     extra_dropdowns <- c(extra_dropdowns, "Units")
+  #   }
+  # 
+  #   if(length(extra_dropdowns) > 0){
+  # 
+  #     dropdown_column_locations <- which(names(dat_with_All) %in% extra_dropdowns)
+  #     extra_dropdown_levels <- real_values_in_selected[, dropdown_column_locations] %>%
+  #       distinct()
+  # 
+  #   } else { extra_dropdown_levels <- "None" }
+  # 
+  #   if(length(only_one) > 0){
+  #     unselected_var_level <- only_one %>%
+  #       pivot_wider(names_from = disaggregation,
+  #                   values_from = levels)
+  #   } else {unselected_var_level <- "None"}
+  # 
+  #   # real_values_in_selected doesn't include headline ('All') rows,
+  #   # so here we do almost the same filter again, but keep the 'All' rows in
+  #   filtered <- dat_with_All
+  #   for(i in 1:number_of_selections){
+  # 
+  #     selected_var <- as.name(selections[i])
+  # 
+  #     filtered <- filtered %>%
+  #       filter(!is.na(!!selected_var))
+  # 
+  #   }
+  # 
+  #   # filtered currently contains rows from unselected columns, that we don;t want
+  #   # in the final data, so this right_join gets rid of them.
+  #   if(is.data.frame(unselected_var_level)){
+  #     filtered <- filtered %>%
+  #       right_join(unselected_var_level, by =
+  #                    c(names(unselected_var_level)))
+  #   }
+  # 
+  #   # list(filtered, extra_dropdown_levels)
+  #   filtered
+  # })
+
+  
+  #-----------------------------------------------------------------------------
+  # plotting
+  #-----------------------------------------------------------------------------
+
+  
+  # plot <- reactive({
+  #   req(input$Select_Indicator != "All")
+  #   
+  #   # filtered_data <- filtered_data_and_extra_dropdowns()[[1]]
+  #   # extra_dropdowns <- filtered_data_and_extra_dropdowns()[[2]]
+  #   filtered_data <- filter()
+  #   
+  #   facet_row <- input[["my-filters-variable1"]]
+  #   facet_column <- input[["my-filters-variable2"]]
+  #   line_colour <- input[["my-filters-variable3"]]
+  #   line_style <- input[["my-filters-variable4"]]
+  #   
+  #   plot_options <- c(line_colour, line_style, 
+  #                     facet_row, facet_column)
+  #   number_of_selections <- length(plot_options[!is.na(plot_options)])
+  #   
+  #   line_colour_sym <- as.name(line_colour)
+  #   line_style_sym <- as.name(line_style)
+  #   facet_row_sym <- as.name(facet_row)
+  #   facet_column_sym <- as.name(facet_column)
+  #   
+  #   df <- filtered_data
+  #   if(!is.na(facet_row)){
+  #     df <- df %>% 
+  #       mutate(facet_row := !!enquo(facet_row_sym))
+  #   }
+  #   if(!is.na(facet_column)){
+  #     df <- df %>% 
+  #       mutate(facet_column := !!enquo(facet_column_sym))
+  #   }
+  #   
+  #   plot <- ggplot(data = df,
+  #                  aes(Year, Value)) +
+  #     geom_point()
+  #   
+  #   if(!is.na(line_colour) & !is.na(line_style)){
+  #     plot <- plot +
+  #       geom_line(aes(colour = !!line_colour_sym,
+  #                     linetype = !!line_style_sym))
+  #   } else if(!is.na(line_colour)) {
+  #     plot <- plot +
+  #       geom_line(aes(colour = !!line_colour_sym))
+  #   } else if(!is.na(line_style)) {
+  #     plot <- plot +
+  #       geom_line(aes(linetype = !!line_style_sym))
+  #   } else {
+  #     plot <- plot +
+  #       geom_line()
+  #   }
+  #   
+  #   
+  #   if(!is.na(facet_row) & !is.na(facet_column)){
+  #     plot <- plot +
+  #       facet_grid(facet_row ~ facet_column)
+  #   } else if(!is.na(facet_column)){
+  #     plot <- plot +
+  #       facet_grid(. ~ facet_column)
+  #   } else if(!is.na(facet_row)){
+  #     plot <- plot +
+  #       facet_grid(facet_row ~ .)
+  #   }
+  #   
+  #   plot +
+  #     theme_bw() +
+  #     theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+  # 
+  # })
+  # 
+  # output$plot <- renderPlot(plot())
   
   
-  output$selections <- renderText({
-    # print(names(input))
-    # [1] "my-filters-reset_all"    "my-filters-manufacturer" "my-filters-trans"        "my-filters-model"        "my-filters-class"       
-    # [6] "vars
-    c(input[["my-filters-variable1"]], input[["my-filters-variable2"]], input[["my-filters-variable3"]], input[[ "my-filters-variable4"]])
-  })
+  # output$selections <- renderText({
+  #   c(input[["my-filters-variable1"]], input[["my-filters-variable2"]], input[["my-filters-variable3"]], input[[ "my-filters-variable4"]])
+  # })
   
 }
 
