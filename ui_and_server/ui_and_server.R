@@ -5,6 +5,7 @@ library(shinyjs)
 library(tidyr)
 library(ggplot2)
 library(dplyr)
+library(shinycssloaders)
 
 # data("mpg", package = "ggplot2")
 
@@ -12,7 +13,7 @@ ui <- fluidPage(
   
   tags$img(src = "SDG_logo.png",
            align = "left",
-           height = 100, width = 300),
+           height = 100, width = 200),
   
   fluidRow(
     
@@ -58,7 +59,9 @@ ui <- fluidPage(
         condition = "input.Select_Indicator != 'All'",
         # DT::dataTableOutput(outputId = "NA_as_all"))
         # textOutput("selections"))
-        plotOutput("plot")),
+        plotOutput("plot") %>% 
+          withSpinner(type = 3)
+        ),
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
         DT::dataTableOutput(outputId = "table"))
