@@ -94,7 +94,7 @@ server <- function(input, output, session) {
   
   output$downloadChart <- downloadHandler(
     filename = function() {
-      paste(input$Select_Indicator, Sys.Date(), '.png', sep='')
+      paste(input$Select_Indicator, "_", Sys.Date(), '.png', sep='')
     },
     content = function(file) {
       ggsave(file, plot = csv(), device = "png")
