@@ -30,13 +30,24 @@ ui <- fluidPage(
             variable3 = list(inputId = "variable3", title = "characteristic 3:"),
             variable4 = list(inputId = "variable4", title = "characteristic 4:"))
           ),
-        
-        downloadBttn(
-          label = "Download indicator list",
-          outputId = "downloadData",
+        conditionalPanel(
+          condition = "input.Select_Indicator == 'All'",
+          downloadBttn(
+            label = "Download indicator list",
+            outputId = "downloadData",
+            style = "bordered",
+            color = "primary",
+            size = "sm")
+        ),
+
+        conditionalPanel(
+          condition = "input.Select_Indicator != 'All'",
+          downloadBttn(
+          label = "Download Chart",
+          outputId = "downloadChart",
           style = "bordered",
           color = "primary",
-          size = "sm"),
+          size = "sm")),
         
         uiOutput("Select Indicator"),
         
@@ -78,6 +89,15 @@ server <- function(input, output, session) {
     },
     content = function(con) {
       write.csv(res_mod(), con, row.names = FALSE)
+    }
+  )
+  
+  output$downloadChart <- downloadHandler(
+    filename = function() {
+      paste(input$Select_Indicator, Sys.Date(), '.png', sep='')
+    },
+    content = function(file) {
+      ggsave(file, plot = csv(), device = "png")
     }
   )
   
@@ -356,7 +376,6 @@ server <- function(input, output, session) {
   # output$NA_as_all <- DT::renderDataTable(csv(), rownames = FALSE)
   # output$selections <- renderText(csv())
   output$plot <- renderPlot(csv())
-  
-}
 
+}
 shinyApp(ui, server)
