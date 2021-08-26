@@ -49,7 +49,7 @@ ui <- fluidPage(
         # DT::dataTableOutput(outputId = "NA_as_all"))
         # textOutput("selections"))
         plotOutput("plot") %>% 
-          withSpinner(type = 3)
+          withSpinner(image = "sdg.gif")
         ),
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
