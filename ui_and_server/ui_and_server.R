@@ -51,6 +51,8 @@ ui <- fluidPage(
         
         uiOutput("Select Indicator"),
         
+        uiOutput("Num Indicators"),
+        
         status = "primary"),
       
 
@@ -80,6 +82,17 @@ server <- function(input, output, session) {
     data = control_sheet,
     vars = c("variable1", "variable2", "variable3", "variable4")
   )
+  
+  output$`Num Indicators` <- renderText({
+    req(input[["my-filters-variable2"]])
+    if(is.null(input[["my-filters-variable3"]])){
+      paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], " and ", input[["my-filters-variable2"]])
+    } else if(is.null(input[["my-filters-variable4"]])) {
+    paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], ", ", input[["my-filters-variable2"]], " and ",  input[["my-filters-variable3"]])
+    } else {
+      paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], ", ", input[["my-filters-variable2"]], ", ",  input[["my-filters-variable3"]], " and ", input[["my-filters-variable4"]] )
+    }
+    })
   
   output$`Select Indicator` <- renderUI({
     selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()$Indicator)))
@@ -378,7 +391,7 @@ server <- function(input, output, session) {
         theme_bw() +
         theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))+
         # scale_x_continuous(breaks = function(x) unique(floor(pretty(seq(0, (max(x) + 1) * 1.1)))))+
-        scale_x_continuous(breaks = int_breaks)+
+        scale_x_continuous(breaks = int_breaks)
         ggtitle(title)
         
         
