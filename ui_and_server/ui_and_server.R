@@ -43,17 +43,28 @@ ui <- fluidPage(
         
         status = "primary"),
       
-
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
-        # DT::dataTableOutput(outputId = "NA_as_all"))
+        # DT::dataTableOutput(outputId = "NA_as_all")),
         # textOutput("selections"))
-        plotOutput("plot") %>% 
-          withSpinner(image = "sdg.gif")
+        plotOutput("plot") %>%
+          withSpinner(image = "sdgs-wheel-slow.gif")
         ),
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
-        DT::dataTableOutput(outputId = "table"))
+        DT::dataTableOutput(outputId = "table"))#,
+      
+      # conditionalPanel(
+      #   condition = "input.Select_Indicator != 'All'",
+      #   selectizeGroupUI(
+      #     id = "extra-filters",
+      #     params = list(
+      #       variable1 = list(inputId = "variable1", title = "extra 1"),
+      #       variable2 = list(inputId = "variable2", title = "extra 2"),
+      #       variable3 = list(inputId = "variable3", title = "extra 3"),
+      #       variable4 = list(inputId = "variable4", title = "extra 4"))
+          # )
+     # )
 
     )
   )
@@ -86,6 +97,18 @@ server <- function(input, output, session) {
   
   
   output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
+  
+  
+  extra_disaggs <- callModule(
+    module = selectizeGroupServer,
+    id = "extra-filters",
+    data = extras(),
+    vars = c("variable1", "variable2", "variable3", "variable4")
+  )
+  
+  # output$`Select Indicator` <- renderUI({
+  #   selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(extra_disaggs()$Indicator)))
+  # })
   
   #-----------------------------------------------------------------------------
   
@@ -298,67 +321,148 @@ server <- function(input, output, session) {
                        c(names(unselected_var_level)))
       }
       
-      #-------------------------------------------------------------------------
-      # plotting
-      #-------------------------------------------------------------------------
-      
-      # Eventually it would be nice to have this as an extra dropdown
-      facet_row <- input[["my-filters-variable1"]]
-      facet_column <- input[["my-filters-variable2"]]
-      line_colour <- input[["my-filters-variable3"]]
-      line_style <- input[["my-filters-variable4"]]
-      
-      plot_options <- c(line_colour, line_style,
-                        facet_row, facet_column)
-      number_of_selections <- length(plot_options[!is.na(plot_options)])
-
-      if(!is.null(line_colour)) {line_colour_sym <- as.name(line_colour)}
-      if(!is.null(line_style)) {line_style_sym <- as.name(line_style)}
-
-
-      plot <- ggplot(data = filtered,
-                     aes(year, value)) +
-        geom_point()
-
-      if(!is.null(line_colour) & !is.null(line_style)){
-        plot <- plot +
-          geom_line(aes(colour = !!line_colour_sym,
-                        linetype = !!line_style_sym))
-      } else if(!is.null(line_colour)) {
-        plot <- plot +
-          geom_line(aes(colour = !!line_colour_sym))
-      } else if(!is.null(line_style)) {
-        plot <- plot +
-          geom_line(aes(linetype = !!line_style_sym))
-      } else {
-        plot <- plot +
-          geom_line()
-      }
-
-
-      if(!is.null(facet_row) & !is.null(facet_column)){
-        plot <- plot +
-          facet_grid(~get(facet_row) ~ ~get(facet_column))
-      } else if(!is.null(facet_column)){
-        plot <- plot +
-          facet_grid(. ~ ~get(facet_column))
-      } else if(!is.null(facet_row)){
-        plot <- plot +
-          facet_grid(~get(facet_row) ~ .)
-      }
-
-      plot +
-        theme_bw() +
-        theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
-      
-      plot
-    
+      list(filtered, extra_dropdowns)
   })
+  
+  
+  
+  extras <- reactive({
+    
+    csv()[[2]]
+    # further_selections <- extra_dropdowns[extra_dropdown_row, ]
+    # 
+    # # This loop and if statement are needed because for example, if region is 
+    # # in the data, but not being plotted, while country is being plotted,
+    # # the user may select NA for region, but this will lead to the filtering
+    # # out of all England rows, just leaving the other countries. This is because
+    # # for England, Region is either the name of a region or 'All', while for the
+    # # other countries, the correct selection would be NA
+    # further_selections_with_alls <- further_selections
+    # for(i in 1:ncol(extra_dropdowns)){
+    #   
+    #   current_column <- as.name(names(extra_dropdowns)[i])
+    #   
+    #   check_for_NA <- further_selections %>% 
+    #     mutate(current_is_na = ifelse(is.na(!!current_column), TRUE, FALSE)) %>% 
+    #     pull(current_is_na)
+    #   
+    #   if(check_for_NA == TRUE){
+    #     replaced_na <- further_selections_with_alls %>% 
+    #       mutate(!!current_column := ifelse(is.na(!!current_column), "All", !!current_column)) 
+    #     
+    #     further_selections_with_alls <- bind_rows(further_selections_with_alls, replaced_na)
+    #   }
+    #   
+    #   check_for_all <- further_selections %>% 
+    #     mutate(current_is_all = ifelse(!!current_column == "All", TRUE, FALSE)) %>% 
+    #     mutate(current_is_all = ifelse(is.na(!!current_column), FALSE, current_is_all)) %>% 
+    #     pull(current_is_all)
+    #   
+    #   if(check_for_all == TRUE){
+    #     replaced_all <- further_selections_with_alls %>% 
+    #       mutate(!!current_column := ifelse(!!current_column == "All", NA, !!current_column)) 
+    #     further_selections_with_alls <- bind_rows(further_selections_with_alls, replaced_all)
+    #     
+    #   }
+    #   
+    #   
+    #   
+    # }
+  })
+  
+  
+  
+  plot <- reactive({
+    req(input$Select_Indicator != "All")
+    filtered <- csv()[[1]]
+    
+    # plots don't work properly if year is not numeric (e.g. 2015/16),
+    # so need to convert year to numeric if it contains a slash
+    slash_present <- ifelse(sum(grepl("/", filtered$year) > 0), TRUE, FALSE)
+
+    if(slash_present == TRUE) {
+      filtered <- mutate(filtered, year = as.numeric(substr(year, 1, 4)))
+    } 
+    
+    # function for calculating x axis breaks
+    int_breaks <- function(x, n = 5){
+      round_values <- pretty(x, n)
+      round_values[abs(round_values %% 1) < .Machine$double.eps^0.5 ]
+    }
+    
+    # need to make sure labels are correct, given the breaks
+    if(slash_present == TRUE) {
+      after_slash <- substr(int_breaks(filtered$year) + 1, 3, 4)
+      year_labels <- paste0(int_breaks(filtered$year), "/", after_slash)
+    } else {
+      year_labels <- int_breaks(filtered$year)
+    }
+    
+    #-------------------------------------------------------------------------
+    # plotting
+    #-------------------------------------------------------------------------
+
+    # Eventually it would be nice to have this as an extra dropdown
+    facet_row <- input[["my-filters-variable1"]]
+    facet_column <- input[["my-filters-variable2"]]
+    line_colour <- input[["my-filters-variable3"]]
+    line_style <- input[["my-filters-variable4"]]
+
+    plot_options <- c(line_colour, line_style,
+                      facet_row, facet_column)
+    number_of_selections <- length(plot_options[!is.na(plot_options)])
+
+    if(!is.null(line_colour)) {line_colour_sym <- as.name(line_colour)}
+    if(!is.null(line_style)) {line_style_sym <- as.name(line_style)}
+
+
+    plot <- ggplot(data = filtered,
+                   aes(year, value)) +
+      geom_point()
+
+    if(!is.null(line_colour) & !is.null(line_style)){
+      plot <- plot +
+        geom_line(aes(colour = !!line_colour_sym,
+                      linetype = !!line_style_sym))
+    } else if(!is.null(line_colour)) {
+      plot <- plot +
+        geom_line(aes(colour = !!line_colour_sym))
+    } else if(!is.null(line_style)) {
+      plot <- plot +
+        geom_line(aes(linetype = !!line_style_sym))
+    } else {
+      plot <- plot +
+        geom_line()
+    }
+
+
+    if(!is.null(facet_row) & !is.null(facet_column)){
+      plot <- plot +
+        facet_grid(~get(facet_row) ~ ~get(facet_column))
+    } else if(!is.null(facet_column)){
+      plot <- plot +
+        facet_grid(. ~ ~get(facet_column))
+    } else if(!is.null(facet_row)){
+      plot <- plot +
+        facet_grid(~get(facet_row) ~ .)
+    }
+
+   
+    
+    plot +
+      theme_bw() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
+      scale_x_continuous(breaks = int_breaks, labels = year_labels) 
+      
+
+    plot
+
+})
 
   
-  # output$NA_as_all <- DT::renderDataTable(csv(), rownames = FALSE)
+  # output$NA_as_all <- DT::renderDataTable(plot(), rownames = FALSE)
   # output$selections <- renderText(csv())
-  output$plot <- renderPlot(csv())
+  output$plot <- renderPlot(plot())
   
 }
 
