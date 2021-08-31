@@ -4,7 +4,6 @@ library(shinyWidgets)
 library(shinyjs)
 library(tidyr)
 library(ggplot2)
-library(dplyr)
 library(shinycssloaders)
 
 # data("mpg", package = "ggplot2")
@@ -31,15 +30,28 @@ ui <- fluidPage(
             variable3 = list(inputId = "variable3", title = "characteristic 3:"),
             variable4 = list(inputId = "variable4", title = "characteristic 4:"))
           ),
-        
-        downloadBttn(
-          label = "Download indicator list",
-          outputId = "downloadData",
+        conditionalPanel(
+          condition = "input.Select_Indicator == 'All'",
+          downloadBttn(
+            label = "Download indicator list",
+            outputId = "downloadData",
+            style = "bordered",
+            color = "primary",
+            size = "sm")
+        ),
+
+        conditionalPanel(
+          condition = "input.Select_Indicator != 'All'",
+          downloadBttn(
+          label = "Download Chart",
+          outputId = "downloadChart",
           style = "bordered",
           color = "primary",
-          size = "sm"),
+          size = "sm")),
         
         uiOutput("Select Indicator"),
+        
+        uiOutput("Num Indicators"),
         
         status = "primary"),
       
@@ -49,7 +61,9 @@ ui <- fluidPage(
         # DT::dataTableOutput(outputId = "NA_as_all"))
         # textOutput("selections"))
         plotOutput("plot") %>% 
+
           withSpinner(image = "sdg.gif")
+
         ),
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
@@ -71,6 +85,17 @@ server <- function(input, output, session) {
     vars = c("variable1", "variable2", "variable3", "variable4")
   )
   
+  output$`Num Indicators` <- renderText({
+    req(input[["my-filters-variable2"]])
+    if(is.null(input[["my-filters-variable3"]])){
+      paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], " and ", input[["my-filters-variable2"]])
+    } else if(is.null(input[["my-filters-variable4"]])) {
+    paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], ", ", input[["my-filters-variable2"]], " and ",  input[["my-filters-variable3"]])
+    } else {
+      paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], ", ", input[["my-filters-variable2"]], ", ",  input[["my-filters-variable3"]], " and ", input[["my-filters-variable4"]] )
+    }
+    })
+  
   output$`Select Indicator` <- renderUI({
     selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()$Indicator)))
   })
@@ -81,6 +106,15 @@ server <- function(input, output, session) {
     },
     content = function(con) {
       write.csv(res_mod(), con, row.names = FALSE)
+    }
+  )
+  
+  output$downloadChart <- downloadHandler(
+    filename = function() {
+      paste(input$Select_Indicator, "_", Sys.Date(), '.png', sep='')
+    },
+    content = function(file) {
+      ggsave(file, plot = csv(), device = "png")
     }
   )
   
@@ -315,7 +349,6 @@ server <- function(input, output, session) {
       if(!is.null(line_colour)) {line_colour_sym <- as.name(line_colour)}
       if(!is.null(line_style)) {line_style_sym <- as.name(line_style)}
 
-
       plot <- ggplot(data = filtered,
                      aes(year, value)) +
         geom_point()
@@ -346,10 +379,24 @@ server <- function(input, output, session) {
         plot <- plot +
           facet_grid(~get(facet_row) ~ .)
       }
+      
+      title <- unique(control_sheet$indicator_title[control_sheet$Indicator == input$Select_Indicator])
 
-      plot +
+      
+      int_breaks <- function(x,n=5){
+        l <- pretty(x,n)
+        l[abs(l %% 1) < .Machine$double.eps^0.5 ]
+      }
+        
+        
+      plot <- plot+
         theme_bw() +
-        theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+        theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))+
+        # scale_x_continuous(breaks = function(x) unique(floor(pretty(seq(0, (max(x) + 1) * 1.1)))))+
+        scale_x_continuous(breaks = int_breaks)
+        ggtitle(title)
+        
+        
       
       plot
     
@@ -359,7 +406,6 @@ server <- function(input, output, session) {
   # output$NA_as_all <- DT::renderDataTable(csv(), rownames = FALSE)
   # output$selections <- renderText(csv())
   output$plot <- renderPlot(csv())
-  
-}
 
+}
 shinyApp(ui, server)
