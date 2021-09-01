@@ -44,20 +44,23 @@ ui <- fluidPage(
         status = "primary"),
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
+        verbatimTextOutput("extra_variables")
+      ),
+      
+      conditionalPanel(
+        condition = "input.Select_Indicator != 'All'",
         selectizeGroupUI(
           id = "extra-filters",
           params = list(
-            variable1 = list(inputId = "series", title = "select series:"),
-            variable2 = list(inputId = "units", title = "select units:"),
-            variable3 = list(inputId = "variable1", title = "select level:"),
-            variable4 = list(inputId = "variable2", title = "select level:"),
-            variable5 = list(inputId = "variable3", title = "select level:"),
-            variable6 = list(inputId = "variable4", title = "select level:"))
-          )),
-      conditionalPanel(
-        condition = "input.Select_Indicator != 'All'",
-        textOutput("extra_variables")
-      ),
+            variable1 = list(inputId = "series", title = "series:"),
+            variable2 = list(inputId = "units", title = "units:"),
+            variable3 = list(inputId = "variable1", title = "A:"),
+            variable4 = list(inputId = "variable2", title = "B:"),
+            variable5 = list(inputId = "variable3", title = "C:"),
+            variable6 = list(inputId = "variable4", title = "D:"))
+          ),
+        actionBttn("plot_button", "Plot")),
+
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
         # DT::dataTableOutput(outputId = "NA_as_all")),
@@ -108,7 +111,36 @@ server <- function(input, output, session) {
     vars = c("series", "units",
              "variable1", "variable2", "variable3", "variable4")) 
   
-  output$extra_variables <- renderText(names(extras()))
+
+  
+  output$extra_variables <- renderText({
+    req(input$Select_Indicator != "All")
+    
+    text <- "Some indicators have further interacting characteristics. \n Please select \n" 
+    
+    if(!is.null(extras()$series) & extras()$series != ""){
+      text <- paste0(text, " - Series \n")
+    } 
+    if(!is.null(extras()$units) & extras()$units != ""){
+      text <- paste0(text, " - Units \n")
+    } 
+    if(!is.null(extras()$variable1) & extras()$variable1 != ""){
+      text <- paste0(text, "- A (", names(extra_dropdowns())[3], ") \n")
+    } 
+    if(!is.null(extras()$variable2) & extras()$variable2 != ""){
+      text <- paste0(text, "- B (", names(extra_dropdowns())[4], ") \n")
+    }
+    if(!is.null(extras()$variable3) & extras()$variable3 != ""){
+      text <- paste0(text, "- C (", names(extra_dropdowns())[5], ") \n")
+    }
+    if(!is.null(extras()$variable4) & extras()$variable3 != ""){
+      text <- paste0(text, "- D (", names(extra_dropdowns())[6], ") \n")
+    }
+    text
+    
+  })
+    
+
   
   # output$extra_disaggs <- DT::renderDataTable(extra_disaggs(), rownames = FALSE)
 
@@ -365,11 +397,11 @@ server <- function(input, output, session) {
     }
     
     if("units" %not_in% names(options)){
-      options$units <- "no units to select"
+      options$units <- ""
     }
     
     if("series" %not_in% names(options)){
-      options$series <- "no series to select"
+      options$series <- ""
     } 
     
     # make series and units the first two dropdowns
@@ -382,19 +414,19 @@ server <- function(input, output, session) {
     
     # make sure there are always 6 columns - I am SURE there is a better way to do this!
     if(ncol(options) == 2){
-      extra_columns <- data.frame("x3" = "no further interacting variables",
-                                  "x4" = "no further interacting variables",
-                                  "x5" = "no further interacting variables",
-                                  "x6" = "no further interacting variables")  
+      extra_columns <- data.frame("x3" = "",
+                                  "x4" = "",
+                                  "x5" = "",
+                                  "x6" = "")  
     } else if(ncol(options) == 3){
-      extra_columns <- data.frame("x4" = "no further interacting variables",
-                                  "x5" = "no further interacting variables",
-                                  "x6" = "no further interacting variables")  
+      extra_columns <- data.frame("x4" = "",
+                                  "x5" = "",
+                                  "x6" = "")  
     } else if(ncol(options) == 4){
-      extra_columns <- data.frame("x5" = "no further interacting variables",
-                                  "x6" = "no further interacting variables")  
+      extra_columns <- data.frame("x5" = "",
+                                  "x6" = "")  
     } else if(ncol(options) == 5){
-      extra_columns <- data.frame("x6" = "no further interacting variables")  
+      extra_columns <- data.frame("x6" = "")  
     } else {extra_columns <- NULL}
     
     options <- bind_cols(options, extra_columns)
@@ -561,7 +593,10 @@ server <- function(input, output, session) {
 
   # output$NA_as_all <- DT::renderDataTable(plot(), rownames = FALSE)
   # output$selections <- renderText(csv())
-  output$plot <- renderPlot(plot())
+  output$plot <- renderPlot({
+    input$plot_button
+    isolate(plot())
+})
   
 }
 
