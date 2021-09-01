@@ -42,7 +42,22 @@ ui <- fluidPage(
         uiOutput("Select Indicator"),
         
         status = "primary"),
-      
+      conditionalPanel(
+        condition = "input.Select_Indicator != 'All'",
+        selectizeGroupUI(
+          id = "extra-filters",
+          params = list(
+            variable1 = list(inputId = "series", title = "select series:"),
+            variable2 = list(inputId = "units", title = "select units:"),
+            variable3 = list(inputId = "variable1", title = "select level:"),
+            variable4 = list(inputId = "variable2", title = "select level:"),
+            variable5 = list(inputId = "variable3", title = "select level:"),
+            variable6 = list(inputId = "variable4", title = "select level:"))
+          )),
+      conditionalPanel(
+        condition = "input.Select_Indicator != 'All'",
+        textOutput("extra_variables")
+      ),
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
         # DT::dataTableOutput(outputId = "NA_as_all")),
@@ -52,20 +67,7 @@ ui <- fluidPage(
         ),
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
-        DT::dataTableOutput(outputId = "table"))#,
-      
-      # conditionalPanel(
-      #   condition = "input.Select_Indicator != 'All'",
-      #   selectizeGroupUI(
-      #     id = "extra-filters",
-      #     params = list(
-      #       variable1 = list(inputId = "variable1", title = "extra 1"),
-      #       variable2 = list(inputId = "variable2", title = "extra 2"),
-      #       variable3 = list(inputId = "variable3", title = "extra 3"),
-      #       variable4 = list(inputId = "variable4", title = "extra 4"))
-          # )
-     # )
-
+        DT::dataTableOutput(outputId = "table"))
     )
   )
 )
@@ -103,12 +105,13 @@ server <- function(input, output, session) {
     module = selectizeGroupServer,
     id = "extra-filters",
     data = extras(),
-    vars = c("variable1", "variable2", "variable3", "variable4")
-  )
+    vars = c("series", "units",
+             "variable1", "variable2", "variable3", "variable4")) 
   
-  # output$`Select Indicator` <- renderUI({
-  #   selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(extra_disaggs()$Indicator)))
-  # })
+  output$extra_variables <- renderText(names(extras()))
+  
+  # output$extra_disaggs <- DT::renderDataTable(extra_disaggs(), rownames = FALSE)
+
   
   #-----------------------------------------------------------------------------
   
@@ -119,7 +122,9 @@ server <- function(input, output, session) {
                            indicator_number, ".csv")
     csv <- read.csv(csv_filepath,
              na.strings=c("","NA")) %>%
-      mutate_if(is.factor, as.character) 
+      mutate_if(is.factor, as.character) %>% 
+      # there shouldn't be any blank values but sometimes they sneak in (e.g. 16-1-3 at time of writing)
+      filter(!is.na(Value))
     
     names(csv) <- tolower(names(csv))
     
@@ -142,7 +147,6 @@ server <- function(input, output, session) {
 
     # is_disagg_nested? i.e. does a column require a single value in any other column (not including NAs).
     # Need to know this to know whether an NA should actually be 'All'
-    # For example, if
     incompletely_nested_variables <- NULL
     completely_nested_variables <- NULL
 
@@ -214,15 +218,21 @@ server <- function(input, output, session) {
       
       all_other_NAs_to_all <- all_variables %>%
         select(-incompletely_nested_variables$nested_variable) %>%
-        replace(is.na(.) & is.character(.), "All")
+        mutate(across(where(is.character), ~replace_na(.x, "All")))
+      # following line hashed out as it didn't work for 16-7-1 for some reason
+        # replace(is.na(.) & is.character(.), "All")
       
     } else {
       
       final_incompletely_nested_NAs_to_all <- NULL
       
+      test <- data.frame("A" = c(NA, "B"),
+                         "B" = c("C", NA)) %>% 
+        mutate(A = as.character(A)) %>%
+        replace(is.na(.) & is.character(.), "All")
       
       all_other_NAs_to_all <- all_variables %>%
-        replace(is.na(.) & is.character(.), "All")
+        mutate(across(where(is.character), ~replace_na(.x, "All")))
       
     }
 
@@ -279,6 +289,8 @@ server <- function(input, output, session) {
       }
       if("units" %in% names(dat_with_All)) {
         extra_dropdowns <- c(extra_dropdowns, "units")
+      } else if("unit.measure" %in% names(dat_with_All)){
+        extra_dropdowns <- c(extra_dropdowns, "unit.measure")
       }
       
       if(length(extra_dropdowns) > 0){
@@ -290,7 +302,7 @@ server <- function(input, output, session) {
         number_of_unique_entries <- length(unique(real_values_in_selected[, dropdown_column_locations]))
         
         if(number_of_unique_entries > 1){
-          extra_dropdown_levels <- real_values_in_selected[, dropdown_column_locations] %>%
+          extra_dropdown_levels <- as.data.frame(real_values_in_selected[, dropdown_column_locations]) %>%
             distinct()
         }
         
@@ -326,48 +338,77 @@ server <- function(input, output, session) {
   
   
   
-  extras <- reactive({
+  extra_dropdowns <- reactive({
+    req(input$Select_Indicator != "All")
     
-    csv()[[2]]
-    # further_selections <- extra_dropdowns[extra_dropdown_row, ]
-    # 
-    # # This loop and if statement are needed because for example, if region is 
-    # # in the data, but not being plotted, while country is being plotted,
-    # # the user may select NA for region, but this will lead to the filtering
-    # # out of all England rows, just leaving the other countries. This is because
-    # # for England, Region is either the name of a region or 'All', while for the
-    # # other countries, the correct selection would be NA
-    # further_selections_with_alls <- further_selections
-    # for(i in 1:ncol(extra_dropdowns)){
-    #   
-    #   current_column <- as.name(names(extra_dropdowns)[i])
-    #   
-    #   check_for_NA <- further_selections %>% 
-    #     mutate(current_is_na = ifelse(is.na(!!current_column), TRUE, FALSE)) %>% 
-    #     pull(current_is_na)
-    #   
-    #   if(check_for_NA == TRUE){
-    #     replaced_na <- further_selections_with_alls %>% 
-    #       mutate(!!current_column := ifelse(is.na(!!current_column), "All", !!current_column)) 
-    #     
-    #     further_selections_with_alls <- bind_rows(further_selections_with_alls, replaced_na)
-    #   }
-    #   
-    #   check_for_all <- further_selections %>% 
-    #     mutate(current_is_all = ifelse(!!current_column == "All", TRUE, FALSE)) %>% 
-    #     mutate(current_is_all = ifelse(is.na(!!current_column), FALSE, current_is_all)) %>% 
-    #     pull(current_is_all)
-    #   
-    #   if(check_for_all == TRUE){
-    #     replaced_all <- further_selections_with_alls %>% 
-    #       mutate(!!current_column := ifelse(!!current_column == "All", NA, !!current_column)) 
-    #     further_selections_with_alls <- bind_rows(further_selections_with_alls, replaced_all)
-    #     
-    #   }
-    #   
-    #   
-    #   
-    # }
+    filtered <- csv()[[1]]
+    extra_dropdowns <- csv()[[2]]
+    
+    # make it so there are always 6 dropdown options (I am assuming it is 
+    # unlikely there will ever be more than 6, but this may need to be increased
+    # in the future)
+    # length(extra_dropdowns) <- 6
+    
+    # options <- data.frame(matrix(ncol = length(extra_dropdowns), nrow = 0))
+    # names(options) <- extra_dropdowns
+    
+    # get the options for the extra dropdowns, while retaining the original
+    # data structure (keeps any nesting intact)
+    options <- filtered %>% 
+      select(all_of(extra_dropdowns)) %>% 
+      distinct()
+    
+    # make sure units and series are always in extra dropdowns and give them a 
+    # value if they don't already have one
+    if("units" %not_in% names(filtered) & "unit.measure"%in% names(filtered)){
+      options <- rename(options, units = unit.measure)
+    }
+    
+    if("units" %not_in% names(options)){
+      options$units <- "no units to select"
+    }
+    
+    if("series" %not_in% names(options)){
+      options$series <- "no series to select"
+    } 
+    
+    # make series and units the first two dropdowns
+    options <- options %>% 
+      relocate(series, units)
+    
+    # # I don't know how to make the variable names the names of the dropdowns,
+    # # so for now just have them at the top of the list
+    # options <- rbind(paste0("characteristic: ", names(options)), options)
+    
+    # make sure there are always 6 columns - I am SURE there is a better way to do this!
+    if(ncol(options) == 2){
+      extra_columns <- data.frame("x3" = "no further interacting variables",
+                                  "x4" = "no further interacting variables",
+                                  "x5" = "no further interacting variables",
+                                  "x6" = "no further interacting variables")  
+    } else if(ncol(options) == 3){
+      extra_columns <- data.frame("x4" = "no further interacting variables",
+                                  "x5" = "no further interacting variables",
+                                  "x6" = "no further interacting variables")  
+    } else if(ncol(options) == 4){
+      extra_columns <- data.frame("x5" = "no further interacting variables",
+                                  "x6" = "no further interacting variables")  
+    } else if(ncol(options) == 5){
+      extra_columns <- data.frame("x6" = "no further interacting variables")  
+    } else {extra_columns <- NULL}
+    
+    options <- bind_cols(options, extra_columns)
+  })
+  
+  extras <- reactive({
+    req(input$Select_Indicator != "All")
+    
+    options <- extra_dropdowns()
+    
+    names(options) <- c("series", "units",
+                        "variable1", "variable2", "variable3", "variable4")
+    options
+
   })
   
   
@@ -375,6 +416,65 @@ server <- function(input, output, session) {
   plot <- reactive({
     req(input$Select_Indicator != "All")
     filtered <- csv()[[1]]
+    extra_dropdowns <- extra_dropdowns()
+    
+    series_selection <- input[["extra-filters-series"]]
+    units_selection <- input[["extra-filters-units"]]
+    extra1 <- input[["extra-filters-variable1"]]
+    extra2 <- input[["extra-filters-variable2"]]
+    extra3 <- input[["extra-filters-variable3"]]
+    extra4 <- input[["extra-filters-variable4"]]
+
+    # build a dataframe on which we can do the second step of filtering (using
+    # any interacting variables that are not standard disaggs e.g. industy sector)
+    extras <- c(extra1, extra2, extra3, extra4)
+    number_of_extras <- length(plot_options[!is.na(selections)])
+    
+    further_selections <- data.frame(series = NA,
+                                   units = NA)
+    if(!is.null(series_selection)){
+      further_selections <- mutate(further_selections,
+                                  series = series_selection)
+    } else {
+      further_selections <- select(further_selections, -series)
+    }
+    if(!is.null(units_selection)){
+      further_selections <- mutate(further_selections,
+                                  units = units_selection)
+    } else {
+      further_selections <- select(further_selections, -units)
+    }
+    
+    if(!is.null(extra1)){
+      dropdown_variable <- sym(names(extra_dropdowns)[3])
+      further_selections <- mutate(further_selections, !!dropdown_variable := extra1)
+    }
+    if(!is.null(extra2)){
+      dropdown_variable <- sym(names(extra_dropdowns)[4])
+      further_selections <- mutate(further_selections, !!dropdown_variable := extra2)
+    }
+    if(!is.null(extra3)){
+      dropdown_variable <- sym(names(extra_dropdowns)[5])
+      further_selections <- mutate(further_selections, !!dropdown_variable := extra3)
+    }
+    if(!is.null(extra4)){
+      dropdown_variable <- sym(names(extra_dropdowns)[6])
+      further_selections <- mutate(further_selections, !!dropdown_variable := extra4)
+    }
+    
+    # earlier, I renamed unit.measure units in the extra_columns dataframe,
+    # so we need to do that here too,
+    # as it will still be called unit.measure in the filtered data
+    if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
+      filtered <- rename(filtered, units = unit.measure)
+    }
+
+    for(selection in 1:ncol(further_selections)){
+      variable <- sym(names(further_selections)[selection])
+      level <- further_selections[1, selection]
+      filtered <- filtered %>% 
+        filter(!!variable == level)
+    }
     
     # plots don't work properly if year is not numeric (e.g. 2015/16),
     # so need to convert year to numeric if it contains a slash
@@ -459,7 +559,6 @@ server <- function(input, output, session) {
 
 })
 
-  
   # output$NA_as_all <- DT::renderDataTable(plot(), rownames = FALSE)
   # output$selections <- renderText(csv())
   output$plot <- renderPlot(plot())
