@@ -60,7 +60,8 @@ ui <- fluidPage(
         condition = "input.Select_Indicator != 'All'",
         # DT::dataTableOutput(outputId = "NA_as_all"))
         # textOutput("selections"))
-        plotOutput("plot") %>% 
+        plotOutput("plot",
+                   height = "600px") %>%
 
           withSpinner(image = "sdg.gif")
 
@@ -393,7 +394,7 @@ server <- function(input, output, session) {
         theme_bw() +
         theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))+
         # scale_x_continuous(breaks = function(x) unique(floor(pretty(seq(0, (max(x) + 1) * 1.1)))))+
-        scale_x_continuous(breaks = int_breaks)
+        scale_x_continuous(breaks = int_breaks) +
         ggtitle(title)
         
         
