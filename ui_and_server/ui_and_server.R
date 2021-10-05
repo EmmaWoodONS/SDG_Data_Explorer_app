@@ -19,16 +19,27 @@ ui <- fluidPage(
     column(
       width = 10, offset = 1,
       tags$h2("UK Indicator Explorer"),
-      tags$h5("Some text to explain what the app does and link to the UK platform"),
+      HTML("<p>This app allows you to find out which indicators have cross-disaggregations. 
+              For example, if you want to know which indicators allow you to compare 
+              males of a certain age with females of the same age, you might select
+              age in <b>characteristic 1</b>, and sex in <b>characteristic 2</b>.
+              </p><p>You can also plot the results for each indicator.</p><p>All data 
+              come from the <a href='https://sdgdata.gov.uk/'>UK SDSG data site</a>, 
+              where you will find important notes on the data and a link to the data source.</p>"),
       
       panel(
-        selectizeGroupUI(
+        radioButtons("group_type", "Choose indicators by:",
+                     choices = list(
+                       "actual characteristics",
+                       "grouped characteristics")),
+
+         selectizeGroupUI(
           id = "my-filters",
           params = list(
-            variable1 = list(inputId = "variable1", title = "characteristic 1:"),
-            variable2 = list(inputId = "variable2", title = "characteristic 2:"),
-            variable3 = list(inputId = "variable3", title = "characteristic 3:"),
-            variable4 = list(inputId = "variable4", title = "characteristic 4:"))
+            variable1 = list(inputId = "var1", title = "characteristic 1 (panel column):"),
+            variable2 = list(inputId = "var2", title = "characteristic 2 (colour):"),
+            variable3 = list(inputId = "var3", title = "characteristic 3 (panel row):"),
+            variable4 = list(inputId = "var4", title = "characteristic 4 (linetype):"))
           ),
         conditionalPanel(
           condition = "input.Select_Indicator == 'All'",
@@ -78,27 +89,53 @@ server <- function(input, output, session) {
   
   control_sheet <- read.csv("https://raw.githubusercontent.com/EmmaWoodONS/SDG_Data_Explorer_app/main/Control_sheet/control_sheet.csv") %>% 
     mutate(across(where(is.factor), as.character)) 
+
+  # because callModule isn't really meant to be in a reactive, when this function is called
+  # it is referred to as res_mod()(), rather than res_mod()
+  res_mod <- reactive({
+    
+    if(input$group_type == "grouped characteristics") {
+      control_sheet <- control_sheet %>%
+        mutate(var1 = variable_group_1,
+               var2 = variable_group_2,
+               var3 = variable_group_3,
+               var4 = variable_group_4) 
+    } else {
+      control_sheet <- control_sheet %>%
+        mutate(var1 = variable1,
+               var2 = variable2,
+               var3 = variable3,
+               var4 = variable4) 
+    }
+    
+    callModule(
+      module = selectizeGroupServer,
+      id = "my-filters",
+      data = control_sheet,
+      vars = c("var1", "var2", "var3", "var4")
+    )
+  })
   
-  res_mod <- callModule(
-    module = selectizeGroupServer,
-    id = "my-filters",
-    data = control_sheet,
-    vars = c("variable1", "variable2", "variable3", "variable4")
-  )
+  selections <- reactive({
+    req(input[["my-filters-var1"]])
+    res_mod()() %>% 
+      select(indicator_title, variable1, variable2, variable3, variable4)
+  })
   
   output$`Num Indicators` <- renderText({
-    req(input[["my-filters-variable2"]])
-    if(is.null(input[["my-filters-variable3"]])){
-      paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], " and ", input[["my-filters-variable2"]])
+    
+    req(input[["my-filters-var2"]])
+    if(is.null(input[["my-filters-var3"]])){
+      paste0("There are ", length(unique(res_mod()()$Indicator)), " indicators disaggregated by ", input[["my-filters-var1"]], " and ", input[["my-filters-var2"]])
     } else if(is.null(input[["my-filters-variable4"]])) {
-    paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], ", ", input[["my-filters-variable2"]], " and ",  input[["my-filters-variable3"]])
+    paste0("There are ", length(unique(res_mod()()$Indicator)), " indicators disaggregated by ", input[["my-filters-var1"]], ", ", input[["my-filters-var2"]], " and ",  input[["my-filters-var3"]])
     } else {
-      paste0("There are ", length(unique(res_mod()$Indicator)), " indicators disaggregated by ", input[["my-filters-variable1"]], ", ", input[["my-filters-variable2"]], ", ",  input[["my-filters-variable3"]], " and ", input[["my-filters-variable4"]] )
+      paste0("There are ", length(unique(res_mod()()$Indicator)), " indicators disaggregated by ", input[["my-filters-var1"]], ", ", input[["my-filters-var2"]], ", ",  input[["my-filters-var3"]], " and ", input[["my-filters-var4"]] )
     }
     })
   
   output$`Select Indicator` <- renderUI({
-    selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()$Indicator)))
+    selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()()$Indicator)))
   })
   
   output$downloadData <- downloadHandler(
@@ -106,7 +143,7 @@ server <- function(input, output, session) {
       paste('data-', Sys.Date(), '.csv', sep='')
     },
     content = function(con) {
-      write.csv(res_mod(), con, row.names = FALSE)
+      write.csv(res_mod()(), con, row.names = FALSE)
     }
   )
   
@@ -119,8 +156,14 @@ server <- function(input, output, session) {
     }
   )
   
+  # table_columns_reduced <- reactive({
+  #   table <- res_mod()()
+  #   table %>% 
+  #     select(-c(var1, var2, var3, var4))
+  # })
   
-  output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
+  # output$table <- DT::renderDataTable(res_mod()(), rownames = FALSE)
+  output$table <- DT::renderDataTable(selections(), rownames = FALSE) 
   
   #-----------------------------------------------------------------------------
   
@@ -244,7 +287,8 @@ server <- function(input, output, session) {
     #-----------------------------------------------------------------------------
     # filter disaggregations
     #-----------------------------------------------------------------------------
-    selections <- c(input[["my-filters-variable1"]], input[["my-filters-variable2"]], input[["my-filters-variable3"]], input[[ "my-filters-variable4"]]) # c(char1, char2, char3, char4)
+    selections <- c(input[["my-filters-var1"]], input[["my-filters-var2"]], 
+                    input[["my-filters-var3"]], input[[ "my-filters-var4"]]) 
     selections <- selections[!is.na(selections)]
     
     number_of_selections <- length(selections)
@@ -338,10 +382,10 @@ server <- function(input, output, session) {
       #-------------------------------------------------------------------------
       
       # Eventually it would be nice to have this as an extra dropdown
-      facet_row <- input[["my-filters-variable1"]]
-      facet_column <- input[["my-filters-variable2"]]
-      line_colour <- input[["my-filters-variable3"]]
-      line_style <- input[["my-filters-variable4"]]
+      facet_column <- input[["my-filters-var1"]]
+      line_colour <- input[["my-filters-var2"]]
+      facet_row <- input[["my-filters-var3"]]
+      line_style <- input[["my-filters-var4"]]
       
       plot_options <- c(line_colour, line_style,
                         facet_row, facet_column)
