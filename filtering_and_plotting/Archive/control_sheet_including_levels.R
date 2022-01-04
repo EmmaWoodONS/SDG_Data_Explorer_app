@@ -17,10 +17,10 @@ remove_unused_columns <- function(dat, cols_to_remove = unused_columns) {
 #----------
 source("config.R")
 
-csv <- read.csv(paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator_number, ".csv"), na.strings = "") %>% 
+csv <- read.csv(paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", indicator, ".csv"), na.strings = "") %>% 
   mutate_if(is.factor, as.character)
 
-disagg_lookup <- read.csv('Disaggregation_group_lookup.csv')
+disagg_lookup <- read.csv('../Control_sheet/Disaggregation_group_lookup.csv')
 
 unused_columns <- c("Year", "Observation.status", "Unit.multiplier", "Unit.measure", "GeoCode", "Value")
 all_variables <- remove_unused_columns(csv)
