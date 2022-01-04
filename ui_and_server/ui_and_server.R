@@ -457,8 +457,8 @@ server <- function(input, output, session) {
     extra3 <- input[["extra-filters-variable3"]]
     extra4 <- input[["extra-filters-variable4"]]
 
-    # build a dataframe on which we can do the second step of filtering (using
-    # any interacting variables that are not standard disaggs e.g. industy sector)
+    # build a data frame on which we can do the second step of filtering (using
+    # any interacting variables that are not standard disaggs e.g. industry sector)
     extras <- c(extra1, extra2, extra3, extra4)
     number_of_extras <- length(extras[!is.na(extras)])
     
