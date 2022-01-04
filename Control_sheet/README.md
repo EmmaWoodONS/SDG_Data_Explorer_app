@@ -1,6 +1,11 @@
 # Control sheet
 
-The control sheet (`control_sheet.csv`) contains the data behind the initial user selections.  
+The control sheet (`control_sheet.csv`) contains the data behind the initial user selections.   
+Once the app is in use, this will need to be rerun every time data on the platform are updated. To run:  
+1. Open `Control_sheet.Rproj`
+2. Run `control_sheet_simple.R`
+3. The new control sheet overwrite the old control_sheet.csv
+4. If necessary during app development merge the change into any active branches
  
 ### Main points
 - The control sheet contains all indicators that have two or more interacting disaggregations (a.k.a variables, or characteristics). This means that only variables that interact with at least one other variable in at least one indicator will be available to be selected by the user.
