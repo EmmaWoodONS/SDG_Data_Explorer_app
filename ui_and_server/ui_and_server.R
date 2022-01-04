@@ -19,12 +19,15 @@ ui <- fluidPage(
     column(
       width = 10, offset = 1,
       tags$h2("UK Indicator Explorer"),
-      HTML("<p>This app allows you to find out which indicators have cross-disaggregations. 
+      HTML("<p>This app allows you to explore indicators with cross-disaggregations. 
               For example, if you want to know which indicators allow you to compare 
               males of a certain age with females of the same age, you might select
               age in <b>characteristic 1</b>, and sex in <b>characteristic 2</b>.
-              </p><p>You can also plot the results for each indicator.</p><p>All data 
-              come from the <a href='https://sdgdata.gov.uk/'>UK SDSG data site</a>, 
+              You can then plot and save the results for each indicator.</p><p>
+              </p><p>Characteristics can be searched using the exact names, e.g.
+              'Local Authority' (<b>actual characteristics</b>), or using grouped names e.g. 
+              'Lower level geography' (<b>grouped characteristics</b>).</p><p>All data 
+              come from the <a href='https://sdgdata.gov.uk/'>UK SDG data site</a>, 
               where you will find important notes on the data and a link to the data source.</p>"),
       
       panel(
@@ -74,7 +77,7 @@ ui <- fluidPage(
         plotOutput("plot",
                    height = "600px") %>%
 
-          withSpinner(image = "sdg.gif")
+          withSpinner(image = "sdgs-wheel-slow.gif")
 
         ),
       conditionalPanel(
