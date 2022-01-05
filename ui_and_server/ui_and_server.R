@@ -97,11 +97,11 @@ ui <- fluidPage(
       
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
-        tableOutput("plot_table")
+        # tableOutput("plot_table")
         # verbatimTextOutput("plot_text")
-        # plotOutput("plot",
-        #            height = "600px") %>%
-        #   withSpinner(image = "sdgs-wheel-slow.gif")
+        plotOutput("plot",
+                   height = "600px") %>%
+          withSpinner(image = "sdgs-wheel-slow.gif")
       ),
       conditionalPanel(
         condition = "input.Select_Indicator == 'All'",
@@ -193,8 +193,8 @@ server <- function(input, output, session) {
   # output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
   output$table <- DT::renderDataTable(selections(), rownames = FALSE)
 
-  output$plot_table <- renderTable(
-    plot())
+  # output$plot_table <- renderTable(
+  #   plot())
   # output$plot_text <- renderText(
   #   plot())
   
@@ -617,194 +617,198 @@ server <- function(input, output, session) {
       extra_selections <- filter(extra_selections, variable4 == extra4)
     }
     
-    extra_selections
-    # # extra_selections <- extra_dropdowns %>%
-    # #   filter(series == series_selection,
-    # #          units == units_selection,
-    # #          variable1 == extra1,
-    # #          variable2 == extra2,
-    # #          variable3 == extra3,
-    # #          variable4 == extra4
-    # #          )
-    # 
-    # 
-    # # in order to join to the data and thus filter it, we need to make the
-    # # column names match those in the data
-    # names(extra_selections) <- names(real_names)
-    # 
-    # # we don't want to join to the main data by series/units, if the
-    # # selection for them is blank. This isn't a problem for the others
-    # # as they will only get a column name if they are selected
-    # if(is.null(series_selection) | series_selection == "") {
-    #   extra_selections <- select(extra_selections, -series)
+    
+    # extra_selections <- extra_dropdowns %>%
+    #   filter(series == series_selection,
+    #          units == units_selection,
+    #          variable1 == extra1,
+    #          variable2 == extra2,
+    #          variable3 == extra3,
+    #          variable4 == extra4
+    #          )
+
+
+    # in order to join to the data and thus filter it, we need to make the
+    # column names match those in the data
+    names(extra_selections) <- names(real_names)
+
+    # we don't want to join to the main data by series/units, if the
+    # selection for them is blank. This isn't a problem for the others
+    # as they will only get a column name if they are selected
+    # this section causes the error attempt to set an attribute on NULL
+    if(is.null(series_selection)) {
+      extra_selections <- select(extra_selections, -series)
+    }
+    if(is.null(units_selection)) {
+      extra_selections <- select(extra_selections, -units)
+    }
+    # end of section that causes error: attempt to set an attribute on NULL
+    
+
+
+    # earlier, I renamed unit.measure units in the extra_columns dataframe,
+    # so we need to do that here too,
+    # as it will still be called unit.measure in the filtered data
+    if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
+      filtered <- rename(filtered, units = unit.measure)
+    }
+
+
+    filtered <- filtered %>%
+      right_join(extra_selections)
+
+    
+    #
+    # # build a data frame on which we can do the second step of filtering (using
+    # # any interacting variables that are not standard disaggs e.g. industry sector)
+    # extras <- c(extra1, extra2, extra3, extra4)
+    # number_of_extras <- length(extras[!is.null(extras)])
+    #
+    # further_selections <- data.frame(series = NA,
+    #                                units = NA)
+    # if(!is.null(series_selection)){
+    #   further_selections <- mutate(further_selections,
+    #                               series = series_selection)
+    # } else {
+    #   further_selections <- select(further_selections, -series)
     # }
-    # if(is.null(units_selection) | units_selection == "") {
-    #   extra_selections <- select(extra_selections, -units)
+    # if(!is.null(units_selection)){
+    #   further_selections <- mutate(further_selections,
+    #                               units = units_selection)
+    # } else {
+    #   further_selections <- select(further_selections, -units)
     # }
-    # 
-    # 
-    # 
+    #
+    # if(!is.null(extra1)){
+    #   dropdown_variable <- sym(names(extra_dropdowns)[3])
+    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra1)
+    # }
+    # if(!is.null(extra2)){
+    #   dropdown_variable <- sym(names(extra_dropdowns)[4])
+    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra2)
+    # }
+    # if(!is.null(extra3)){
+    #   dropdown_variable <- sym(names(extra_dropdowns)[5])
+    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra3)
+    # }
+    # if(!is.null(extra4)){
+    #   dropdown_variable <- sym(names(extra_dropdowns)[6])
+    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra4)
+    # }
+    #
     # # earlier, I renamed unit.measure units in the extra_columns dataframe,
     # # so we need to do that here too,
     # # as it will still be called unit.measure in the filtered data
     # if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
     #   filtered <- rename(filtered, units = unit.measure)
     # }
-    # 
-    # filtered <- filtered %>%
-    #   right_join(selections)
-    # 
-    # #
-    # # # build a data frame on which we can do the second step of filtering (using
-    # # # any interacting variables that are not standard disaggs e.g. industry sector)
-    # # extras <- c(extra1, extra2, extra3, extra4)
-    # # number_of_extras <- length(extras[!is.null(extras)])
-    # #
-    # # further_selections <- data.frame(series = NA,
-    # #                                units = NA)
-    # # if(!is.null(series_selection)){
-    # #   further_selections <- mutate(further_selections,
-    # #                               series = series_selection)
-    # # } else {
-    # #   further_selections <- select(further_selections, -series)
-    # # }
-    # # if(!is.null(units_selection)){
-    # #   further_selections <- mutate(further_selections,
-    # #                               units = units_selection)
-    # # } else {
-    # #   further_selections <- select(further_selections, -units)
-    # # }
-    # #
-    # # if(!is.null(extra1)){
-    # #   dropdown_variable <- sym(names(extra_dropdowns)[3])
-    # #   further_selections <- mutate(further_selections, !!dropdown_variable := extra1)
-    # # }
-    # # if(!is.null(extra2)){
-    # #   dropdown_variable <- sym(names(extra_dropdowns)[4])
-    # #   further_selections <- mutate(further_selections, !!dropdown_variable := extra2)
-    # # }
-    # # if(!is.null(extra3)){
-    # #   dropdown_variable <- sym(names(extra_dropdowns)[5])
-    # #   further_selections <- mutate(further_selections, !!dropdown_variable := extra3)
-    # # }
-    # # if(!is.null(extra4)){
-    # #   dropdown_variable <- sym(names(extra_dropdowns)[6])
-    # #   further_selections <- mutate(further_selections, !!dropdown_variable := extra4)
-    # # }
-    # #
-    # # # earlier, I renamed unit.measure units in the extra_columns dataframe,
-    # # # so we need to do that here too,
-    # # # as it will still be called unit.measure in the filtered data
-    # # if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
-    # #   filtered <- rename(filtered, units = unit.measure)
-    # # }
-    # #
-    # # # selected_further_selections <- further_selections[, names(further_selections) %not_in% c("x3", "x4", "x5", "x6")]
-    # #
-    # # for(selection in 1:ncol(further_selections)){
-    # #   variable <- sym(names(further_selections)[selection])
-    # #   level <- further_selections[1, selection]
-    # #   if(!is.na(unique(further_selections[selection]))) {
-    # #     filtered <- filtered %>%
-    # #       filter(!!variable == level)
-    # #   }
-    # # }
-    # 
-    # # plots don't work properly if year is not numeric (e.g. 2015/16),
-    # # so need to convert year to numeric if it contains a slash
-    # slash_present <- ifelse(sum(grepl("/", filtered$year) > 0), TRUE, FALSE)
-    # 
-    # if(slash_present == TRUE) {
-    #   filtered <- mutate(filtered, year = as.numeric(substr(year, 1, 4)))
+    #
+    # # selected_further_selections <- further_selections[, names(further_selections) %not_in% c("x3", "x4", "x5", "x6")]
+    #
+    # for(selection in 1:ncol(further_selections)){
+    #   variable <- sym(names(further_selections)[selection])
+    #   level <- further_selections[1, selection]
+    #   if(!is.na(unique(further_selections[selection]))) {
+    #     filtered <- filtered %>%
+    #       filter(!!variable == level)
+    #   }
     # }
-    # 
-    # # function for calculating x axis breaks
-    # int_breaks <- function(x, n = 5){
-    #   round_values <- pretty(x, n)
-    #   round_values[abs(round_values %% 1) < .Machine$double.eps^0.5 ]
-    # }
-    # 
-    # # need to make sure labels are correct, given the breaks
-    # if(slash_present == TRUE) {
-    #   after_slash <- substr(int_breaks(filtered$year) + 1, 3, 4)
-    #   year_labels <- paste0(int_breaks(filtered$year), "/", after_slash)
-    # } else {
-    #   year_labels <- int_breaks(filtered$year)
-    # }
-    # 
-    # #-------------------------------------------------------------------------
-    # # plotting
-    # #-------------------------------------------------------------------------
-    # 
-    # # Eventually it would be nice to have this as an extra dropdown
-    # facet_column <- input[["my-filters-var1"]]
-    # line_colour <- input[["my-filters-var2"]]
-    # facet_row <- input[["my-filters-var3"]]
-    # line_style <- input[["my-filters-var4"]]
-    # 
-    # # # for running outside of app:
-    # # facet_column <- "age"
-    # # line_colour <- "sex"
-    # # facet_row <- NULL
-    # # line_style <- NULL
-    # 
-    # plot_options <- c(facet_column, facet_row, line_colour, line_style)
-    # number_of_selections <- length(plot_options[!is.null(plot_options)])
-    # 
-    # if(!is.null(line_colour)) {line_colour_sym <- as.name(line_colour)}
-    # if(!is.null(line_style)) {line_style_sym <- as.name(line_style)}
-    # 
-    # 
-    # plot <- ggplot(data = filtered,
-    #                aes(year, value)) +
-    #   geom_point()
-    # 
-    # if(!is.null(line_colour) & !is.null(line_style)){
-    #   plot <- plot +
-    #     geom_line(aes(colour = !!line_colour_sym,
-    #                   linetype = !!line_style_sym))
-    # } else if(!is.null(line_colour)) {
-    #   plot <- plot +
-    #     geom_line(aes(colour = !!line_colour_sym))
-    # } else if(!is.null(line_style)) {
-    #   plot <- plot +
-    #     geom_line(aes(linetype = !!line_style_sym))
-    # } else {
-    #   plot <- plot +
-    #     geom_line()
-    # }
-    # 
-    # 
-    # if(!is.null(facet_row) & !is.null(facet_column)){
-    #   plot <- plot +
-    #     facet_grid(~get(facet_row) ~ ~get(facet_column))
-    # } else if(!is.null(facet_column)){
-    #   plot <- plot +
-    #     facet_grid(. ~ ~get(facet_column))
-    # } else if(!is.null(facet_row)){
-    #   plot <- plot +
-    #     facet_grid(~get(facet_row) ~ .)
-    # }
-    # 
-    # 
-    # 
-    # title <- unique(control_sheet$indicator_title[control_sheet$Indicator == input$Select_Indicator])
-    # # title <- unique(control_sheet$indicator_title[control_sheet$Indicator == "16.7.1"])
-    # 
-    # int_breaks <- function(x,n=5){
-    #   l <- pretty(x,n)
-    #   l[abs(l %% 1) < .Machine$double.eps^0.5 ]
-    # }
-    # 
-    # 
-    # plot <- plot +
-    #   theme_bw() +
-    #   theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
-    #   scale_x_continuous(breaks = int_breaks) +
-    #   ggtitle(title)
-    # 
-    # 
-    # plot
+
+    # plots don't work properly if year is not numeric (e.g. 2015/16),
+    # so need to convert year to numeric if it contains a slash
+    slash_present <- ifelse(sum(grepl("/", filtered$year) > 0), TRUE, FALSE)
+
+    if(slash_present == TRUE) {
+      filtered <- mutate(filtered, year = as.numeric(substr(year, 1, 4)))
+    }
+
+    # function for calculating x axis breaks
+    int_breaks <- function(x, n = 5){
+      round_values <- pretty(x, n)
+      round_values[abs(round_values %% 1) < .Machine$double.eps^0.5 ]
+    }
+
+    # need to make sure labels are correct, given the breaks
+    if(slash_present == TRUE) {
+      after_slash <- substr(int_breaks(filtered$year) + 1, 3, 4)
+      year_labels <- paste0(int_breaks(filtered$year), "/", after_slash)
+    } else {
+      year_labels <- int_breaks(filtered$year)
+    }
+
+    #-------------------------------------------------------------------------
+    # plotting
+    #-------------------------------------------------------------------------
+
+    # Eventually it would be nice to have this as an extra dropdown
+    facet_column <- input[["my-filters-var1"]]
+    line_colour <- input[["my-filters-var2"]]
+    facet_row <- input[["my-filters-var3"]]
+    line_style <- input[["my-filters-var4"]]
+
+    # # for running outside of app:
+    # facet_column <- "age"
+    # line_colour <- "sex"
+    # facet_row <- NULL
+    # line_style <- NULL
+
+    plot_options <- c(facet_column, facet_row, line_colour, line_style)
+    number_of_selections <- length(plot_options[!is.null(plot_options)])
+
+    if(!is.null(line_colour)) {line_colour_sym <- as.name(line_colour)}
+    if(!is.null(line_style)) {line_style_sym <- as.name(line_style)}
+
+
+    plot <- ggplot(data = filtered,
+                   aes(year, value)) +
+      geom_point()
+
+    if(!is.null(line_colour) & !is.null(line_style)){
+      plot <- plot +
+        geom_line(aes(colour = !!line_colour_sym,
+                      linetype = !!line_style_sym))
+    } else if(!is.null(line_colour)) {
+      plot <- plot +
+        geom_line(aes(colour = !!line_colour_sym))
+    } else if(!is.null(line_style)) {
+      plot <- plot +
+        geom_line(aes(linetype = !!line_style_sym))
+    } else {
+      plot <- plot +
+        geom_line()
+    }
+
+
+    if(!is.null(facet_row) & !is.null(facet_column)){
+      plot <- plot +
+        facet_grid(~get(facet_row) ~ ~get(facet_column))
+    } else if(!is.null(facet_column)){
+      plot <- plot +
+        facet_grid(. ~ ~get(facet_column))
+    } else if(!is.null(facet_row)){
+      plot <- plot +
+        facet_grid(~get(facet_row) ~ .)
+    }
+
+
+
+    title <- unique(control_sheet$indicator_title[control_sheet$Indicator == input$Select_Indicator])
+    # title <- unique(control_sheet$indicator_title[control_sheet$Indicator == "16.7.1"])
+
+    int_breaks <- function(x,n=5){
+      l <- pretty(x,n)
+      l[abs(l %% 1) < .Machine$double.eps^0.5 ]
+    }
+
+
+    plot <- plot +
+      theme_bw() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
+      scale_x_continuous(breaks = int_breaks) +
+      ggtitle(title)
+
+
+    plot
     
   })
   
