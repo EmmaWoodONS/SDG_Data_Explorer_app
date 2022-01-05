@@ -247,8 +247,11 @@ server <- function(input, output, session) {
   csv <- reactive({
     req(input$Select_Indicator != "All")
     indicator_number <- gsub("\\.", "-", input$Select_Indicator)
-    csv_filepath <- paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", 
-                           indicator_number, ".csv")
+    
+    csv_filepath <- paste0('https://raw.githubusercontent.com/ONSdigital/sdg-data/master/data/indicator_',
+                           indicator_number, '.csv')
+    # csv_filepath <- paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", 
+    #                        indicator_number, ".csv")
     csv <- read.csv(csv_filepath,
              na.strings=c("","NA")) %>%
       mutate_if(is.factor, as.character) %>% 
