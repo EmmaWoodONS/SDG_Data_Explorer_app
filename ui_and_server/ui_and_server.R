@@ -98,7 +98,7 @@ ui <- fluidPage(
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
         tableOutput("plot_table")
-        # textOutput("selections"))
+        # verbatimTextOutput("plot_text")
         # plotOutput("plot",
         #            height = "600px") %>%
         #   withSpinner(image = "sdgs-wheel-slow.gif")
@@ -192,9 +192,11 @@ server <- function(input, output, session) {
   
   # output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
   output$table <- DT::renderDataTable(selections(), rownames = FALSE)
-  
+
   output$plot_table <- renderTable(
     plot())
+  # output$plot_text <- renderText(
+  #   plot())
   
   # extra_disaggs <- callModule(
   #   module = selectizeGroupServer,
@@ -563,56 +565,59 @@ server <- function(input, output, session) {
     req(input$Select_Indicator != "All")
     filtered <- csv()[[1]] # filtered <- csv[[1]]
     
-    test <- extra_disaggs()()
-    test
-    # 
-    # #data() # This used to be `extra_dropdowns <- extras()`,
-    # # however the options were not reactive. `data()` is an argument in the
-    # # callModule for extra_disaggs
-    # # if running outside of app: extra_dropdowns <- extras[[1]]
-    # # ... seems to work ok without this - data() gives something that is not a dataframe and throws errors
-    # extra_dropdowns <- extra_disaggs()()#extras()[[1]] # extra_dropdowns <- extras[[1]]
-    # real_names <- extras()[[2]] # real_names <-extras[[2]]
-    # 
-    # # I think if these a NULL for an indicator, it remembers the options from
-    # # the previous indicator - need to find a fix!
-    # series_selection <- input[["extra-filters-series"]]
-    # units_selection <- input[["extra-filters-units"]]
-    # extra1 <- input[["extra-filters-variable1"]]
-    # extra2 <- input[["extra-filters-variable2"]]
-    # extra3 <- input[["extra-filters-variable3"]]
-    # extra4 <- input[["extra-filters-variable4"]]
-    # 
-    # # if running outside of app:
-    # # series_selection <- extra_dropdowns[1,"series"]
-    # # units_selection <-  extra_dropdowns[1,"units"]
-    # # extra1 <- extra_dropdowns[1,"variable1"]
-    # # extra2 <- extra_dropdowns[1,"variable2"]
-    # # extra3 <- extra_dropdowns[1,"variable3"]
-    # # extra4 <- extra_dropdowns[1,"variable4"]
-    # 
-    # 
-    # extra_selections <- extra_dropdowns
+    # test <- extra_disaggs()()
+    # test
 
-    # if(!is.null(series_selection) & series_selection != "") {
-    #   extra_selections <- filter(extra_selections, series == series_selection)
-    # }
-    # 
-    # if(!is.null(units_selection) & units_selection != "") {
-    #   extra_selections <- filter(extra_selections, units == units_selection)
-    # }
-    # if(!is.null(extra1) & extra1 != "") {
-    #   extra_selections <- filter(extra_selections, variable1 == extra1)
-    # }
-    # if(!is.null(extra2) & extra2 != "") {
-    #   extra_selections <- filter(extra_selections, variable2 == extra2)
-    # }
-    # if(!is.null(extra3) & extra3 != "") {
-    #   extra_selections <- filter(extra_selections, variable3 == extra3)
-    # }
-    # if(!is.null(extra4) & extra4 != "") {
-    #   extra_selections <- filter(extra_selections, variable4 == extra4)
-    # }
+    #data() # This used to be `extra_dropdowns <- extras()`,
+    # however the options were not reactive. `data()` is an argument in the
+    # callModule for extra_disaggs
+    # if running outside of app: extra_dropdowns <- extras[[1]]
+    # ... seems to work ok without this - data() gives something that is not a dataframe and throws errors
+    extra_dropdowns <- extra_disaggs()()#extras()[[1]] # extra_dropdowns <- extras[[1]]
+    real_names <- extras()[[2]] # real_names <-extras[[2]]
+
+    # I think if these a NULL for an indicator, it remembers the options from
+    # the previous indicator - need to find a fix!
+    series_selection <- input[["extra-filters-series"]]
+    units_selection <- input[["extra-filters-units"]]
+    extra1 <- input[["extra-filters-variable1"]]
+    extra2 <- input[["extra-filters-variable2"]]
+    extra3 <- input[["extra-filters-variable3"]]
+    extra4 <- input[["extra-filters-variable4"]]
+
+    # if running outside of app:
+    # series_selection <- extra_dropdowns[1,"series"]
+    # units_selection <-  extra_dropdowns[1,"units"]
+    # extra1 <- extra_dropdowns[1,"variable1"]
+    # extra2 <- extra_dropdowns[1,"variable2"]
+    # extra3 <- extra_dropdowns[1,"variable3"]
+    # extra4 <- extra_dropdowns[1,"variable4"]
+    
+    # test <- is.null(input[["extra-filters-series"]]) 
+    # test <- data.frame(series = test)
+    # test
+    extra_selections <- extra_dropdowns
+
+    if(length(series_selection == 1)) {
+      extra_selections <- filter(extra_selections, series == series_selection)
+    }
+    if(length(units_selection) == 1) {
+      extra_selections <- filter(extra_selections, units == units_selection)
+    }
+    if(length(extra1) == 1) {
+      extra_selections <- filter(extra_selections, variable1 == extra1)
+    }
+    if(length(extra2) == 1) {
+      extra_selections <- filter(extra_selections, variable2 == extra2)
+    }
+    if(length(extra3) == 1) {
+      extra_selections <- filter(extra_selections, variable3 == extra3)
+    }
+    if(length(extra4) == 1) {
+      extra_selections <- filter(extra_selections, variable4 == extra4)
+    }
+    
+    extra_selections
     # # extra_selections <- extra_dropdowns %>%
     # #   filter(series == series_selection,
     # #          units == units_selection,
