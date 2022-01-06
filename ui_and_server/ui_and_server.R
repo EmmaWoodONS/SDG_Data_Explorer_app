@@ -4,7 +4,6 @@ library(shinyWidgets)
 library(shinyjs)
 library(tidyr)
 library(ggplot2)
-library(dplyr)
 library(shinycssloaders)
 library(reactlog)
 
@@ -37,7 +36,7 @@ ui <- fluidPage(
                      choices = list(
                        "actual characteristics",
                        "grouped characteristics")),
-        
+
         selectizeGroupUI(
           id = "my-filters",
           params = list(
@@ -46,7 +45,7 @@ ui <- fluidPage(
             variable3 = list(inputId = "var3", title = "characteristic 3 (panel row):"),
             variable4 = list(inputId = "var4", title = "characteristic 4 (linetype):"))
         ),
-        
+
         conditionalPanel(
           condition = "input.Select_Indicator == 'All'",
           downloadBttn(
@@ -65,6 +64,7 @@ ui <- fluidPage(
             style = "bordered",
             color = "primary",
             size = "sm")),
+
         
         uiOutput("Select Indicator"),
         
@@ -74,6 +74,7 @@ ui <- fluidPage(
       
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
+
         verbatimTextOutput("extra_variables")
       ),
       
@@ -115,7 +116,7 @@ server <- function(input, output, session) {
   `%not_in%` <- Negate(`%in%`)
   control_sheet <- read.csv("https://raw.githubusercontent.com/EmmaWoodONS/SDG_Data_Explorer_app/main/Control_sheet/control_sheet.csv") %>% 
     mutate(across(where(is.factor), as.character)) 
-  
+
   # because callModule isn't really meant to be in a reactive, when this function is called
   # it is referred to as res_mod()(), rather than res_mod()
   res_mod <- reactive({
@@ -142,13 +143,7 @@ server <- function(input, output, session) {
     )
   })
   
-  # res_mod <- callModule(
-  #   module = selectizeGroupServer,
-  #   id = "my-filters",
-  #   data = control_sheet,
-  #   vars = c("variable1", "variable2", "variable3", "variable4")
-  # )
-  
+
   selections <- reactive({
     req(input[["my-filters-var1"]])
     res_mod()() %>% 
@@ -167,7 +162,6 @@ server <- function(input, output, session) {
     }
   })
   
-  
   output$`Select Indicator` <- renderUI({
     selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()()$Indicator)))
   })
@@ -177,7 +171,7 @@ server <- function(input, output, session) {
       paste('data-', Sys.Date(), '.csv', sep='')
     },
     content = function(con) {
-      write.csv(res_mod(), con, row.names = FALSE)
+      write.csv(res_mod()(), con, row.names = FALSE)
     }
   )
   
@@ -258,7 +252,7 @@ server <- function(input, output, session) {
   
   
   # output$extra_disaggs <- DT::renderDataTable(extra_disaggs(), rownames = FALSE)
-  
+
   
   #-----------------------------------------------------------------------------
   
@@ -598,6 +592,7 @@ server <- function(input, output, session) {
     # test
     extra_selections <- extra_dropdowns
 
+
     if(length(series_selection == 1)) {
       extra_selections <- filter(extra_selections, series == series_selection)
     }
@@ -645,7 +640,6 @@ server <- function(input, output, session) {
     # end of section that causes error: attempt to set an attribute on NULL
     
 
-
     # earlier, I renamed unit.measure units in the extra_columns dataframe,
     # so we need to do that here too,
     # as it will still be called unit.measure in the filtered data
@@ -656,8 +650,7 @@ server <- function(input, output, session) {
 
     filtered <- filtered %>%
       right_join(extra_selections)
-
-    
+  
     #
     # # build a data frame on which we can do the second step of filtering (using
     # # any interacting variables that are not standard disaggs e.g. industry sector)
@@ -830,4 +823,6 @@ server <- function(input, output, session) {
   
 }
 
+
+}
 shinyApp(ui, server)
