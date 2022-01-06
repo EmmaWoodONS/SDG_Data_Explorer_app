@@ -4,8 +4,8 @@ library(shinyWidgets)
 library(shinyjs)
 library(tidyr)
 library(ggplot2)
+library(dplyr)
 library(shinycssloaders)
-library(reactlog)
 
 # data("mpg", package = "ggplot2")
 
@@ -20,69 +20,35 @@ ui <- fluidPage(
     column(
       width = 10, offset = 1,
       tags$h2("UK Indicator Explorer"),
-      HTML("<p>This app allows you to explore indicators with cross-disaggregations. 
-              For example, if you want to know which indicators allow you to compare 
-              males of a certain age with females of the same age, you might select
-              age in <b>characteristic 1</b>, and sex in <b>characteristic 2</b>.
-              You can then plot and save the results for each indicator.</p><p>
-              </p><p>Characteristics can be searched using the exact names, e.g.
-              'Local Authority' (<b>actual characteristics</b>), or using grouped names e.g. 
-              'Lower level geography' (<b>grouped characteristics</b>).</p><p>All data 
-              come from the <a href='https://sdgdata.gov.uk/'>UK SDG data site</a>, 
-              where you will find important notes on the data and a link to the data source.</p>"),
+      tags$h5("Some text to explain what the app does and link to the UK platform"),
       
       panel(
-        radioButtons("group_type", "Choose indicators by:",
-                     choices = list(
-                       "actual characteristics",
-                       "grouped characteristics")),
-
         selectizeGroupUI(
           id = "my-filters",
           params = list(
-            variable1 = list(inputId = "var1", title = "characteristic 1 (panel column):"),
-            variable2 = list(inputId = "var2", title = "characteristic 2 (colour):"),
-            variable3 = list(inputId = "var3", title = "characteristic 3 (panel row):"),
-            variable4 = list(inputId = "var4", title = "characteristic 4 (linetype):"))
-        ),
-
-        conditionalPanel(
-          condition = "input.Select_Indicator == 'All'",
-          downloadBttn(
-            label = "Download indicator list",
-            outputId = "downloadData",
-            style = "bordered",
-            color = "primary",
-            size = "sm")
+            variable1 = list(inputId = "variable1", title = "characteristic 1:"),
+            variable2 = list(inputId = "variable2", title = "characteristic 2:"),
+            variable3 = list(inputId = "variable3", title = "characteristic 3:"),
+            variable4 = list(inputId = "variable4", title = "characteristic 4:"))
         ),
         
-        conditionalPanel(
-          condition = "input.Select_Indicator != 'All'",
-          downloadBttn(
-            label = "Download Chart",
-            outputId = "downloadChart",
-            style = "bordered",
-            color = "primary",
-            size = "sm")),
-
+        downloadBttn(
+          label = "Download indicator list",
+          outputId = "downloadData",
+          style = "bordered",
+          color = "primary",
+          size = "sm"),
         
         uiOutput("Select Indicator"),
         
-        uiOutput("Num Indicators"),
-        
         status = "primary"),
-      
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
-
-        verbatimTextOutput("extra_variables")
-      ),
-      
-      conditionalPanel(
-        condition = "input.Select_Indicator != 'All'",
-        
-        # actionButton("continue", "continue"),
-        
+        verbatimTextOutput("extra_variables"),
+        # ),
+        # 
+        # conditionalPanel(
+        #   condition = "input.Select_Indicator != 'All'",
         selectizeGroupUI(
           id = "extra-filters",
           params = list(
@@ -93,15 +59,15 @@ ui <- fluidPage(
             variable5 = list(inputId = "variable3", title = "C:"),
             variable6 = list(inputId = "variable4", title = "D:"))
         ),
-        
-        actionBttn("plot_button", "Plot")),
+        actionButton("plot_button", "Plot"),
+        # actionButton("reset_button", "reset")
+      ),
       
       conditionalPanel(
         condition = "input.Select_Indicator != 'All'",
-        # tableOutput("plot_table")
-        # verbatimTextOutput("plot_text")
-        plotOutput("plot",
-                   height = "600px") %>%
+        # DT::dataTableOutput(outputId = "NA_as_all")),
+        # textOutput("selections"))
+        plotOutput("plot") %>%
           withSpinner(image = "sdgs-wheel-slow.gif")
       ),
       conditionalPanel(
@@ -114,56 +80,19 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   `%not_in%` <- Negate(`%in%`)
+  
   control_sheet <- read.csv("https://raw.githubusercontent.com/EmmaWoodONS/SDG_Data_Explorer_app/main/Control_sheet/control_sheet.csv") %>% 
     mutate(across(where(is.factor), as.character)) 
-
-  # because callModule isn't really meant to be in a reactive, when this function is called
-  # it is referred to as res_mod()(), rather than res_mod()
-  res_mod <- reactive({
-    
-    if(input$group_type == "grouped characteristics") {
-      control_sheet <- control_sheet %>%
-        mutate(var1 = variable_group_1,
-               var2 = variable_group_2,
-               var3 = variable_group_3,
-               var4 = variable_group_4) 
-    } else {
-      control_sheet <- control_sheet %>%
-        mutate(var1 = variable1,
-               var2 = variable2,
-               var3 = variable3,
-               var4 = variable4) 
-    }
-    
-    callModule(
-      module = selectizeGroupServer,
-      id = "my-filters",
-      data = control_sheet,
-      vars = c("var1", "var2", "var3", "var4")
-    )
-  })
   
-
-  selections <- reactive({
-    req(input[["my-filters-var1"]])
-    res_mod()() %>% 
-      select(indicator_title, variable1, variable2, variable3, variable4)
-  })
-  
-  output$`Num Indicators` <- renderText({
-    
-    req(input[["my-filters-var2"]])
-    if(is.null(input[["my-filters-var3"]])){
-      paste0("There are ", length(unique(res_mod()()$Indicator)), " indicators disaggregated by ", input[["my-filters-var1"]], " and ", input[["my-filters-var2"]])
-    } else if(is.null(input[["my-filters-var4"]])) {
-      paste0("There are ", length(unique(res_mod()()$Indicator)), " indicators disaggregated by ", input[["my-filters-var1"]], ", ", input[["my-filters-var2"]], " and ",  input[["my-filters-var3"]])
-    } else {
-      paste0("There are ", length(unique(res_mod()()$Indicator)), " indicators disaggregated by ", input[["my-filters-var1"]], ", ", input[["my-filters-var2"]], ", ",  input[["my-filters-var3"]], " and ", input[["my-filters-var4"]] )
-    }
-  })
+  res_mod <- callModule(
+    module = selectizeGroupServer,
+    id = "my-filters",
+    data = control_sheet,
+    vars = c("variable1", "variable2", "variable3", "variable4")
+  )
   
   output$`Select Indicator` <- renderUI({
-    selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()()$Indicator)))
+    selectInput("Select_Indicator", "Select Indicator", choices = c("All", unique(res_mod()$Indicator)))
   })
   
   output$downloadData <- downloadHandler(
@@ -171,99 +100,67 @@ server <- function(input, output, session) {
       paste('data-', Sys.Date(), '.csv', sep='')
     },
     content = function(con) {
-      write.csv(res_mod()(), con, row.names = FALSE)
+      write.csv(res_mod(), con, row.names = FALSE)
     }
   )
   
-  output$downloadChart <- downloadHandler(
-    filename = function() {
-      paste(input$Select_Indicator, "_", Sys.Date(), '.png', sep='')
-    },
-    content = function(file) {
-      ggsave(file, plot = csv(), device = "png")
-    }
-  )
   
-  # output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
-  output$table <- DT::renderDataTable(selections(), rownames = FALSE)
-
-  # output$plot_table <- renderTable(
-  #   plot())
-  # output$plot_text <- renderText(
-  #   plot())
+  output$table <- DT::renderDataTable(res_mod(), rownames = FALSE)
   
-  # extra_disaggs <- callModule(
-  #   module = selectizeGroupServer,
-  #   id = "extra-filters",
-  #   data = reactive(extras()[[1]]), # Initially thought this should be `data = extras(),
-  #   # but then the options didn't update when the indicator was changed. 
-  #   vars = c("series", "units",
-  #            "variable1", "variable2", "variable3", "variable4")) 
-  extra_disaggs <- reactive({
-    callModule(
-      module = selectizeGroupServer,
-      id = "extra-filters",
-      data = reactive(extras()[[1]]), # Initially thought this should be `data = extras(),
-      # but then the options didn't update when the indicator was changed. 
-      vars = c("series", "units",
-               "variable1", "variable2", "variable3", "variable4")) 
-  })
+  
+  extra_disaggs <- callModule(
+    module = selectizeGroupServer,
+    id = "extra-filters",
+    data = extras()[[1]],
+    vars = c("series", "units",
+             "variable1", "variable2", "variable3", "variable4")) 
+  
+  
   
   output$extra_variables <- renderText({
     req(input$Select_Indicator != "All")
     
     text <- "Some indicators have further interacting characteristics. \n Please select \n" 
     
-    # extras <- extras()[[1]]
-    extras <- extra_disaggs()()
-    # remove blanks so we can find the number of real options in each selection 
-    # just by using length
-    series_not_null <- extras$series[!is.null(extras$series) & extras$series != ""]
-    units_not_null <- extras$units[!is.null(extras$units) & extras$units != ""]
-    var1_not_null <- extras$variable1[!is.null(extras$variable1) & extras$variable1 != ""]
-    var2_not_null <- extras$variable2[!is.null(extras$variable2) & extras$variable2 != ""]
-    var3_not_null <- extras$variable3[!is.null(extras$variable3) & extras$variable3 != ""]
-    var4_not_null <- extras$variable4[!is.null(extras$variable4) & extras$variable4 != ""]
-    
-    real_names <- extras()[[2]]
-    
-    if(length(series_not_null) > 0){
+    if(!is.null(extras()[[1]]$series) & extras()[[1]]$series[1] != ""){
       text <- paste0(text, " - Series \n")
     } 
-    if(length(units_not_null) > 0){
+    if(!is.null(extras()[[1]]$units) & extras()[[1]]$units[1] != ""){
       text <- paste0(text, " - Units \n")
     } 
-    if(length(var1_not_null) > 0){
-      text <- paste0(text, "- A (", names(real_names)[3], ") \n")
+    if(!is.null(extras()[[1]]$variable1) & extras()[[1]]$variable1[1] != ""){
+      text <- paste0(text, "- A (", names(extras()[[2]])[[2]][3], ") \n")
     } 
-    if(length(var2_not_null) > 0){
-      text <- paste0(text, "- B (", names(real_names)[4], ") \n")
+    if(!is.null(extras()[[1]]$variable2) & extras()[[1]]$variable2[1] != ""){
+      text <- paste0(text, "- B (", names(extras()[[2]])[[2]][4], ") \n")
     }
-    if(length(var3_not_null) > 0){
-      text <- paste0(text, "- C (", names(real_names)[5], ") \n")
+    if(!is.null(extras()[[1]]$variable3) & extras()[[1]]$variable3[1] != ""){
+      text <- paste0(text, "- C (", names(extras()[[2]])[5], ") \n")
     }
-    if(length(var4_not_null) > 0){
-      text <- paste0(text, "- D (", names(real_names)[6], ") \n")
+    if(!is.null(extras()[[1]]$variable4) & extras()[[1]]$variable4[1] != ""){
+      text <- paste0(text, "- D (", names(extras()[[2]])[6], ") \n")
     }
     text
     
   })
   
   
+  # output$NA_as_all <- DT::renderDataTable(plot(), rownames = FALSE)
+  # output$selections <- renderText(csv())
+  output$plot <- renderPlot({
+    input$plot_button
+    isolate(plot())
+    plot()
+  })
   
-  # output$extra_disaggs <- DT::renderDataTable(extra_disaggs(), rownames = FALSE)
-
   
   #-----------------------------------------------------------------------------
   
   csv <- reactive({
     req(input$Select_Indicator != "All")
     indicator_number <- gsub("\\.", "-", input$Select_Indicator)
-    
-    csv_filepath <- paste0('https://raw.githubusercontent.com/ONSdigital/sdg-data/master/data/indicator_',
-                           indicator_number, '.csv')
-    # csv_filepath <- paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", 
-    #                        indicator_number, ".csv")
+    csv_filepath <- paste0("Y:\\Data Collection and Reporting\\Jemalex\\CSV\\indicator_", 
+                           indicator_number, ".csv")
     csv <- read.csv(csv_filepath,
                     na.strings=c("","NA")) %>%
       mutate_if(is.factor, as.character) %>% 
@@ -275,7 +172,7 @@ server <- function(input, output, session) {
     #-----------------------------------------------------------------------------
     # replace NAs with 'All':
     #-----------------------------------------------------------------------------
-    `%not_in%` <- Negate(`%in%`)
+    
     
     irrelevant_variables <- c("observation.status", 
                               "unit.multiplier", "unit.measure",
@@ -386,8 +283,7 @@ server <- function(input, output, session) {
     #-----------------------------------------------------------------------------
     # filter disaggregations
     #-----------------------------------------------------------------------------
-    selections <- c(input[["my-filters-var1"]], input[["my-filters-var2"]], 
-                    input[["my-filters-var3"]], input[[ "my-filters-var4"]]) 
+    selections <- c(input[["my-filters-variable1"]], input[["my-filters-variable2"]], input[["my-filters-variable3"]], input[[ "my-filters-variable4"]]) # c(char1, char2, char3, char4)
     selections <- selections[!is.na(selections)]
     
     number_of_selections <- length(selections)
@@ -446,10 +342,10 @@ server <- function(input, output, session) {
       # for 11-7-2: that issue needs fixing, but doing this quick fix for now
       number_of_unique_entries <- length(unique(real_values_in_selected[, dropdown_column_locations]))
       
-      if(number_of_unique_entries > 0){
+      if(number_of_unique_entries > 1){
         extra_dropdown_levels <- as.data.frame(real_values_in_selected[, dropdown_column_locations]) %>%
           distinct()
-      } 
+      }
       
     } else { extra_dropdown_levels <- "none" }
     
@@ -470,7 +366,7 @@ server <- function(input, output, session) {
         filter(!is.na(!!selected_var))
     }
     
-    # filtered currently contains rows from un-selected columns that we don't want
+    # filtered currently contains rows from unselected columns, that we don;t want
     # in the final data, so this right_join gets rid of them.
     if(is.data.frame(unselected_var_level)){
       filtered <- filtered %>%
@@ -481,12 +377,12 @@ server <- function(input, output, session) {
     list(filtered, extra_dropdowns)
   })
   
-  
-  extras <- reactive({
+  extras <- reactive(
+    observeEvent(input$Select_Indicator, {
     req(input$Select_Indicator != "All")
     
-    filtered <- csv()[[1]] # filtered <- csv[[1]]
-    extra_dropdowns <- csv()[[2]] # extra_dropdowns <- csv[[2]]
+    filtered <- csv()[[1]]
+    extra_dropdowns <- csv()[[2]]
     
     # make it so there are always 6 dropdown options (I am assuming it is 
     # unlikely there will ever be more than 6, but this may need to be increased
@@ -541,186 +437,95 @@ server <- function(input, output, session) {
       extra_columns <- data.frame("x6" = "")  
     } else {extra_columns <- NULL}
     
-    options <- bind_cols(options, extra_columns)
-    options_real_names <- options
+    original_names <- bind_cols(options, extra_columns)
+    
+    options <- original_names
     
     names(options) <- c("series", "units",
                         "variable1", "variable2", "variable3", "variable4")
+    list(options, original_names)
     
-    list(options, options_real_names)
-  })
+  }))
   
-  # extras_real_names <- reactive({
-  #   req(input$Select_Indicator != "All")
-  #   
-  # })
-  
-  plot <- reactive({
+  plot <- eventReactive(input$plot_button, {
     req(input$Select_Indicator != "All")
-    filtered <- csv()[[1]] # filtered <- csv[[1]]
+    filtered <- csv()[[1]]
+    extra_dropdowns <- extras()[[1]]
     
-    # test <- extra_disaggs()()
-    # test
-
-    #data() # This used to be `extra_dropdowns <- extras()`,
-    # however the options were not reactive. `data()` is an argument in the
-    # callModule for extra_disaggs
-    # if running outside of app: extra_dropdowns <- extras[[1]]
-    # ... seems to work ok without this - data() gives something that is not a dataframe and throws errors
-    extra_dropdowns <- extra_disaggs()()#extras()[[1]] # extra_dropdowns <- extras[[1]]
-    real_names <- extras()[[2]] # real_names <-extras[[2]]
-
-    # I think if these a NULL for an indicator, it remembers the options from
-    # the previous indicator - need to find a fix!
     series_selection <- input[["extra-filters-series"]]
     units_selection <- input[["extra-filters-units"]]
     extra1 <- input[["extra-filters-variable1"]]
     extra2 <- input[["extra-filters-variable2"]]
     extra3 <- input[["extra-filters-variable3"]]
     extra4 <- input[["extra-filters-variable4"]]
-
-    # if running outside of app:
-    # series_selection <- extra_dropdowns[1,"series"]
-    # units_selection <-  extra_dropdowns[1,"units"]
-    # extra1 <- extra_dropdowns[1,"variable1"]
-    # extra2 <- extra_dropdowns[1,"variable2"]
-    # extra3 <- extra_dropdowns[1,"variable3"]
-    # extra4 <- extra_dropdowns[1,"variable4"]
     
-    # test <- is.null(input[["extra-filters-series"]]) 
-    # test <- data.frame(series = test)
-    # test
-    extra_selections <- extra_dropdowns
-
-
-    if(length(series_selection == 1)) {
-      extra_selections <- filter(extra_selections, series == series_selection)
-    }
-    if(length(units_selection) == 1) {
-      extra_selections <- filter(extra_selections, units == units_selection)
-    }
-    if(length(extra1) == 1) {
-      extra_selections <- filter(extra_selections, variable1 == extra1)
-    }
-    if(length(extra2) == 1) {
-      extra_selections <- filter(extra_selections, variable2 == extra2)
-    }
-    if(length(extra3) == 1) {
-      extra_selections <- filter(extra_selections, variable3 == extra3)
-    }
-    if(length(extra4) == 1) {
-      extra_selections <- filter(extra_selections, variable4 == extra4)
-    }
+    # build a dataframe on which we can do the second step of filtering (using
+    # any interacting variables that are not standard disaggs e.g. industy sector)
+    extras <- c(extra1, extra2, extra3, extra4)
+    number_of_extras <- length(extras[!is.null(extras)])
     
-    
-    # extra_selections <- extra_dropdowns %>%
-    #   filter(series == series_selection,
-    #          units == units_selection,
-    #          variable1 == extra1,
-    #          variable2 == extra2,
-    #          variable3 == extra3,
-    #          variable4 == extra4
-    #          )
-
-
-    # in order to join to the data and thus filter it, we need to make the
-    # column names match those in the data
-    names(extra_selections) <- names(real_names)
-
-    # we don't want to join to the main data by series/units, if the
-    # selection for them is blank. This isn't a problem for the others
-    # as they will only get a column name if they are selected
-    # this section causes the error attempt to set an attribute on NULL
-    if(is.null(series_selection)) {
-      extra_selections <- select(extra_selections, -series)
+    if(number_of_extras > 0) { 
+      
+      further_selections <- data.frame(series = NA,
+                                       units = NA)
+      if(!is.null(series_selection)){
+        further_selections <- mutate(further_selections,
+                                     series = series_selection)
+      } else {
+        further_selections <- select(further_selections, -series)
+      }
+      if(!is.null(units_selection)){
+        further_selections <- mutate(further_selections,
+                                     units = units_selection)
+      } else {
+        further_selections <- select(further_selections, -units)
+      }
+      
+      if(!is.null(extra1)){
+        dropdown_variable <- sym(names(extra_dropdowns)[3])
+        further_selections <- mutate(further_selections, !!dropdown_variable := extra1)
+      }
+      if(!is.null(extra2)){
+        dropdown_variable <- sym(names(extra_dropdowns)[4])
+        further_selections <- mutate(further_selections, !!dropdown_variable := extra2)
+      }
+      if(!is.null(extra3)){
+        dropdown_variable <- sym(names(extra_dropdowns)[5])
+        further_selections <- mutate(further_selections, !!dropdown_variable := extra3)
+      }
+      if(!is.null(extra4)){
+        dropdown_variable <- sym(names(extra_dropdowns)[6])
+        further_selections <- mutate(further_selections, !!dropdown_variable := extra4)
+      }
+      
+      # earlier, I renamed unit.measure units in the extra_columns dataframe,
+      # so we need to do that here too,
+      # as it will still be called unit.measure in the filtered data
+      if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
+        filtered <- rename(filtered, units = unit.measure)
+      }
+      
+      for(selection in 1:ncol(further_selections)){
+        variable <- sym(names(further_selections)[selection])
+        level <- further_selections[1, selection]
+        filtered <- filtered %>% 
+          filter(!!variable == level)
+      }
     }
-    if(is.null(units_selection)) {
-      extra_selections <- select(extra_selections, -units)
-    }
-    # end of section that causes error: attempt to set an attribute on NULL
-    
-
-    # earlier, I renamed unit.measure units in the extra_columns dataframe,
-    # so we need to do that here too,
-    # as it will still be called unit.measure in the filtered data
-    if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
-      filtered <- rename(filtered, units = unit.measure)
-    }
-
-
-    filtered <- filtered %>%
-      right_join(extra_selections)
-  
-    #
-    # # build a data frame on which we can do the second step of filtering (using
-    # # any interacting variables that are not standard disaggs e.g. industry sector)
-    # extras <- c(extra1, extra2, extra3, extra4)
-    # number_of_extras <- length(extras[!is.null(extras)])
-    #
-    # further_selections <- data.frame(series = NA,
-    #                                units = NA)
-    # if(!is.null(series_selection)){
-    #   further_selections <- mutate(further_selections,
-    #                               series = series_selection)
-    # } else {
-    #   further_selections <- select(further_selections, -series)
-    # }
-    # if(!is.null(units_selection)){
-    #   further_selections <- mutate(further_selections,
-    #                               units = units_selection)
-    # } else {
-    #   further_selections <- select(further_selections, -units)
-    # }
-    #
-    # if(!is.null(extra1)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[3])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra1)
-    # }
-    # if(!is.null(extra2)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[4])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra2)
-    # }
-    # if(!is.null(extra3)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[5])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra3)
-    # }
-    # if(!is.null(extra4)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[6])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra4)
-    # }
-    #
-    # # earlier, I renamed unit.measure units in the extra_columns dataframe,
-    # # so we need to do that here too,
-    # # as it will still be called unit.measure in the filtered data
-    # if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
-    #   filtered <- rename(filtered, units = unit.measure)
-    # }
-    #
-    # # selected_further_selections <- further_selections[, names(further_selections) %not_in% c("x3", "x4", "x5", "x6")]
-    #
-    # for(selection in 1:ncol(further_selections)){
-    #   variable <- sym(names(further_selections)[selection])
-    #   level <- further_selections[1, selection]
-    #   if(!is.na(unique(further_selections[selection]))) {
-    #     filtered <- filtered %>%
-    #       filter(!!variable == level)
-    #   }
-    # }
-
     # plots don't work properly if year is not numeric (e.g. 2015/16),
     # so need to convert year to numeric if it contains a slash
     slash_present <- ifelse(sum(grepl("/", filtered$year) > 0), TRUE, FALSE)
-
+    
     if(slash_present == TRUE) {
       filtered <- mutate(filtered, year = as.numeric(substr(year, 1, 4)))
-    }
-
+    } 
+    
     # function for calculating x axis breaks
     int_breaks <- function(x, n = 5){
       round_values <- pretty(x, n)
       round_values[abs(round_values %% 1) < .Machine$double.eps^0.5 ]
     }
-
+    
     # need to make sure labels are correct, given the breaks
     if(slash_present == TRUE) {
       after_slash <- substr(int_breaks(filtered$year) + 1, 3, 4)
@@ -728,34 +533,29 @@ server <- function(input, output, session) {
     } else {
       year_labels <- int_breaks(filtered$year)
     }
-
+    
     #-------------------------------------------------------------------------
     # plotting
     #-------------------------------------------------------------------------
-
+    
     # Eventually it would be nice to have this as an extra dropdown
-    facet_column <- input[["my-filters-var1"]]
-    line_colour <- input[["my-filters-var2"]]
-    facet_row <- input[["my-filters-var3"]]
-    line_style <- input[["my-filters-var4"]]
-
-    # # for running outside of app:
-    # facet_column <- "age"
-    # line_colour <- "sex"
-    # facet_row <- NULL
-    # line_style <- NULL
-
-    plot_options <- c(facet_column, facet_row, line_colour, line_style)
-    number_of_selections <- length(plot_options[!is.null(plot_options)])
-
+    facet_row <- input[["my-filters-variable1"]]
+    facet_column <- input[["my-filters-variable2"]]
+    line_colour <- input[["my-filters-variable3"]]
+    line_style <- input[["my-filters-variable4"]]
+    
+    plot_options <- c(line_colour, line_style,
+                      facet_row, facet_column)
+    number_of_selections <- length(plot_options[!is.na(plot_options)])
+    
     if(!is.null(line_colour)) {line_colour_sym <- as.name(line_colour)}
     if(!is.null(line_style)) {line_style_sym <- as.name(line_style)}
-
-
+    
+    
     plot <- ggplot(data = filtered,
                    aes(year, value)) +
       geom_point()
-
+    
     if(!is.null(line_colour) & !is.null(line_style)){
       plot <- plot +
         geom_line(aes(colour = !!line_colour_sym,
@@ -770,8 +570,8 @@ server <- function(input, output, session) {
       plot <- plot +
         geom_line()
     }
-
-
+    
+    
     if(!is.null(facet_row) & !is.null(facet_column)){
       plot <- plot +
         facet_grid(~get(facet_row) ~ ~get(facet_column))
@@ -782,47 +582,21 @@ server <- function(input, output, session) {
       plot <- plot +
         facet_grid(~get(facet_row) ~ .)
     }
-
-
-
-    title <- unique(control_sheet$indicator_title[control_sheet$Indicator == input$Select_Indicator])
-    # title <- unique(control_sheet$indicator_title[control_sheet$Indicator == "16.7.1"])
-
-    int_breaks <- function(x,n=5){
-      l <- pretty(x,n)
-      l[abs(l %% 1) < .Machine$double.eps^0.5 ]
-    }
-
-
-    plot <- plot +
+    
+    
+    
+    plot +
       theme_bw() +
       theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
-      scale_x_continuous(breaks = int_breaks) +
-      ggtitle(title)
-
-
+      scale_x_continuous(breaks = int_breaks, labels = year_labels) 
+    
+    
     plot
     
   })
   
-  # # reset selections for extra disaggregations:
-  # updateSelectizeInput(session, "inSelect",
-  #                   label = paste("Select input label", length(x)),
-  #                   choices = x,
-  #                   selected = tail(x, 1)
-  # )
   
-  
-  # output$NA_as_all <- DT::renderDataTable(plot(), rownames = FALSE)
-  # output$selections <- renderText(csv())
-  
-  output$plot <- renderPlot({
-    input$plot_button
-    isolate(plot())
-  })
   
 }
 
-
-}
 shinyApp(ui, server)
