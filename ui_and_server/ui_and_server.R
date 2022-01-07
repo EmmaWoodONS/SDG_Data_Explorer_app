@@ -257,8 +257,8 @@ server <- function(input, output, session) {
   #-----------------------------------------------------------------------------
   
   csv <- reactive({
-    req(input$Select_Indicator != "All")
-    indicator_number <- gsub("\\.", "-", input$Select_Indicator)
+    req(input$Select_Indicator != "All") # if running outside of app: Select_Indicator <- "3.1.1"
+    indicator_number <- gsub("\\.", "-", input$Select_Indicator) # indicator_number <- gsub("\\.", "-", Select_Indicator) 
     
     csv_filepath <- paste0('https://raw.githubusercontent.com/ONSdigital/sdg-data/master/data/indicator_',
                            indicator_number, '.csv')
@@ -388,7 +388,7 @@ server <- function(input, output, session) {
     #-----------------------------------------------------------------------------
     selections <- c(input[["my-filters-var1"]], input[["my-filters-var2"]], 
                     input[["my-filters-var3"]], input[[ "my-filters-var4"]]) 
-    selections <- selections[!is.na(selections)]
+    selections <- selections[!is.na(selections)] # selections <- c("deprivation quintile", "country")
     
     # because of the way the data are read in, spaces in csv column headings 
     # have been converted to '.'
@@ -482,14 +482,14 @@ server <- function(input, output, session) {
                      c(names(unselected_var_level)))
     }
     
-    list(filtered, extra_dropdowns)
+    list(filtered, extra_dropdowns) # csv <- list(filtered, extra_dropdowns)
   })
   
   
   extras <- reactive({
     req(input$Select_Indicator != "All")
     
-    filtered <- csv()[[1]] # 
+    filtered <- csv()[[1]] # filtered <- csv[[1]]
     
     extra_dropdowns <- csv()[[2]] # extra_dropdowns <- csv[[2]]
     
@@ -544,16 +544,16 @@ server <- function(input, output, session) {
     names(options) <- c("series", "units",
                         "variable1", "variable2", "variable3", "variable4")
     
-    list(options, options_real_names)
+    list(options, options_real_names) # if running outside of app: extras <- list(options, options_real_names)
   })
-  # if running outside of app: extras <- list(options, options_real_names)
+ 
   
   plot <- reactive({
     req(input$Select_Indicator != "All")
     filtered <- csv()[[1]] # filtered <- csv[[1]]
     # get the extra dropdowns from extra_disaggs rather than from extras()[[1]]
     # so that it is reactive
-    extra_dropdowns <- extra_disaggs()()# extra_dropdowns <- extras[[1]]
+    extra_dropdowns <- extra_disaggs()() # extra_dropdowns <- extras[[1]]
     real_names <- extras()[[2]] # real_names <- extras[[2]]
 
     series_selection <- input[["extra-filters-series"]]
@@ -621,7 +621,7 @@ server <- function(input, output, session) {
   
     # plots don't work properly if year is not numeric (e.g. 2015/16),
     # so need to convert year to numeric if it contains a slash
-    slash_present <- ifelse(sum(grepl("/", filtered$year) > 0), TRUE, FALSE)
+    slash_present <- ifelse(sum(grepl("/|-", filtered$year) > 0), TRUE, FALSE)
 
     if(slash_present == TRUE) {
       filtered <- mutate(filtered, year = as.numeric(substr(year, 1, 4)))
@@ -652,8 +652,8 @@ server <- function(input, output, session) {
     line_style <- input[["my-filters-var4"]]
 
     # # for running outside of app:
-    # facet_column <- "highest qualification"
-    # line_colour <- "sex"
+    # facet_column <- "deprivation quintile"
+    # line_colour <- "country"
     # facet_row <- NULL
     # line_style <- NULL
     
@@ -704,13 +704,7 @@ server <- function(input, output, session) {
 
     title <- unique(control_sheet$indicator_title[control_sheet$Indicator == input$Select_Indicator])
     # title <- unique(control_sheet$indicator_title[control_sheet$Indicator == "16.7.1"])
-
-    int_breaks <- function(x,n=5){
-      l <- pretty(x,n)
-      l[abs(l %% 1) < .Machine$double.eps^0.5 ]
-    }
-
-
+    
     plot <- plot +
       theme_bw() +
       theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
