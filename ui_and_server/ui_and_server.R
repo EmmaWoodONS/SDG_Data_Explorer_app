@@ -390,6 +390,10 @@ server <- function(input, output, session) {
                     input[["my-filters-var3"]], input[[ "my-filters-var4"]]) 
     selections <- selections[!is.na(selections)]
     
+    # because of the way the data are read in, spaces in csv column headings 
+    # have been converted to '.'
+    selections <- gsub(" ", ".", selections)  
+    
     number_of_selections <- length(selections)
     
     unselected_characteristics <- setdiff(names(dat_with_All), selections)
@@ -485,16 +489,9 @@ server <- function(input, output, session) {
   extras <- reactive({
     req(input$Select_Indicator != "All")
     
-    filtered <- csv()[[1]] # filtered <- csv[[1]]
+    filtered <- csv()[[1]] # 
+    
     extra_dropdowns <- csv()[[2]] # extra_dropdowns <- csv[[2]]
-    
-    # make it so there are always 6 dropdown options (I am assuming it is 
-    # unlikely there will ever be more than 6, but this may need to be increased
-    # in the future)
-    # length(extra_dropdowns) <- 6
-    
-    # options <- data.frame(matrix(ncol = length(extra_dropdowns), nrow = 0))
-    # names(options) <- extra_dropdowns
     
     # get the options for the extra dropdowns, while retaining the original
     # data structure (keeps any nesting intact)
@@ -549,29 +546,16 @@ server <- function(input, output, session) {
     
     list(options, options_real_names)
   })
-  
-  # extras_real_names <- reactive({
-  #   req(input$Select_Indicator != "All")
-  #   
-  # })
+  # if running outside of app: extras <- list(options, options_real_names)
   
   plot <- reactive({
     req(input$Select_Indicator != "All")
     filtered <- csv()[[1]] # filtered <- csv[[1]]
-    
-    # test <- extra_disaggs()()
-    # test
+    # get the extra dropdowns from extra_disaggs rather than from extras()[[1]]
+    # so that it is reactive
+    extra_dropdowns <- extra_disaggs()()# extra_dropdowns <- extras[[1]]
+    real_names <- extras()[[2]] # real_names <- extras[[2]]
 
-    #data() # This used to be `extra_dropdowns <- extras()`,
-    # however the options were not reactive. `data()` is an argument in the
-    # callModule for extra_disaggs
-    # if running outside of app: extra_dropdowns <- extras[[1]]
-    # ... seems to work ok without this - data() gives something that is not a dataframe and throws errors
-    extra_dropdowns <- extra_disaggs()()#extras()[[1]] # extra_dropdowns <- extras[[1]]
-    real_names <- extras()[[2]] # real_names <-extras[[2]]
-
-    # I think if these a NULL for an indicator, it remembers the options from
-    # the previous indicator - need to find a fix!
     series_selection <- input[["extra-filters-series"]]
     units_selection <- input[["extra-filters-units"]]
     extra1 <- input[["extra-filters-variable1"]]
@@ -579,19 +563,15 @@ server <- function(input, output, session) {
     extra3 <- input[["extra-filters-variable3"]]
     extra4 <- input[["extra-filters-variable4"]]
 
-    # if running outside of app:
+    # if running outside of app (assumes the first option is selected):
     # series_selection <- extra_dropdowns[1,"series"]
     # units_selection <-  extra_dropdowns[1,"units"]
     # extra1 <- extra_dropdowns[1,"variable1"]
     # extra2 <- extra_dropdowns[1,"variable2"]
     # extra3 <- extra_dropdowns[1,"variable3"]
     # extra4 <- extra_dropdowns[1,"variable4"]
-    
-    # test <- is.null(input[["extra-filters-series"]]) 
-    # test <- data.frame(series = test)
-    # test
-    extra_selections <- extra_dropdowns
 
+    extra_selections <- extra_dropdowns
 
     if(length(series_selection == 1)) {
       extra_selections <- filter(extra_selections, series == series_selection)
@@ -611,17 +591,6 @@ server <- function(input, output, session) {
     if(length(extra4) == 1) {
       extra_selections <- filter(extra_selections, variable4 == extra4)
     }
-    
-    
-    # extra_selections <- extra_dropdowns %>%
-    #   filter(series == series_selection,
-    #          units == units_selection,
-    #          variable1 == extra1,
-    #          variable2 == extra2,
-    #          variable3 == extra3,
-    #          variable4 == extra4
-    #          )
-
 
     # in order to join to the data and thus filter it, we need to make the
     # column names match those in the data
@@ -631,10 +600,10 @@ server <- function(input, output, session) {
     # selection for them is blank. This isn't a problem for the others
     # as they will only get a column name if they are selected
     # this section causes the error attempt to set an attribute on NULL
-    if(is.null(series_selection)) {
+    if(length(series_selection) == 0) {
       extra_selections <- select(extra_selections, -series)
     }
-    if(is.null(units_selection)) {
+    if(length(units_selection) == 0) {
       extra_selections <- select(extra_selections, -units)
     }
     # end of section that causes error: attempt to set an attribute on NULL
@@ -647,66 +616,9 @@ server <- function(input, output, session) {
       filtered <- rename(filtered, units = unit.measure)
     }
 
-
     filtered <- filtered %>%
       right_join(extra_selections)
   
-    #
-    # # build a data frame on which we can do the second step of filtering (using
-    # # any interacting variables that are not standard disaggs e.g. industry sector)
-    # extras <- c(extra1, extra2, extra3, extra4)
-    # number_of_extras <- length(extras[!is.null(extras)])
-    #
-    # further_selections <- data.frame(series = NA,
-    #                                units = NA)
-    # if(!is.null(series_selection)){
-    #   further_selections <- mutate(further_selections,
-    #                               series = series_selection)
-    # } else {
-    #   further_selections <- select(further_selections, -series)
-    # }
-    # if(!is.null(units_selection)){
-    #   further_selections <- mutate(further_selections,
-    #                               units = units_selection)
-    # } else {
-    #   further_selections <- select(further_selections, -units)
-    # }
-    #
-    # if(!is.null(extra1)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[3])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra1)
-    # }
-    # if(!is.null(extra2)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[4])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra2)
-    # }
-    # if(!is.null(extra3)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[5])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra3)
-    # }
-    # if(!is.null(extra4)){
-    #   dropdown_variable <- sym(names(extra_dropdowns)[6])
-    #   further_selections <- mutate(further_selections, !!dropdown_variable := extra4)
-    # }
-    #
-    # # earlier, I renamed unit.measure units in the extra_columns dataframe,
-    # # so we need to do that here too,
-    # # as it will still be called unit.measure in the filtered data
-    # if("units" %not_in% names(filtered) & "unit.measure" %in% names(filtered)){
-    #   filtered <- rename(filtered, units = unit.measure)
-    # }
-    #
-    # # selected_further_selections <- further_selections[, names(further_selections) %not_in% c("x3", "x4", "x5", "x6")]
-    #
-    # for(selection in 1:ncol(further_selections)){
-    #   variable <- sym(names(further_selections)[selection])
-    #   level <- further_selections[1, selection]
-    #   if(!is.na(unique(further_selections[selection]))) {
-    #     filtered <- filtered %>%
-    #       filter(!!variable == level)
-    #   }
-    # }
-
     # plots don't work properly if year is not numeric (e.g. 2015/16),
     # so need to convert year to numeric if it contains a slash
     slash_present <- ifelse(sum(grepl("/", filtered$year) > 0), TRUE, FALSE)
@@ -740,11 +652,16 @@ server <- function(input, output, session) {
     line_style <- input[["my-filters-var4"]]
 
     # # for running outside of app:
-    # facet_column <- "age"
+    # facet_column <- "highest qualification"
     # line_colour <- "sex"
     # facet_row <- NULL
     # line_style <- NULL
-
+    
+    facet_column <- if(!is.null(facet_column)) {gsub(" ", ".", facet_column)}
+    line_colour <- if(!is.null(line_colour)) {gsub(" ", ".", line_colour)}
+    facet_row <- if(!is.null(facet_row)) {gsub(" ", ".", facet_row)}
+    line_style <- if(!is.null(line_style)) {gsub(" ", ".", line_style)}
+    
     plot_options <- c(facet_column, facet_row, line_colour, line_style)
     number_of_selections <- length(plot_options[!is.null(plot_options)])
 
