@@ -73,25 +73,32 @@ correctly_replace_NA_with_All <- function(csv){
   # where All does not make sense (e.g. All for Welsh-only Health Boards when England is selected), keep NAs
   incompletely_nested_NAs_to_all <- all_variables 
   
-  for(i in 1:nrow(incompletely_nested_variables)) {
+  if(!is.null(incompletely_nested_variables)) {
     
-    nested_variable_colname <- sym(nested_variables[i])
-    nested_within_colname <- sym(nested_within[i])
+    for(i in 1:nrow(incompletely_nested_variables)) {
+      
+      nested_variable_colname <- sym(nested_variables[i])
+      nested_within_colname <- sym(nested_within[i])
+      
+      incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>%
+        # mutate(Region = ifelse(Country == "England" & is.na(Region), "England", Region)) : this is what the line below is doing as an example from 3.1.2
+        mutate(!!nested_variable_colname := ifelse(!!nested_within_colname == values_given_for[i] &
+                                                     is.na(!!nested_variable_colname),
+                                                   "All", !!nested_variable_colname))
+      
+    }
     
-    incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>% 
-      # mutate(Region = ifelse(Country == "England" & is.na(Region), "England", Region)) : this is what the line below is doing as an example from 3.1.2
-      mutate(!!nested_variable_colname := ifelse(!!nested_within_colname == values_given_for[i] &
-                                                   is.na(!!nested_variable_colname),
-                                                 "All", !!nested_variable_colname))
+    final_incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>%
+      select(incompletely_nested_variables$nested_variable)
     
+    all_other_NAs_to_all <- all_variables %>%
+      select(-incompletely_nested_variables$nested_variable) %>%
+      replace(is.na(.), "All")
+    
+  } else {
+    
+    final_incompletely_nested_NAs_to_all <- NULL
   }
-  
-  final_incompletely_nested_NAs_to_all <- incompletely_nested_NAs_to_all %>% 
-    select(incompletely_nested_variables$nested_variable)
-  
-  all_other_NAs_to_all <- all_variables %>% 
-    select(-incompletely_nested_variables$nested_variable) %>% 
-    replace(is.na(.), "All")
   
   final_NAs_to_all <- bind_cols(final_incompletely_nested_NAs_to_all, all_other_NAs_to_all)
   
